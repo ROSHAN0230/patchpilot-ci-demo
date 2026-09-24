@@ -9,3 +9,6 @@ venv/
 *.log
 patchpilot_telemetry.jsonl
 *.tmp
+.env
+.env.*
+!*.example
