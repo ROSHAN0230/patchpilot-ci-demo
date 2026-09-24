@@ -8,6 +8,7 @@ import requests
 from typing import List, Dict, Any, Optional, Tuple
 from patchpilot.types import DependencyDelta, FailureRecord
 from patchpilot.contracts import RepairEngine
+from patchpilot.engine.knowledge import MigrationKnowledgeRegistry
 
 
 class NemotronRepairEngine(RepairEngine):
@@ -33,16 +34,14 @@ class NemotronRepairEngine(RepairEngine):
         negative_feedback: Optional[str] = None,
         iteration: int = 1,
     ) -> Tuple[str, Dict[str, Any]]:
+        directives = MigrationKnowledgeRegistry.get_directives(delta.package_name, delta.new_version)
+        directives_block = "\n".join([f"- {d}" for d in directives])
+
         system_prompt = (
             f"You are PatchPilot, an autonomous Python migration engineer upgrading code for {delta.package_name} "
             f"from {delta.old_version} to {delta.new_version}.\n"
-            "MIGRATION DIRECTIVES:\n"
-            "- If migrating to Pydantic V2:\n"
-            "  * Replace `class Config:` with `model_config = ConfigDict(...)` and replace `orm_mode = True` with `from_attributes = True`.\n"
-            "  * Replace `.from_orm(obj)` with `model_validate(obj)`, replace `.dict(...)` with `.model_dump(...)`, and replace `.copy(update=...)` with `.model_copy(update=...)`.\n"
-            "  * Replace `__root__ = ...` with `RootModel[...]` from `pydantic` and access elements via `.root`.\n"
-            "  * Replace `Field(..., regex=...)` with `Field(..., pattern=...)`.\n"
-            "  * Replace `@validator` with `@field_validator` and ALWAYS decorate with `@classmethod`. Note: `@field_validator` does NOT accept `each_item=True`; to validate collection elements, iterate over items in the validator method.\n"
+            f"MIGRATION DIRECTIVES FOR {delta.package_name.upper()} {delta.new_version}:\n"
+            f"{directives_block}\n"
             "STRICT RULES:\n"
             "1. Output ONLY the complete updated Python code inside a single ```python ... ``` block.\n"
             "2. Preserve all existing business logic, validation semantics, type hints, and function signatures.\n"

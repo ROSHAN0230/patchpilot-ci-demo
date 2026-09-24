@@ -104,8 +104,27 @@ class FailureNormalizer(FailureAnalyzer):
         if "validationerror" in specific or "mode='before'" in specific:
             return "validation_semantic_change"
 
+        if "declarative_base" in specific or "declarativebase" in specific:
+            return "declarative_base_deprecation"
+        if "query" in specific and ("session" in specific or "legacy" in specific):
+            return "session_query_legacy"
+        if "execute" in specific and ("engine" in specific or "attribute 'execute'" in specific):
+            return "engine_execute_removed"
+        if "autocommit" in specific or "commit" in specific:
+            return "transaction_commit_required"
+        if "removedin20warning" in specific:
+            return "sqlalchemy_20_deprecation"
+
         # Fallback to broader text if specific has no match
         combined = (specific + " " + full_output).lower()
+        if "declarative_base" in combined or "declarativebase" in combined:
+            return "declarative_base_deprecation"
+        if "query" in combined and ("session" in combined or "legacy" in combined):
+            return "session_query_legacy"
+        if "execute" in combined and ("engine" in combined or "attribute 'execute'" in combined):
+            return "engine_execute_removed"
+        if "removedin20warning" in combined:
+            return "sqlalchemy_20_deprecation"
         if "basesettings" in combined or "pydantic-settings" in combined:
             return "missing_settings_package"
         if "field_validator" in combined or "validator" in combined:

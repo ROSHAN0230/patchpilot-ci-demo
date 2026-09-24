@@ -37,6 +37,126 @@ class DependencyDelta:
 
 
 @dataclass
+class UpgradeSpec:
+    """Canonical representation of an upgrade recovery case."""
+    package_name: str
+    old_version: str
+    new_version: str
+    package_manager: str = "pip"
+    manifest_path: str = "pyproject.toml"
+    lockfile_path: Optional[str] = None
+    is_direct: bool = True
+    changed_dependencies: Dict[str, Any] = field(default_factory=dict)
+    version_range: str = ""
+    upgrade_type: str = "major"
+    repo_revision: Optional[str] = None
+    trigger_source: str = "cli"
+
+    def to_delta(self) -> DependencyDelta:
+        return DependencyDelta(
+            package_name=self.package_name,
+            old_version=self.old_version,
+            new_version=self.new_version,
+            manifest_path=self.manifest_path,
+            is_major_bump=(self.upgrade_type == "major"),
+        )
+
+    @classmethod
+    def from_delta(cls, delta: DependencyDelta, trigger_source: str = "cli") -> "UpgradeSpec":
+        return cls(
+            package_name=delta.package_name,
+            old_version=delta.old_version,
+            new_version=delta.new_version,
+            manifest_path=delta.manifest_path,
+            upgrade_type="major" if delta.is_major_bump else "minor",
+            trigger_source=trigger_source,
+        )
+
+
+class NodeType(str, Enum):
+    PACKAGE = "package"
+    MODULE = "module"
+    SYMBOL = "symbol"
+    TEST = "test"
+    FAILURE = "failure"
+
+
+class EdgeType(str, Enum):
+    UPGRADE_TARGET = "upgrade_target"
+    IMPORTS = "imports"
+    DEFINES_SYMBOL = "defines_symbol"
+    CALLS_SYMBOL = "calls_symbol"
+    TESTS_MODULE = "tests_module"
+    FAILS_AT = "fails_at"
+    DEPENDS_ON = "depends_on"
+    TRANSITIVELY_IMPACTS = "transitively_impacts"
+
+
+@dataclass
+class ImpactNode:
+    id: str
+    name: str
+    node_type: NodeType
+    file_path: Optional[str] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class ImpactEdge:
+    source: str
+    target: str
+    edge_type: EdgeType
+    explanation: str
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class EvidenceItem:
+    evidence_id: str
+    cluster_id: str
+    query: str
+    url: str
+    title: str
+    retrieved_timestamp: str
+    relevant_content: str
+    source_authority: str = "official_docs"
+
+
+@dataclass
+class EvidencePack:
+    spec: UpgradeSpec
+    items: List[EvidenceItem] = field(default_factory=list)
+    cluster_evidence_map: Dict[str, List[EvidenceItem]] = field(default_factory=dict)
+
+
+@dataclass
+class FailureCluster:
+    cluster_id: str
+    dependency: str
+    failure_category: str
+    exception_classes: List[str]
+    symbols: List[str]
+    affected_files: List[str]
+    member_failures: List["FailureRecord"]
+    representative_failure: "FailureRecord"
+    graph_context: Dict[str, Any] = field(default_factory=dict)
+    evidence_references: List[str] = field(default_factory=list)
+
+
+@dataclass
+class MigrationRiskMap:
+    spec: UpgradeSpec
+    known_breaking_changes: List[str] = field(default_factory=list)
+    affected_modules: List[str] = field(default_factory=list)
+    affected_symbols: List[str] = field(default_factory=list)
+    affected_tests: List[str] = field(default_factory=list)
+    semantic_risk_regions: List[Dict[str, Any]] = field(default_factory=list)
+    uncertainty_score: float = 0.0
+    evidence_references: List[str] = field(default_factory=list)
+
+
+
+@dataclass
 class FailureRecord:
     run_id: str
     test_name: str
@@ -149,3 +269,11 @@ class BenchmarkMetrics:
     cost_usd: float = 0.0
     final_diff_size: int = 0
     human_interventions: int = 0
+    impact_graph_nodes: int = 0
+    impact_graph_edges: int = 0
+    cluster_count: int = 0
+    repair_ordering: List[str] = field(default_factory=list)
+    verification_contract_result: Optional[str] = None
+    candidate_hypotheses: List[str] = field(default_factory=list)
+    affected_file_precision: Optional[float] = None
+

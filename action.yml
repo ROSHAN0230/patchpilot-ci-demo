@@ -1,0 +1,85 @@
+name: "PatchPilot Autonomous Upgrade Recovery"
+description: "Autonomous Breaking-Change Recovery & Dependency Upgrade Engineer for CI Pull Requests"
+author: "PatchPilot Team"
+
+inputs:
+  nebius-api-key:
+    description: "Nebius Token Factory API Key for NVIDIA Nemotron-3 Super 120B inference"
+    required: true
+  tavily-api-key:
+    description: "Tavily Search API Key for authoritative upstream migration guides"
+    required: false
+    default: ""
+  github-token:
+    description: "GitHub Token for commenting on PRs"
+    required: false
+    default: "${{ github.token }}"
+  package-name:
+    description: "Target package name to upgrade (auto-detected if omitted)"
+    required: false
+    default: ""
+  retry-budget:
+    description: "Maximum repair candidate attempts per affected file"
+    required: false
+    default: "3"
+
+outputs:
+  status:
+    description: "Final recovery status (verified_green, budget_exhausted, etc.)"
+    value: "${{ steps.patchpilot_step.outputs.status }}"
+  runtime_seconds:
+    description: "Total wall-clock recovery time in seconds"
+    value: "${{ steps.patchpilot_step.outputs.runtime_seconds }}"
+  cost_usd:
+    description: "Total API cost incurred during autonomous recovery"
+    value: "${{ steps.patchpilot_step.outputs.cost_usd }}"
+  rollbacks:
+    description: "Number of atomic cryptographic rollbacks performed"
+    value: "${{ steps.patchpilot_step.outputs.rollbacks }}"
+  report_path:
+    description: "Path to generated PR markdown report"
+    value: "${{ steps.patchpilot_step.outputs.report_path }}"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install PatchPilot Dependencies
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests tavily-python pytest sqlalchemy pydantic
+
+    - name: Execute PatchPilot Autonomous Recovery
+      id: patchpilot_step
+      shell: bash
+      env:
+        NEBIUS_API_KEY: ${{ inputs.nebius-api-key }}
+        TAVILY_API_KEY: ${{ inputs.tavily-api-key }}
+      run: |
+        python -m patchpilot.ci.github_runner \
+          --repo-dir "." \
+          --package "${{ inputs.package-name }}" \
+          --report-out "patchpilot_pr_report.md" \
+          --retry-budget "${{ inputs.retry-budget }}"
+
+    - name: Post Recovery Report to PR
+      if: always() && github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          if (fs.existsSync('patchpilot_pr_report.md')) {
+            const report = fs.readFileSync('patchpilot_pr_report.md', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+          }

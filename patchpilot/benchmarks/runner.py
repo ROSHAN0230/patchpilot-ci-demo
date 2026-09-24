@@ -197,9 +197,51 @@ def run_adversarial_rollback_benchmark(harness: BenchmarkHarness) -> bool:
         shutil.rmtree(workspace, ignore_errors=True)
 
 
+def run_sqlalchemy_benchmark(harness: BenchmarkHarness) -> bool:
+    print("\n" + "=" * 70)
+    print("  SCENARIO 4: SQLALCHEMY 1.4 -> 2.0 GENERALIZATION BENCHMARK")
+    print("=" * 70)
+    workspace = setup_workspace("sqlalchemy")
+    try:
+        delta = DependencyDelta("sqlalchemy", "1.4.49", "2.0.28", "pyproject.toml", True)
+        contract = VerificationContract(
+            required_tests=["tests/test_repository.py"],
+            allowed_file_scope=["models.py", "repository.py"],
+            retry_budget=3,
+            migration_assertions={"dependency": "sqlalchemy"},
+        )
+
+        nebius_key = os.environ.get("NEBIUS_API_KEY", "")
+        tavily_key = os.environ.get("TAVILY_API_KEY", "")
+
+        logger = JsonlEventLogger(log_path=os.path.join(harness.results_dir, "scenario_sqlalchemy_telemetry.jsonl"))
+        controller = BoundedRecoveryController(
+            evidence_engine=TavilyEvidenceEngine(api_key=tavily_key),
+            repair_engine=NemotronRepairEngine(api_key=nebius_key),
+            patch_manager=ScopeEnforcedPatchManager(),
+            sandbox=LocalSubprocessDriver(),
+            verifier=ContractVerificationEngine(),
+            failure_analyzer=FailureNormalizer(),
+            recorder=logger,
+        )
+
+        metrics = harness.run_benchmark(
+            benchmark_id="bm_scenario_4_sqlalchemy",
+            repo_dir=workspace,
+            contract=contract,
+            delta=delta,
+            controller=controller,
+        )
+        assert metrics.final_status == UpgradeStatus.VERIFIED_GREEN
+        print(f"[SUCCESS] Scenario 4 PASSED 100% GREEN for SQLAlchemy 2.0 (Runtime: {metrics.runtime_seconds:.1f}s, Cost: ${metrics.cost_usd:.4f})")
+        return True
+    finally:
+        shutil.rmtree(workspace, ignore_errors=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description="PatchPilot Benchmark Runner")
-    parser.add_argument("--scenario", choices=["single", "multifile", "adversarial", "all"], default="all")
+    parser.add_argument("--scenario", choices=["single", "multifile", "adversarial", "sqlalchemy", "all"], default="all")
     parser.add_argument("--results-dir", default=os.path.join(os.path.dirname(__file__), "..", "..", "benchmarks", "results"))
     args = parser.parse_args()
 
@@ -217,6 +259,10 @@ def main():
     if args.scenario in ["adversarial", "all"]:
         s3 = run_adversarial_rollback_benchmark(harness)
         success = success and s3
+
+    if args.scenario in ["sqlalchemy", "all"]:
+        s4 = run_sqlalchemy_benchmark(harness)
+        success = success and s4
 
     print("\n" + "=" * 70)
     print(f"  BENCHMARK SUITE COMPLETE -> ALL PASSING: {success}")

@@ -10,10 +10,13 @@ from typing import List, Dict, Optional, Any
 from patchpilot.types import (
     UpgradeStatus,
     DependencyDelta,
+    UpgradeSpec,
     VerificationContract,
     CandidatePatch,
     BenchmarkMetrics,
     FailureRecord,
+    FailureCluster,
+    EvidencePack,
 )
 from patchpilot.contracts import (
     RecoveryController,
@@ -26,6 +29,11 @@ from patchpilot.contracts import (
     EvidenceRecorder,
 )
 from patchpilot.state import SnapshotManager, RollbackIntegrityError
+from patchpilot.intelligence.ast_analyzer import AstRepositoryAnalyzer
+from patchpilot.intelligence.graph import ImpactGraphBuilder
+from patchpilot.intelligence.clusterer import FailureClusterer
+from patchpilot.intelligence.ordering import DependencyAwareSequencer
+from patchpilot.intelligence.risk_map import RiskMapGenerator
 
 
 class BoundedRecoveryController(RecoveryController):
@@ -40,6 +48,11 @@ class BoundedRecoveryController(RecoveryController):
         verifier: VerificationEngine,
         failure_analyzer: FailureAnalyzer,
         recorder: EvidenceRecorder,
+        ast_analyzer: Optional[AstRepositoryAnalyzer] = None,
+        graph_builder: Optional[ImpactGraphBuilder] = None,
+        clusterer: Optional[FailureClusterer] = None,
+        sequencer: Optional[DependencyAwareSequencer] = None,
+        risk_generator: Optional[RiskMapGenerator] = None,
     ):
         self.evidence_engine = evidence_engine
         self.repair_engine = repair_engine
@@ -48,6 +61,11 @@ class BoundedRecoveryController(RecoveryController):
         self.verifier = verifier
         self.failure_analyzer = failure_analyzer
         self.recorder = recorder
+        self.ast_analyzer = ast_analyzer or AstRepositoryAnalyzer()
+        self.graph_builder = graph_builder or ImpactGraphBuilder()
+        self.clusterer = clusterer or FailureClusterer()
+        self.sequencer = sequencer or DependencyAwareSequencer()
+        self.risk_generator = risk_generator or RiskMapGenerator()
 
     def execute_recovery(
         self,
@@ -128,17 +146,55 @@ class BoundedRecoveryController(RecoveryController):
         )
 
         # -------------------------------------------------------------
-        # STATE: ANALYZING & PRISTINE SNAPSHOT
+        # STATE: REPOSITORY INTELLIGENCE & IMPACT GRAPH
         # -------------------------------------------------------------
+        self.recorder.record_event(self._make_event(run_id, "INTELLIGENCE_STARTED", "repo_analyzer", "running", 0.0))
+        spec = UpgradeSpec.from_delta(delta)
+        analysis = self.ast_analyzer.analyze_repository(repo_dir, spec.package_name)
+        impact_graph = self.graph_builder.build_graph(spec, analysis, baseline_failures)
+        failure_clusters = self.clusterer.cluster_failures(baseline_failures, spec, impact_graph)
+        risk_map = self.risk_generator.generate_risk_map(spec, analysis, impact_graph, failure_clusters)
+
+        # Derive dependency-aware repair ordering from the graph
         target_files = contract.allowed_file_scope
+        if target_files:
+            ordered_files, order_rationale = self.sequencer.determine_repair_sequence(
+                target_files, impact_graph, failure_clusters
+            )
+            target_files = ordered_files
+        else:
+            ordered_files = []
+            order_rationale = "No files in contract scope."
+
+        self.recorder.record_event(
+            self._make_event(run_id, "INTELLIGENCE_COMPLETED", "repo_analyzer", "ok", 0.0, {
+                "graph_nodes": len(impact_graph.nodes),
+                "graph_edges": len(impact_graph.edges),
+                "cluster_count": len(failure_clusters),
+                "repair_ordering": target_files,
+                "order_rationale": order_rationale,
+                "uncertainty_score": risk_map.uncertainty_score,
+            })
+        )
+
         initial_snapshot = snapshot_mgr.create_snapshot("baseline_pristine", target_files)
 
         # -------------------------------------------------------------
-        # STATE: RESEARCHING (UPSTREAM EVIDENCE)
+        # STATE: RESEARCHING (UPSTREAM EVIDENCE PACK)
         # -------------------------------------------------------------
         self.recorder.record_event(self._make_event(run_id, "RESEARCH_STARTED", "evidence", "running", 0.0))
-        docs_context, citations = self.evidence_engine.search_migration_docs(delta, baseline_failures)
-        tavily_calls += 1
+        docs_context = ""
+        citations = []
+        if hasattr(self.evidence_engine, "assemble_evidence_pack"):
+            pack = self.evidence_engine.assemble_evidence_pack(spec, failure_clusters)
+            tavily_calls += max(len(failure_clusters), 1)
+            docs_context = "\n\n".join([f"Source [{it.title}] ({it.url}):\n{it.relevant_content}" for it in pack.items[:4]])
+            citations = [{"title": it.title, "url": it.url, "snippet": it.relevant_content[:200]} for it in pack.items]
+
+        if not docs_context:
+            docs_context, citations = self.evidence_engine.search_migration_docs(delta, baseline_failures)
+            tavily_calls += 1
+
         self.recorder.record_event(
             self._make_event(run_id, "RESEARCH_COMPLETED", "evidence", "ok", 0.0, {
                 "citations_count": len(citations),
@@ -341,6 +397,10 @@ class BoundedRecoveryController(RecoveryController):
             tok_out=total_tokens_out,
             tavily_calls=tavily_calls,
             cost=total_cost_usd,
+            graph_nodes=len(impact_graph.nodes),
+            graph_edges=len(impact_graph.edges),
+            cluster_count=len(failure_clusters),
+            repair_ordering=target_files,
         )
 
     def _make_event(self, run_id: str, event_type: str, comp: str, status: str, dur: float, meta: Optional[Dict] = None):
@@ -373,6 +433,10 @@ class BoundedRecoveryController(RecoveryController):
         tok_out: int,
         tavily_calls: int,
         cost: float,
+        graph_nodes: int = 0,
+        graph_edges: int = 0,
+        cluster_count: int = 0,
+        repair_ordering: Optional[List[str]] = None,
     ) -> BenchmarkMetrics:
         return BenchmarkMetrics(
             benchmark_id=run_id,
@@ -394,4 +458,9 @@ class BoundedRecoveryController(RecoveryController):
             cost_usd=round(cost, 6),
             final_diff_size=0,
             human_interventions=0,
+            impact_graph_nodes=graph_nodes,
+            impact_graph_edges=graph_edges,
+            cluster_count=cluster_count,
+            repair_ordering=repair_ordering or target_files,
+            verification_contract_result="VERIFIED_GREEN" if status == UpgradeStatus.VERIFIED_GREEN else str(status.value),
         )

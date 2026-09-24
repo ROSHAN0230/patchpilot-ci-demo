@@ -40,13 +40,22 @@ class ContractVerificationEngine(VerificationEngine):
                 overall_exit_code = rc
                 break  # Fail fast on first failing required suite
 
+        # Stage 1b: Run optional lint or typecheck command if specified in contract
+        if overall_exit_code == 0 and contract.typecheck_command:
+            typecheck_cmd = contract.typecheck_command if isinstance(contract.typecheck_command, list) else contract.typecheck_command.split()
+            rc_tc, out_tc, _ = sandbox.run_command(typecheck_cmd, cwd=repo_dir, timeout_seconds=contract.timeout_seconds)
+            combined_output += f"\n--- Typecheck Output ---\n" + out_tc
+            if rc_tc != 0:
+                overall_exit_code = rc_tc
+
         # Stage 2: Parse current failure records
         current_failures: List[FailureRecord] = []
+        dep_name = contract.migration_assertions.get("dependency", "python")
         if overall_exit_code != 0:
             current_failures = failure_analyzer.parse_test_output(
                 run_id=candidate_id,
                 test_output=combined_output,
-                dependency="pydantic",
+                dependency=dep_name,
             )
 
         # Stage 3: Detect regressions against baseline

@@ -1,0 +1,32 @@
+name: "PatchPilot Autonomous Upgrade Recovery"
+
+on:
+  pull_request:
+    paths:
+      - "pyproject.toml"
+      - "requirements.txt"
+      - "poetry.lock"
+      - "Pipfile.lock"
+
+jobs:
+  patchpilot-recovery:
+    name: "Autonomous PR Recovery"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout PR Branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Run PatchPilot Autonomous Recovery Action
+        uses: ./
+        with:
+          nebius-api-key: ${{ secrets.NEBIUS_API_KEY }}
+          tavily-api-key: ${{ secrets.TAVILY_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          retry-budget: 3

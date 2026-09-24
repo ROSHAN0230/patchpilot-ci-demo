@@ -1,6 +1,6 @@
 {
   "benchmark_id": "bm_scenario_2_multifile",
-  "repository": "pp_bench_multifile_il2iz3bw",
+  "repository": "pp_bench_multifile_z1o4ui5f",
   "dependency_delta": {
     "package_name": "pydantic",
     "old_version": "1.10.14",
@@ -23,11 +23,22 @@
   "tests_after": 3,
   "lint_result": null,
   "typecheck_result": null,
-  "runtime_seconds": 20.32,
-  "model_tokens_input": 2621,
-  "model_tokens_output": 779,
+  "runtime_seconds": 16.01,
+  "model_tokens_input": 2822,
+  "model_tokens_output": 580,
   "tavily_calls": 1,
-  "cost_usd": 0.003655,
+  "cost_usd": 0.003418,
   "final_diff_size": 0,
-  "human_interventions": 0
+  "human_interventions": 0,
+  "impact_graph_nodes": 21,
+  "impact_graph_edges": 22,
+  "cluster_count": 1,
+  "repair_ordering": [
+    "core/config.py",
+    "core/schemas.py",
+    "services/user_service.py"
+  ],
+  "verification_contract_result": "VERIFIED_GREEN",
+  "candidate_hypotheses": [],
+  "affected_file_precision": null
 }

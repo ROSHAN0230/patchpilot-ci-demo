@@ -1,0 +1,42 @@
+{
+  "benchmark_id": "bm_scenario_4_sqlalchemy",
+  "repository": "pp_bench_sqlalchemy_z5brxlvs",
+  "dependency_delta": {
+    "package_name": "sqlalchemy",
+    "old_version": "1.4.49",
+    "new_version": "2.0.28",
+    "manifest_path": "pyproject.toml",
+    "is_major_bump": true
+  },
+  "baseline_status": "failed",
+  "baseline_failure_count": 2,
+  "affected_files": [
+    "models.py",
+    "repository.py"
+  ],
+  "candidate_count": 2,
+  "attempts": 2,
+  "rollback_count": 0,
+  "final_status": "verified_green",
+  "tests_before": 2,
+  "tests_after": 2,
+  "lint_result": null,
+  "typecheck_result": null,
+  "runtime_seconds": 11.33,
+  "model_tokens_input": 2062,
+  "model_tokens_output": 425,
+  "tavily_calls": 1,
+  "cost_usd": 0.0025,
+  "final_diff_size": 0,
+  "human_interventions": 0,
+  "impact_graph_nodes": 16,
+  "impact_graph_edges": 17,
+  "cluster_count": 1,
+  "repair_ordering": [
+    "models.py",
+    "repository.py"
+  ],
+  "verification_contract_result": "VERIFIED_GREEN",
+  "candidate_hypotheses": [],
+  "affected_file_precision": null
+}
