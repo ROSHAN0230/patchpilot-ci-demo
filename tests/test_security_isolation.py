@@ -25,7 +25,7 @@ def test_sandbox_security_credential_scrubbing():
         "NEBIUS_API_KEY": "secret_nebius_key_12345",
         "TAVILY_API_KEY": "mock_dummy_tavily_secret_key",
         "AWS_SECRET_ACCESS_KEY": "AKIAIOSFODNN7EXAMPLE",
-        "GITHUB_TOKEN": "ghp_xxxxxxxxxxxxxxxxxxxx",
+        "GITHUB_TOKEN": "dummy_mock_github_token",
         "DATABASE_PASSWORD": "supersecretpassword",
         "SSH_AUTH_SOCK": "/tmp/ssh.sock",
         "SAFE_CUSTOM_APP_VAR": "harmless",
