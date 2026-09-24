@@ -239,9 +239,69 @@ def run_sqlalchemy_benchmark(harness: BenchmarkHarness) -> bool:
         shutil.rmtree(workspace, ignore_errors=True)
 
 
+def run_pristine_sqlalchemy_benchmark(harness: BenchmarkHarness) -> bool:
+    print("\n" + "=" * 70)
+    print("  SCENARIO 5: PRISTINE SQLALCHEMY 1.4 -> 2.x MIGRATION BENCHMARK")
+    print("  (Baseline committed to Git, zero pre-migrated 2.0 application code)")
+    print("=" * 70)
+    workspace = setup_workspace("sqlalchemy_pristine")
+    try:
+        delta = DependencyDelta("sqlalchemy", "1.4.52", "2.0.54", "pyproject.toml", is_major_bump=True)
+        contract = VerificationContract(
+            required_tests=["tests/test_user_repository.py"],
+            allowed_file_scope=["models.py", "repository.py"],
+            retry_budget=3,
+            migration_assertions={"dependency": "sqlalchemy"},
+        )
+
+        nebius_key = os.environ.get("NEBIUS_API_KEY", "")
+        tavily_key = os.environ.get("TAVILY_API_KEY", "")
+
+        logger = JsonlEventLogger(log_path=os.path.join(harness.results_dir, "scenario_sqlalchemy_pristine_telemetry.jsonl"))
+        controller = BoundedRecoveryController(
+            evidence_engine=TavilyEvidenceEngine(api_key=tavily_key),
+            repair_engine=NemotronRepairEngine(api_key=nebius_key),
+            patch_manager=ScopeEnforcedPatchManager(),
+            sandbox=LocalSubprocessDriver(),
+            verifier=ContractVerificationEngine(),
+            failure_analyzer=FailureNormalizer(),
+            recorder=logger,
+        )
+
+        metrics = harness.run_benchmark(
+            benchmark_id="bm_scenario_5_sqlalchemy_pristine",
+            repo_dir=workspace,
+            contract=contract,
+            delta=delta,
+            controller=controller,
+        )
+        assert metrics.final_status == UpgradeStatus.VERIFIED_GREEN
+        print(f"[SUCCESS] Scenario 5 PASSED 100% GREEN for Pristine SQLAlchemy 1.4 -> 2.0!")
+        print(f"          Runtime: {metrics.runtime_seconds:.1f}s | Cost: ${metrics.cost_usd:.4f} | Rollbacks: {metrics.rollback_count}")
+        return True
+    finally:
+        shutil.rmtree(workspace, ignore_errors=True)
+
+
+def run_competitor_baseline_benchmark(harness: BenchmarkHarness) -> bool:
+    print("\n" + "=" * 70)
+    print("  COMPETITOR BASELINE: GENERAL CODING AGENT VS PATCHPILOT")
+    print("=" * 70)
+    from patchpilot.benchmarks.competitor_baseline import run_neutral_comparison
+    comparison = run_neutral_comparison("sqlalchemy_pristine")
+    gen = comparison["general_baseline"]
+    pp = comparison["patchpilot"]
+    print("[COMPETITOR BASELINE COMPARISON RESULTS]")
+    print(f"  Target Repository : {comparison['target_repository']}")
+    print(f"  Dependency        : {comparison['dependency']} ({comparison['version_jump']})")
+    print(f"  General Agent     : Initial={gen['initial_failures']}, Final={gen['final_failures']}, Passed={gen['verification_passed']}, Cost=${gen['cost_usd']:.4f}")
+    print(f"  PatchPilot        : Initial={pp['initial_failures']}, Final={pp['final_failures']}, Passed={pp['verification_passed']}, Cost=${pp['cost_usd']:.4f}")
+    return pp['verification_passed']
+
+
 def main():
     parser = argparse.ArgumentParser(description="PatchPilot Benchmark Runner")
-    parser.add_argument("--scenario", choices=["single", "multifile", "adversarial", "sqlalchemy", "all"], default="all")
+    parser.add_argument("--scenario", choices=["single", "multifile", "adversarial", "sqlalchemy", "sqlalchemy_pristine", "baseline_compare", "all"], default="all")
     parser.add_argument("--results-dir", default=os.path.join(os.path.dirname(__file__), "..", "..", "benchmarks", "results"))
     args = parser.parse_args()
 
@@ -263,6 +323,14 @@ def main():
     if args.scenario in ["sqlalchemy", "all"]:
         s4 = run_sqlalchemy_benchmark(harness)
         success = success and s4
+
+    if args.scenario in ["sqlalchemy_pristine", "all"]:
+        s5 = run_pristine_sqlalchemy_benchmark(harness)
+        success = success and s5
+
+    if args.scenario in ["baseline_compare", "all"]:
+        s6 = run_competitor_baseline_benchmark(harness)
+        success = success and s6
 
     print("\n" + "=" * 70)
     print(f"  BENCHMARK SUITE COMPLETE -> ALL PASSING: {success}")

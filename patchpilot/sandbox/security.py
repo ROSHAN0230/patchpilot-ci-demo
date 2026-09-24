@@ -101,10 +101,16 @@ class SandboxSecurityPolicy:
         """
         Ensures target file or working directory is strictly contained within repo_root.
         """
-        norm_target = os.path.realpath(target_path)
-        norm_root = os.path.realpath(repo_root)
+        norm_target = os.path.realpath(os.path.abspath(target_path))
+        norm_root = os.path.realpath(os.path.abspath(repo_root))
 
-        if not norm_target.startswith(norm_root):
+        try:
+            common = os.path.commonpath([norm_target, norm_root])
+            if common != norm_root:
+                raise SecurityViolationError(
+                    f"Security boundary violation: target path '{norm_target}' escapes repo root '{norm_root}'."
+                )
+        except ValueError:
             raise SecurityViolationError(
                 f"Security boundary violation: target path '{norm_target}' escapes repo root '{norm_root}'."
             )

@@ -1,0 +1,44 @@
+{
+  "benchmark_id": "bm_scenario_5_sqlalchemy_pristine",
+  "repository": "pp_bench_sqlalchemy_pristine_0vgclrd7",
+  "dependency_delta": {
+    "package_name": "sqlalchemy",
+    "old_version": "1.4.52",
+    "new_version": "2.0.54",
+    "manifest_path": "pyproject.toml",
+    "is_major_bump": true
+  },
+  "baseline_status": "failed",
+  "baseline_failure_count": 2,
+  "affected_files": [
+    "models.py",
+    "repository.py"
+  ],
+  "candidate_count": 2,
+  "attempts": 2,
+  "rollback_count": 0,
+  "final_status": "verified_green",
+  "tests_before": 2,
+  "tests_after": 3,
+  "lint_result": null,
+  "typecheck_result": null,
+  "runtime_seconds": 21.92,
+  "model_tokens_input": 2284,
+  "model_tokens_output": 301,
+  "tavily_calls": 2,
+  "cost_usd": 0.002429,
+  "final_diff_size": 0,
+  "human_interventions": 0,
+  "impact_graph_nodes": 16,
+  "impact_graph_edges": 17,
+  "cluster_count": 2,
+  "repair_ordering": [
+    "models.py",
+    "repository.py"
+  ],
+  "verification_contract_result": "VERIFIED_GREEN",
+  "candidate_hypotheses": [],
+  "affected_file_precision": null,
+  "final_diff_text": "diff --git a/models.py b/models.py\nindex 9f7d785..ad610c1 100644\n--- a/models.py\n+++ b/models.py\n@@ -1,7 +1,10 @@\n-from sqlalchemy.ext.declarative import declarative_base\n+from sqlalchemy.orm import DeclarativeBase\n from sqlalchemy import Column, Integer, String\n \n-Base = declarative_base()\n+\n+class Base(DeclarativeBase):\n+    pass\n+\n \n class UserModel(Base):\n     __tablename__ = \"users\"\ndiff --git a/pyproject.toml b/pyproject.toml\nindex a4300f6..af56465 100644\n--- a/pyproject.toml\n+++ b/pyproject.toml\n@@ -2,7 +2,7 @@\n name = \"pristine-sqlalchemy-service\"\n version = \"0.1.0\"\n dependencies = [\n-    \"sqlalchemy==1.4.52\",\n+    \"sqlalchemy>=2.0.0\",\n ]\n \n [tool.pytest.ini_options]\ndiff --git a/repository.py b/repository.py\nindex defde13..6fe3e71 100644\n--- a/repository.py\n+++ b/repository.py\n@@ -1,17 +1,21 @@\n from typing import List, Optional\n+from sqlalchemy import select, text\n from sqlalchemy.orm import Session\n from models import UserModel\n \n+\n class UserRepository:\n     def __init__(self, session: Session):\n         self.session = session\n \n     def get_by_id(self, user_id: int) -> Optional[UserModel]:\n-        return self.session.query(UserModel).filter(UserModel.id == user_id).first()\n+        stmt = select(UserModel).where(UserModel.id == user_id)\n+        return self.session.execute(stmt).scalars().first()\n \n     def get_all(self) -> List[UserModel]:\n-        return self.session.query(UserModel).all()\n+        stmt = select(UserModel)\n+        return self.session.execute(stmt).scalars().all()\n \n     def count_raw(self) -> int:\n-        result = self.session.execute(\"SELECT count(*) FROM users\").scalar()\n+        result = self.session.execute(text(\"SELECT count(*) FROM users\")).scalar()\n         return result or 0\n",
+  "sandbox_backend": "local_subprocess_isolated"
+}

@@ -438,6 +438,18 @@ class BoundedRecoveryController(RecoveryController):
         cluster_count: int = 0,
         repair_ordering: Optional[List[str]] = None,
     ) -> BenchmarkMetrics:
+        # Capture git diff if available
+        diff_text = ""
+        try:
+            import subprocess
+            diff_res = subprocess.run(["git", "diff"], cwd=repo_dir, capture_output=True, text=True, timeout=5)
+            if diff_res.returncode == 0 and diff_res.stdout:
+                diff_text = diff_res.stdout
+        except Exception:
+            diff_text = ""
+
+        backend_name = self.sandbox.get_backend_name() if hasattr(self.sandbox, "get_backend_name") else "local_subprocess_isolated"
+
         return BenchmarkMetrics(
             benchmark_id=run_id,
             repository=os.path.basename(repo_dir),
@@ -456,11 +468,13 @@ class BoundedRecoveryController(RecoveryController):
             model_tokens_output=tok_out,
             tavily_calls=tavily_calls,
             cost_usd=round(cost, 6),
-            final_diff_size=0,
+            final_diff_size=len(diff_text),
             human_interventions=0,
             impact_graph_nodes=graph_nodes,
             impact_graph_edges=graph_edges,
             cluster_count=cluster_count,
             repair_ordering=repair_ordering or target_files,
             verification_contract_result="VERIFIED_GREEN" if status == UpgradeStatus.VERIFIED_GREEN else str(status.value),
+            final_diff_text=diff_text if diff_text else None,
+            sandbox_backend=backend_name,
         )

@@ -91,7 +91,7 @@ class ImpactGraph:
             # If edge represents dependency: target depends on source
             # E.g. A imports B -> B is upstream of A -> B must be repaired before A.
             # In our edges: source IMPORTS target means source depends on target.
-            if edge.edge_type == EdgeType.IMPORTS:
+            if edge.edge_type in (EdgeType.IMPORTS, EdgeType.TESTS_MODULE, EdgeType.TYPE_CHECKING_IMPORTS):
                 consumer = edge.source.replace("mod:", "")
                 provider = edge.target.replace("mod:", "")
                 if consumer in file_set and provider in file_set and consumer != provider:
@@ -228,6 +228,21 @@ class ImpactGraphBuilder:
                         edge_type=edge_type,
                         explanation=f"{consumer_file} imports {provider_file}",
                     )
+
+        # 3b. Add Type-Checking Import Edges
+        if hasattr(analysis, "type_checking_import_graph"):
+            for consumer_file, imported_files in analysis.type_checking_import_graph.items():
+                consumer_id = f"mod:{consumer_file}"
+                for provider_file in imported_files:
+                    provider_id = f"mod:{provider_file}"
+                    if consumer_id in graph.nodes and provider_id in graph.nodes:
+                        graph.add_edge(
+                            source=consumer_id,
+                            target=provider_id,
+                            edge_type=EdgeType.TYPE_CHECKING_IMPORTS,
+                            explanation=f"{consumer_file} imports {provider_file} inside TYPE_CHECKING guard",
+                            metadata={"type_checking": True},
+                        )
 
         # 4. Integrate Failure Nodes if provided
         if failures:

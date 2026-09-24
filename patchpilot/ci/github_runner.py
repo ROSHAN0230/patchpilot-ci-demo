@@ -7,7 +7,9 @@ import os
 import sys
 import json
 import argparse
-from typing import Optional, Dict, Any
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from patchpilot.types import UpgradeSpec, DependencyDelta, VerificationContract, UpgradeStatus
 from patchpilot.intelligence.manifest import ManifestAnalyzer

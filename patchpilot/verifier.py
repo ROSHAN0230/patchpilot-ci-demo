@@ -40,13 +40,28 @@ class ContractVerificationEngine(VerificationEngine):
                 overall_exit_code = rc
                 break  # Fail fast on first failing required suite
 
-        # Stage 1b: Run optional lint or typecheck command if specified in contract
+        tc_passed: Optional[bool] = None
+        lint_passed: Optional[bool] = None
+
+        # Stage 1b: Run optional lint command if specified in contract
+        if overall_exit_code == 0 and contract.lint_command:
+            lint_cmd = contract.lint_command if isinstance(contract.lint_command, list) else contract.lint_command.split()
+            rc_lint, out_lint, _ = sandbox.run_command(lint_cmd, cwd=repo_dir, timeout_seconds=contract.timeout_seconds)
+            combined_output += f"\n--- Lint Output ---\n" + out_lint
+            lint_passed = (rc_lint == 0)
+            if rc_lint != 0:
+                overall_exit_code = rc_lint
+
+        # Stage 1c: Run optional typecheck command if specified in contract
         if overall_exit_code == 0 and contract.typecheck_command:
             typecheck_cmd = contract.typecheck_command if isinstance(contract.typecheck_command, list) else contract.typecheck_command.split()
             rc_tc, out_tc, _ = sandbox.run_command(typecheck_cmd, cwd=repo_dir, timeout_seconds=contract.timeout_seconds)
             combined_output += f"\n--- Typecheck Output ---\n" + out_tc
+            tc_passed = (rc_tc == 0)
             if rc_tc != 0:
                 overall_exit_code = rc_tc
+        elif contract.typecheck_command and overall_exit_code != 0:
+            tc_passed = False
 
         # Stage 2: Parse current failure records
         current_failures: List[FailureRecord] = []
@@ -78,4 +93,6 @@ class ContractVerificationEngine(VerificationEngine):
             failure_records=current_failures,
             raw_output=combined_output,
             duration_ms=elapsed_ms,
+            typecheck_passed=tc_passed,
+            lint_passed=lint_passed,
         )

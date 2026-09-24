@@ -54,6 +54,12 @@ class FailureNormalizer(FailureAnalyzer):
                 symbol = "model_dump"
             elif "basesettings" in summary_msg.lower():
                 symbol = "BaseSettings"
+            elif "declarative_base" in summary_msg.lower():
+                symbol = "declarative_base"
+            elif "select" in summary_msg.lower():
+                symbol = "select"
+            elif "execute" in summary_msg.lower():
+                symbol = "execute"
 
             record = FailureRecord(
                 run_id=run_id,
@@ -104,6 +110,8 @@ class FailureNormalizer(FailureAnalyzer):
         if "validationerror" in specific or "mode='before'" in specific:
             return "validation_semantic_change"
 
+        if "textual sql expression" in specific or "explicitly declared as text" in specific:
+            return "textual_sql_text_required"
         if "declarative_base" in specific or "declarativebase" in specific:
             return "declarative_base_deprecation"
         if "query" in specific and ("session" in specific or "legacy" in specific):

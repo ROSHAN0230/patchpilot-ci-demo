@@ -84,6 +84,7 @@ class NodeType(str, Enum):
 class EdgeType(str, Enum):
     UPGRADE_TARGET = "upgrade_target"
     IMPORTS = "imports"
+    TYPE_CHECKING_IMPORTS = "type_checking_imports"
     DEFINES_SYMBOL = "defines_symbol"
     CALLS_SYMBOL = "calls_symbol"
     TESTS_MODULE = "tests_module"
@@ -233,6 +234,8 @@ class CandidateEvaluation:
     snapshot_hash_post: str = ""
     rollback_performed: bool = False
     duration_ms: float = 0.0
+    typecheck_passed: Optional[bool] = None
+    lint_passed: Optional[bool] = None
 
 
 @dataclass
@@ -276,4 +279,6 @@ class BenchmarkMetrics:
     verification_contract_result: Optional[str] = None
     candidate_hypotheses: List[str] = field(default_factory=list)
     affected_file_precision: Optional[float] = None
+    final_diff_text: Optional[str] = None
+    sandbox_backend: str = "local_subprocess_isolated"
 
