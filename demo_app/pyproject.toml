@@ -2,7 +2,7 @@
 name = "demo-user-service"
 version = "0.1.0"
 dependencies = [
-    "sqlalchemy==1.4.52",
+    "sqlalchemy>=2.0.0",
 ]
 
 [tool.pytest.ini_options]
