@@ -6,13 +6,13 @@
     "component": "controller",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.748432+00:00",
+    "timestamp": "2026-09-24T13:02:37.135666+00:00",
     "metadata": {
       "package": "pydantic",
       "from": "1.10.14",
       "to": "2.6.4"
     },
-    "event_hash": "08e5839d0130a27cc67288357633509fed3e0a476e1ac45e3b10ad5e76fb4e93"
+    "event_hash": "95fa86664c0c7061be014a77572e39cd3ed2553a1ba4fab5a1f75e341628cc75"
   },
   {
     "sequence": 2,
@@ -21,9 +21,9 @@
     "component": "sandbox",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.748563+00:00",
+    "timestamp": "2026-09-24T13:02:37.135774+00:00",
     "metadata": {},
-    "event_hash": "17e9f17ef846da16e0bdd2aeb387c896f9b3a2e6f2e507e51a5316868323fdfa"
+    "event_hash": "0df0fa75821e12687d9c01b3cc6d09aad0bd2880879635417876372190602baf"
   },
   {
     "sequence": 3,
@@ -32,12 +32,12 @@
     "component": "sandbox",
     "status": "failed",
     "duration_ms": 0.01,
-    "timestamp": "2026-09-24T12:21:23.749290+00:00",
+    "timestamp": "2026-09-24T13:02:37.136470+00:00",
     "metadata": {
       "failure_count": 1,
       "exit_code": 1
     },
-    "event_hash": "927f2daed3aae01d7493a2e4aa9773d008b505e0a138a0c8d4e732309d6eb6fc"
+    "event_hash": "569c6482641999a6a548465a575110df93b0e2623d7f7b76e26208aa3c5ed36d"
   },
   {
     "sequence": 4,
@@ -46,9 +46,9 @@
     "component": "repo_analyzer",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.749398+00:00",
+    "timestamp": "2026-09-24T13:02:37.136522+00:00",
     "metadata": {},
-    "event_hash": "01474da94083469d9555ec796e03c8e54ddebdd7c692962f657e2302283b7710"
+    "event_hash": "8f90166d4d63331a2b1e042a62035281056d8771b8bb9ab8b64a36c3d15a856a"
   },
   {
     "sequence": 5,
@@ -57,7 +57,7 @@
     "component": "repo_analyzer",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.751920+00:00",
+    "timestamp": "2026-09-24T13:02:37.138303+00:00",
     "metadata": {
       "graph_nodes": 4,
       "graph_edges": 1,
@@ -68,7 +68,7 @@
       "order_rationale": "Single file remediation; ordering is trivial.",
       "uncertainty_score": 0.1
     },
-    "event_hash": "c9cee4e50fae322ae021e47ecc0af5c0cff7f3a8b9b62b5e8d9e439984bd935f"
+    "event_hash": "12db2fb34fa13ee0c4ad693e5c8e49a467df2990b6dfb222b18d116b02054e44"
   },
   {
     "sequence": 6,
@@ -77,9 +77,9 @@
     "component": "evidence",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.752445+00:00",
+    "timestamp": "2026-09-24T13:02:37.138724+00:00",
     "metadata": {},
-    "event_hash": "b1b439e96f0f0d3705e9a060e98bb611cdd593edda8006587f3cc2acf06ac54e"
+    "event_hash": "93cb64ac347accf60d5932b37efbf6ab6d9edb6e3066dc7f10dba5e6f90ab838"
   },
   {
     "sequence": 7,
@@ -88,11 +88,11 @@
     "component": "evidence",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.752541+00:00",
+    "timestamp": "2026-09-24T13:02:37.138821+00:00",
     "metadata": {
       "citations_count": 1
     },
-    "event_hash": "39d0965e37e293935f851e79eb60a2233bcdea5fa5cbddc19e66a8c9434f4ebd"
+    "event_hash": "a707e2a373ec3f72e736613d4ec5be19289e8e6dd8dc0bea951ce0bef79803d8"
   },
   {
     "sequence": 8,
@@ -101,12 +101,12 @@
     "component": "repair_engine",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.753049+00:00",
+    "timestamp": "2026-09-24T13:02:37.139221+00:00",
     "metadata": {
       "target_file": "model.py",
       "iteration": 1
     },
-    "event_hash": "0080f3cc9a0f80f950697221d5e9bae81935cf550a13cd765c1550211b840095"
+    "event_hash": "3e1bc30246887f7608e01d65ca5b3876c4c774fea311dd954c4d9beec387f79b"
   },
   {
     "sequence": 9,
@@ -115,11 +115,11 @@
     "component": "patch_manager",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.754262+00:00",
+    "timestamp": "2026-09-24T13:02:37.140427+00:00",
     "metadata": {
       "candidate_id": "mock_test_run_cand_model.py_iter1"
     },
-    "event_hash": "32351105525392028a3afe076de0eaa12e84de7bdf76d9b280d58579b50e74aa"
+    "event_hash": "55f33f0b1d6846aa4a9eabaf266760c625305df84aa0821c51d40b235590a0d2"
   },
   {
     "sequence": 10,
@@ -128,11 +128,11 @@
     "component": "verifier",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.754386+00:00",
+    "timestamp": "2026-09-24T13:02:37.140573+00:00",
     "metadata": {
       "candidate_id": "mock_test_run_cand_model.py_iter1"
     },
-    "event_hash": "47c55760e1eef9b30808ff7450612ab7e5db363517421588c52cc873218c152e"
+    "event_hash": "4275d4840d5bd02fb27b24470e5438f40049a7aab73eb490a366e1cf06b556a7"
   },
   {
     "sequence": 11,
@@ -141,14 +141,14 @@
     "component": "verifier",
     "status": "failed",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.763930+00:00",
+    "timestamp": "2026-09-24T13:02:37.149703+00:00",
     "metadata": {
       "candidate_id": "mock_test_run_cand_model.py_iter1",
       "tests_failed": 2,
       "regressions": 0,
       "target_failures": 0
     },
-    "event_hash": "71f7acfd309bbaf8f48a6a2a15fd5456aa93edc86c0429bed5f2924025f56e70"
+    "event_hash": "3988408da7ca9576eb8e1873ec403395195fb5c5a54698eddda68b8c8db29b42"
   },
   {
     "sequence": 12,
@@ -157,11 +157,11 @@
     "component": "state_manager",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.764150+00:00",
+    "timestamp": "2026-09-24T13:02:37.149783+00:00",
     "metadata": {
       "snapshot_id": "mock_test_run_cand_model.py_iter1"
     },
-    "event_hash": "4d034e624f61a620f389b5ed6375a621fb73ba611c3e270cafda4ad8d5d103f6"
+    "event_hash": "c3e8f127e65714be44db2176e24a98c067008a409ad22d0e1413086b3b7963a2"
   },
   {
     "sequence": 13,
@@ -169,12 +169,12 @@
     "event_type": "ROLLBACK_COMPLETED",
     "component": "state_manager",
     "status": "ok",
-    "duration_ms": 2.82,
-    "timestamp": "2026-09-24T12:21:23.767054+00:00",
+    "duration_ms": 2.14,
+    "timestamp": "2026-09-24T13:02:37.151970+00:00",
     "metadata": {
       "verified_hash": "48c7a80b983dd27f30ea45d1ee5c5b1ff1d8f45fc456d9d1eb06673398139393"
     },
-    "event_hash": "4eb808bc6c1967c5e8d51ac2d3e745fee2f92f990ec3567ad06aff1780e25cda"
+    "event_hash": "2f9e3bf5fd5f89aa73f601cb8f044425c86f591fe489bb3d6f6a7ea28475ffd6"
   },
   {
     "sequence": 14,
@@ -183,12 +183,12 @@
     "component": "repair_engine",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.767436+00:00",
+    "timestamp": "2026-09-24T13:02:37.152324+00:00",
     "metadata": {
       "target_file": "model.py",
       "iteration": 2
     },
-    "event_hash": "e0514a8e93df37097a09cf057b6893a44ca37caed9210bb9de0da681eb721063"
+    "event_hash": "46b5b4a9c9cd3705f375c91dd4d22061dd71b29359b5ada2d6304b59db229cbe"
   },
   {
     "sequence": 15,
@@ -197,11 +197,11 @@
     "component": "patch_manager",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.768189+00:00",
+    "timestamp": "2026-09-24T13:02:37.153008+00:00",
     "metadata": {
       "candidate_id": "mock_test_run_cand_model.py_iter2"
     },
-    "event_hash": "51c2e8a8eeb4a848eba13c697081ae232956e7dad36dce0d758a7be7e1bd835c"
+    "event_hash": "31b23ddd1895adc61639bc2c0afa5228ac2fd027440b4505ff16c1be061020ea"
   },
   {
     "sequence": 16,
@@ -210,11 +210,11 @@
     "component": "verifier",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.768250+00:00",
+    "timestamp": "2026-09-24T13:02:37.153068+00:00",
     "metadata": {
       "candidate_id": "mock_test_run_cand_model.py_iter2"
     },
-    "event_hash": "1411a4be47bc79d6e85c3db3d1371dd568dbfadb511360a0228c49a69c578efc"
+    "event_hash": "aec9586bf8cef1f6a20e638a1b04def40a515635cee49e8bb7b74ce84eec8886"
   },
   {
     "sequence": 17,
@@ -223,13 +223,13 @@
     "component": "verifier",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-24T12:21:23.769579+00:00",
+    "timestamp": "2026-09-24T13:02:37.154419+00:00",
     "metadata": {
       "candidate_id": "mock_test_run_cand_model.py_iter2",
       "tests_passed": 3,
       "target_file_resolved": "model.py"
     },
-    "event_hash": "6920ce1d22e04415f36e75d3b69f702c6756ffddf87ddb8996dda2a6cbfa6046"
+    "event_hash": "6f8f834cbd7520d51f70f21d8b1ec3fc443734b2931ddbac897bdff743ffa67a"
   },
   {
     "sequence": 18,
@@ -237,13 +237,13 @@
     "event_type": "RUN_COMPLETED",
     "component": "controller",
     "status": "ok",
-    "duration_ms": 21.27,
-    "timestamp": "2026-09-24T12:21:23.769673+00:00",
+    "duration_ms": 18.88,
+    "timestamp": "2026-09-24T13:02:37.154532+00:00",
     "metadata": {
       "final_status": "verified_green",
       "attempts": 2,
       "rollbacks": 1
     },
-    "event_hash": "611ee421a63c4946a3a208d62e02e1f14df1f5182b32115520964785021476b8"
+    "event_hash": "005788e8eb32ed65f26a16dc991e6fac6b0e6f8581dcee83a87ec3bb81c472a6"
   }
 ]

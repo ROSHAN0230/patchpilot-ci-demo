@@ -1,0 +1,14 @@
+{
+  "package_name": "pydantic",
+  "old_version": "1.10.14",
+  "new_version": "2.6.4",
+  "package_manager": "pip",
+  "manifest_path": "pyproject.toml",
+  "lockfile_path": null,
+  "is_direct": true,
+  "changed_dependencies": {},
+  "version_range": "",
+  "upgrade_type": "major",
+  "repo_revision": null,
+  "trigger_source": "cli"
+}

@@ -55,9 +55,20 @@ def health() -> Dict[str, Any]:
     }
 
 
+def determine_run_type(run_id: str) -> str:
+    """Classifies run bundle into clear developer/judge categories."""
+    if run_id == "canonical_live_demo" or run_id.startswith("live_"):
+        return "CANONICAL LIVE RUN"
+    if run_id.startswith("gh_pr_"):
+        return "GITHUB ACTION CI/PR"
+    if run_id.startswith("bm_"):
+        return "BENCHMARK SUITE"
+    return "VERIFIED RUN"
+
+
 @app.get("/api/runs")
 def list_runs() -> List[Dict[str, Any]]:
-    """Lists all available run bundles with high-level summary metrics."""
+    """Lists all available run bundles with high-level summary metrics and run types."""
     if not os.path.isdir(BASE_RUNS_DIR):
         return []
 
@@ -80,8 +91,10 @@ def list_runs() -> List[Dict[str, Any]]:
                         with open(cands_file, "r", encoding="utf-8") as cf:
                             cand_count = len(json.load(cf))
 
+                    run_id = manifest.get("run_id", entry.name)
                     summaries.append({
-                        "run_id": manifest.get("run_id", entry.name),
+                        "run_id": run_id,
+                        "run_type": determine_run_type(run_id),
                         "target_package": manifest.get("target_package", "unknown"),
                         "old_version": manifest.get("old_version", ""),
                         "new_version": manifest.get("new_version", ""),
@@ -98,8 +111,13 @@ def list_runs() -> List[Dict[str, Any]]:
                 except Exception as e:
                     print(f"Error reading {entry.name}: {e}")
     
-    # Sort with flagship runs first
-    priority = {"gh_pr_sqlalchemy": 0, "bm_scenario_5_sqlalchemy_pristine": 1, "bm_scenario_3_adversarial": 2}
+    # Sort with flagship live demo and PR runs first
+    priority = {
+        "canonical_live_demo": 0,
+        "gh_pr_sqlalchemy": 1,
+        "bm_scenario_5_sqlalchemy_pristine": 2,
+        "bm_scenario_3_adversarial": 3,
+    }
     summaries.sort(key=lambda x: priority.get(x["run_id"], 99))
     return summaries
 
@@ -114,6 +132,7 @@ def get_run_bundle(run_id: str) -> Dict[str, Any]:
     try:
         bundle_data = ArtifactBundleExporter.load(run_dir)
         bundle_data["run_id"] = run_id
+        bundle_data["run_type"] = determine_run_type(run_id)
         audit_res = AuditLedgerVerifier.verify_run_bundle(run_dir)
         bundle_data["audit_verification"] = audit_res
         return bundle_data
@@ -323,6 +342,11 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
         <select id="run-select" onchange="onRunChanged()" class="bg-transparent text-emerald-400 font-mono font-medium focus:outline-none cursor-pointer">
           <option value="" disabled selected>Loading runs...</option>
         </select>
+      </div>
+
+      <div id="run-type-badge" class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 font-bold">
+        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>CANONICAL LIVE RUN</span>
       </div>
 
       <div id="target-delta-badge" class="px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-200">
@@ -702,7 +726,7 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
         currentRuns.forEach((r, idx) => {
           const opt = document.createElement('option');
           opt.value = r.run_id;
-          opt.textContent = `${r.run_id} (${r.target_package} ${r.old_version}->${r.new_version})`;
+          opt.textContent = `[${r.run_type || 'RUN'}] ${r.run_id} (${r.target_package} ${r.old_version}->${r.new_version})`;
           if (idx === 0) opt.selected = true;
           sel.appendChild(opt);
         });
@@ -737,6 +761,22 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
       const events = data.telemetry_events || [];
 
       // Top Badges
+      const runTypeBadge = document.getElementById('run-type-badge');
+      const rType = data.run_type || (data.run_id === 'canonical_live_demo' ? 'CANONICAL LIVE RUN' : (data.run_id && data.run_id.startsWith('gh_pr_')) ? 'GITHUB ACTION CI/PR' : (data.run_id && data.run_id.startsWith('bm_')) ? 'BENCHMARK SUITE' : 'VERIFIED RUN');
+      if (rType.includes('LIVE')) {
+        runTypeBadge.className = "px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 font-bold";
+        runTypeBadge.innerHTML = `<span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span><span>${rType}</span>`;
+      } else if (rType.includes('GITHUB')) {
+        runTypeBadge.className = "px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1.5 font-bold";
+        runTypeBadge.innerHTML = `<span class="h-2 w-2 rounded-full bg-purple-400"></span><span>${rType}</span>`;
+      } else if (rType.includes('BENCHMARK')) {
+        runTypeBadge.className = "px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 flex items-center gap-1.5 font-bold";
+        runTypeBadge.innerHTML = `<span class="h-2 w-2 rounded-full bg-cyan-400"></span><span>${rType}</span>`;
+      } else {
+        runTypeBadge.className = "px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1.5 font-bold";
+        runTypeBadge.innerHTML = `<span class="h-2 w-2 rounded-full bg-slate-400"></span><span>${rType}</span>`;
+      }
+
       document.getElementById('target-delta-badge').textContent = `${spec.package_name || 'unknown'} ${spec.old_version || ''} -> ${spec.new_version || ''}`;
       document.getElementById('backend-badge').textContent = data.backend_identity || 'local_subprocess_isolated';
       

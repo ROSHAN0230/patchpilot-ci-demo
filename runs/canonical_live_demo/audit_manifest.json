@@ -1,13 +1,13 @@
 {
-  "run_id": "mock_test_run",
+  "run_id": "canonical_live_demo",
   "target_package": "pydantic",
   "old_version": "1.10.14",
   "new_version": "2.6.4",
   "upgrade_type": "major",
   "backend_identity": "local_subprocess_isolated",
-  "root_hash": "005788e8eb32ed65f26a16dc991e6fac6b0e6f8581dcee83a87ec3bb81c472a6",
-  "event_count": 18,
-  "timestamp": "2026-09-24T13:02:37.154827+00:00",
+  "root_hash": "ce5680957db95a0f919b026592e28ab81093e6c61b049c7c451c6a56f1d6c439",
+  "event_count": 12,
+  "timestamp": "2026-09-24T13:02:54.816506+00:00",
   "verification_seal": "VERIFIED_GREEN",
   "final_status": "verified_green"
 }

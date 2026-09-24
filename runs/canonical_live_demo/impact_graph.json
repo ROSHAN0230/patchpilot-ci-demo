@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "id": "pkg:pydantic",
+      "name": "pydantic",
+      "type": "package",
+      "file_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "mod:service_model",
+      "name": "service_model.py",
+      "type": "module",
+      "file_path": "service_model.py",
+      "metadata": {}
+    },
+    {
+      "id": "test:service",
+      "name": "test_service.py",
+      "type": "test",
+      "file_path": "test_service.py",
+      "metadata": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "pkg:pydantic",
+      "target": "mod:service_model",
+      "type": "imports",
+      "explanation": "Imports deprecated validator",
+      "metadata": {}
+    },
+    {
+      "source": "mod:service_model",
+      "target": "test:service",
+      "type": "tests_module",
+      "explanation": "Validates UserModel",
+      "metadata": {}
+    }
+  ],
+  "causal_paths": {}
+}
