@@ -7,6 +7,7 @@ import os
 import sys
 import json
 import argparse
+from typing import Optional
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -34,8 +35,12 @@ def run_ci_recovery(
     Entrypoint for GitHub Action CI step.
     Detects upgrade, coordinates autonomous recovery, and generates PR comment artifact.
     """
+    if repo_dir == "." and not os.path.isfile("pyproject.toml") and os.path.isfile(os.path.join("demo_app", "pyproject.toml")):
+        repo_dir = "demo_app"
+
     manifest_analyzer = ManifestAnalyzer(default_trigger="github_action")
-    spec = manifest_analyzer.detect_upgrade(repo_dir, package_hint=package_name)
+    target_package = package_name if (package_name and package_name.strip()) else None
+    spec = manifest_analyzer.detect_upgrade(repo_dir, package_hint=target_package)
 
     if not spec:
         print("[PatchPilot CI] No dependency upgrade detected in manifests. Exiting successfully.")

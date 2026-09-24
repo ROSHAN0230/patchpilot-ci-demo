@@ -1,0 +1,10 @@
+[project]
+name = "demo-user-service"
+version = "0.1.0"
+dependencies = [
+    "sqlalchemy==1.4.52",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -7,6 +7,7 @@ on:
       - "requirements.txt"
       - "poetry.lock"
       - "Pipfile.lock"
+      - "demo_app/**"
 
 jobs:
   patchpilot-recovery:
@@ -15,6 +16,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
 
     steps:
       - name: Checkout PR Branch
@@ -29,4 +31,5 @@ jobs:
           nebius-api-key: ${{ secrets.NEBIUS_API_KEY }}
           tavily-api-key: ${{ secrets.TAVILY_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-dir: "demo_app"
           retry-budget: 3

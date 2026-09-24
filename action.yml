@@ -14,6 +14,10 @@ inputs:
     description: "GitHub Token for commenting on PRs"
     required: false
     default: "${{ github.token }}"
+  repo-dir:
+    description: "Directory containing the application repository to recover (default: .)"
+    required: false
+    default: "."
   package-name:
     description: "Target package name to upgrade (auto-detected if omitted)"
     required: false
@@ -52,7 +56,7 @@ runs:
       shell: bash
       run: |
         python -m pip install --upgrade pip
-        pip install requests tavily-python pytest sqlalchemy pydantic
+        pip install requests tavily-python pytest sqlalchemy pydantic python-dotenv mypy
 
     - name: Execute PatchPilot Autonomous Recovery
       id: patchpilot_step
@@ -62,10 +66,22 @@ runs:
         TAVILY_API_KEY: ${{ inputs.tavily-api-key }}
       run: |
         python -m patchpilot.ci.github_runner \
-          --repo-dir "." \
+          --repo-dir "${{ inputs.repo-dir }}" \
           --package "${{ inputs.package-name }}" \
           --report-out "patchpilot_pr_report.md" \
           --retry-budget "${{ inputs.retry-budget }}"
+
+    - name: Commit and Push Verified Recovery Fixes
+      if: steps.patchpilot_step.outputs.status == 'verified_green'
+      shell: bash
+      run: |
+        git config user.name "PatchPilot Bot"
+        git config user.email "bot@patchpilot.ai"
+        git add -u
+        if ! git diff-index --quiet HEAD; then
+          git commit -m "fix(patchpilot): autonomous breaking-change recovery verified green [skip ci]"
+          git push origin HEAD:${{ github.head_ref }}
+        fi
 
     - name: Post Recovery Report to PR
       if: always() && github.event_name == 'pull_request'
