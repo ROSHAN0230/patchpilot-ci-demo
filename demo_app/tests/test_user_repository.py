@@ -1,5 +1,5 @@
 import pytest
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from models import Base, UserModel
 from repository import UserRepository
