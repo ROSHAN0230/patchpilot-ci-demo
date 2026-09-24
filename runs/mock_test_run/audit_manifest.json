@@ -1,0 +1,13 @@
+{
+  "run_id": "mock_test_run",
+  "target_package": "pydantic",
+  "old_version": "1.10.14",
+  "new_version": "2.6.4",
+  "upgrade_type": "major",
+  "backend_identity": "local_subprocess_isolated",
+  "root_hash": "f94cdc3b42234dcaefc502ae814915d6616d6ecbb0c69e86a36ab119c1695279",
+  "event_count": 18,
+  "timestamp": "2026-09-24T12:10:47.485130+00:00",
+  "verification_seal": "VERIFIED_GREEN",
+  "final_status": "verified_green"
+}

@@ -1,0 +1,15 @@
+diff --git a/service_model.py b/service_model.py
+--- a/service_model.py
++++ b/service_model.py
+@@ -1,6 +1,7 @@
+-from pydantic import BaseModel, validator
++from pydantic import BaseModel, field_validator
+ 
+ class ServiceUser(BaseModel):
+     user_id: int
+-    @validator('user_id')
+-    def check_id(cls, v):
++    @field_validator('user_id')
++    @classmethod
++    def check_id(cls, v):
+         return v

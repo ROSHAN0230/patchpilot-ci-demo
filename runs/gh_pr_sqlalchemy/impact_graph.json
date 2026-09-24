@@ -1,0 +1,56 @@
+{
+  "nodes": [
+    {
+      "id": "pkg:sqlalchemy",
+      "name": "sqlalchemy",
+      "type": "package",
+      "file_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "mod:models",
+      "name": "models.py",
+      "type": "module",
+      "file_path": "models.py",
+      "metadata": {}
+    },
+    {
+      "id": "mod:repository",
+      "name": "repository.py",
+      "type": "module",
+      "file_path": "repository.py",
+      "metadata": {}
+    },
+    {
+      "id": "test:suite",
+      "name": "tests/",
+      "type": "test",
+      "file_path": "tests/",
+      "metadata": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "pkg:sqlalchemy",
+      "target": "mod:models",
+      "type": "imports",
+      "explanation": "declarative_base deprecation",
+      "metadata": {}
+    },
+    {
+      "source": "mod:models",
+      "target": "mod:repository",
+      "type": "imports",
+      "explanation": "UserModel query usage",
+      "metadata": {}
+    },
+    {
+      "source": "mod:repository",
+      "target": "test:suite",
+      "type": "tests_module",
+      "explanation": "Repository test coverage",
+      "metadata": {}
+    }
+  ],
+  "causal_paths": {}
+}

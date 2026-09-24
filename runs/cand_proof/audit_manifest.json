@@ -1,0 +1,13 @@
+{
+  "run_id": "cand_proof",
+  "target_package": "pydantic",
+  "old_version": "1.10.0",
+  "new_version": "2.0.0",
+  "upgrade_type": "major",
+  "backend_identity": "<MagicMock name='mock.get_backend_name()' id='2638359313248'>",
+  "root_hash": "f04dd7b0d358c1dc9ab3d32dfb2c999ee9724165c12c7c5be92b686258ac8d48",
+  "event_count": 18,
+  "timestamp": "2026-09-24T12:10:47.364158+00:00",
+  "verification_seal": "VERIFIED_GREEN",
+  "final_status": "verified_green"
+}

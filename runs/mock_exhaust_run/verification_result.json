@@ -1,0 +1,10 @@
+{
+  "status": "budget_exhausted",
+  "seal": "UNVERIFIED",
+  "tests_passed": 1,
+  "tests_failed": 2,
+  "typecheck_passed": false,
+  "lint_passed": false,
+  "scope_confinement": true,
+  "duration_seconds": 0.02
+}

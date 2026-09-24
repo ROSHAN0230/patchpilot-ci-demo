@@ -1,0 +1,12 @@
+--- a/models.py
++++ b/models.py
+@@ -1,6 +1,7 @@
+-from pydantic import BaseModel, validator
++from pydantic import BaseModel, field_validator
+ class UserModel(BaseModel):
+     id: int
+-    @validator('id')
++    @field_validator('id')
++    @classmethod
+     def check_id(cls, v):
+         return v

@@ -1,0 +1,24 @@
+[
+  {
+    "candidate_id": "gh_action_cand_1",
+    "iteration": 1,
+    "hypothesis": "Remediate DeclarativeBase and 2.0 select().scalars() across models and repo",
+    "target_files": [
+      "models.py",
+      "repository.py"
+    ],
+    "passed": true,
+    "status": "verified",
+    "exit_code": 0,
+    "tests_passed": 4,
+    "tests_failed": 0,
+    "rollback_performed": false,
+    "duration_ms": 2800.0,
+    "typecheck_passed": true,
+    "lint_passed": true,
+    "unified_diff": "--- a/models.py\n+++ b/models.py\n@@ -1,4 +1,4 @@\n-Base = declarative_base()\n+class Base(DeclarativeBase): pass\n",
+    "evidence_ids": [
+      "ev_tavily_sqla2"
+    ]
+  }
+]

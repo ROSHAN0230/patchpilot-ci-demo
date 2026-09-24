@@ -1,0 +1,12 @@
+{
+  "status": "verified_green",
+  "seal": "VERIFIED_GREEN",
+  "tests_passed": 4,
+  "tests_failed": 0,
+  "typecheck_passed": true,
+  "lint_passed": true,
+  "github_pr_url": "https://github.com/ROSHAN0230/patchpilot-ci-demo/pull/1",
+  "commit_sha": "83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78",
+  "workflow_run_id": "35993907979",
+  "workflow_conclusion": "success"
+}

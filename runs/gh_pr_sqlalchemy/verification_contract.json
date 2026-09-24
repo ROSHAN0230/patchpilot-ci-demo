@@ -1,0 +1,14 @@
+{
+  "required_tests": [
+    "tests/test_models.py",
+    "tests/test_repository.py"
+  ],
+  "allowed_file_scope": [
+    "models.py",
+    "repository.py",
+    "pyproject.toml"
+  ],
+  "timeout_seconds": 30,
+  "retry_budget": 3,
+  "migration_assertions": {}
+}

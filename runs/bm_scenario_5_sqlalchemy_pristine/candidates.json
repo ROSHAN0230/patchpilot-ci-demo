@@ -1,0 +1,44 @@
+[
+  {
+    "candidate_id": "bm_scenario_5_sqlalchemy_pristine_cand_1",
+    "iteration": 1,
+    "hypothesis": "Replace declarative_base() with class Base(DeclarativeBase) in models.py",
+    "target_files": [
+      "models.py"
+    ],
+    "passed": true,
+    "status": "verified",
+    "exit_code": 0,
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "rollback_performed": false,
+    "duration_ms": 1488.0,
+    "typecheck_passed": true,
+    "lint_passed": true,
+    "unified_diff": "--- a/models.py\n+++ b/models.py\n@@ -1,7 +1,10 @@\n-from sqlalchemy.ext.declarative import declarative_base\n+from sqlalchemy.orm import DeclarativeBase\n from sqlalchemy import Column, Integer, String\n \n-Base = declarative_base()\n+class Base(DeclarativeBase):\n+    pass\n",
+    "evidence_ids": [
+      "ev_sqla_decl_base"
+    ]
+  },
+  {
+    "candidate_id": "bm_scenario_5_sqlalchemy_pristine_cand_2",
+    "iteration": 2,
+    "hypothesis": "Convert Session.query to 2.0 select().scalars() and wrap raw strings with text()",
+    "target_files": [
+      "repository.py"
+    ],
+    "passed": true,
+    "status": "verified",
+    "exit_code": 0,
+    "tests_passed": 3,
+    "tests_failed": 0,
+    "rollback_performed": false,
+    "duration_ms": 1186.0,
+    "typecheck_passed": true,
+    "lint_passed": true,
+    "unified_diff": "--- a/repository.py\n+++ b/repository.py\n@@ -1,17 +1,21 @@\n from typing import List, Optional\n+from sqlalchemy import select, text\n from sqlalchemy.orm import Session\n from models import UserModel\n \n class UserRepository:\n     def __init__(self, session: Session):\n         self.session = session\n \n     def get_by_id(self, user_id: int) -> Optional[UserModel]:\n-        return self.session.query(UserModel).filter(UserModel.id == user_id).first()\n+        stmt = select(UserModel).where(UserModel.id == user_id)\n+        return self.session.execute(stmt).scalars().first()\n \n     def get_all(self) -> List[UserModel]:\n-        return self.session.query(UserModel).all()\n+        stmt = select(UserModel)\n+        return self.session.execute(stmt).scalars().all()\n \n     def count_raw(self) -> int:\n-        result = self.session.execute(\"SELECT count(*) FROM users\").scalar()\n+        result = self.session.execute(text(\"SELECT count(*) FROM users\")).scalar()\n         return result or 0\n",
+    "evidence_ids": [
+      "ev_sqla_select_execute"
+    ]
+  }
+]

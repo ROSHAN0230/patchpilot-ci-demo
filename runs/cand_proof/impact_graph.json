@@ -1,0 +1,119 @@
+{
+  "nodes": [
+    {
+      "id": "pkg:pydantic",
+      "name": "pydantic",
+      "type": "package",
+      "file_path": null,
+      "metadata": {
+        "old_version": "1.10.0",
+        "new_version": "2.0.0"
+      }
+    },
+    {
+      "id": "mod:models.py",
+      "name": "models",
+      "type": "module",
+      "file_path": "models.py",
+      "metadata": {}
+    },
+    {
+      "id": "sym:models.py:UserModel",
+      "name": "UserModel",
+      "type": "symbol",
+      "file_path": "models.py",
+      "metadata": {
+        "kind": "class",
+        "line": 2,
+        "bases": [
+          "BaseModel"
+        ]
+      }
+    },
+    {
+      "id": "sym:models.py:check_id",
+      "name": "check_id",
+      "type": "symbol",
+      "file_path": "models.py",
+      "metadata": {
+        "kind": "function",
+        "line": 5,
+        "bases": []
+      }
+    },
+    {
+      "id": "mod:test_models.py",
+      "name": "test_models",
+      "type": "test",
+      "file_path": "test_models.py",
+      "metadata": {}
+    },
+    {
+      "id": "sym:test_models.py:test_model",
+      "name": "test_model",
+      "type": "symbol",
+      "file_path": "test_models.py",
+      "metadata": {
+        "kind": "function",
+        "line": 2,
+        "bases": []
+      }
+    },
+    {
+      "id": "fail:test_models.py::test_model::DeprecationWarning",
+      "name": "test_model",
+      "type": "failure",
+      "file_path": "test_models.py",
+      "metadata": {
+        "category": "validator",
+        "exception": "DeprecationWarning",
+        "message": "validator deprecated"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "pkg:pydantic",
+      "target": "mod:models.py",
+      "type": "upgrade_target",
+      "explanation": "models.py imports pydantic (pydantic.BaseModel, pydantic.validator)",
+      "metadata": {}
+    },
+    {
+      "source": "mod:models.py",
+      "target": "sym:models.py:UserModel",
+      "type": "defines_symbol",
+      "explanation": "models.py defines class UserModel",
+      "metadata": {}
+    },
+    {
+      "source": "mod:models.py",
+      "target": "sym:models.py:check_id",
+      "type": "defines_symbol",
+      "explanation": "models.py defines function check_id",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_models.py",
+      "target": "sym:test_models.py:test_model",
+      "type": "defines_symbol",
+      "explanation": "test_models.py defines function test_model",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_models.py",
+      "target": "mod:models.py",
+      "type": "tests_module",
+      "explanation": "test_models.py imports models.py",
+      "metadata": {}
+    },
+    {
+      "source": "fail:test_models.py::test_model::DeprecationWarning",
+      "target": "mod:test_models.py",
+      "type": "fails_at",
+      "explanation": "Test test_model failed with DeprecationWarning in test_models.py",
+      "metadata": {}
+    }
+  ],
+  "causal_paths": {}
+}

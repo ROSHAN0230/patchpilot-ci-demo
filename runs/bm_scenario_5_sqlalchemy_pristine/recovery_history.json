@@ -1,0 +1,331 @@
+[
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437727+00:00",
+    "event_type": "UPGRADE_DETECTED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "metadata": {
+      "package": "sqlalchemy",
+      "from": "1.4.52",
+      "to": "2.0.54"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0001",
+    "sequence_number": 1,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "event_hash": "eeac3f72bcfa89732ce50e3e9e93685562237ea52857f9a1611c108fbe07560c"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437790+00:00",
+    "event_type": "BASELINE_STARTED",
+    "component": "sandbox",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {},
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0002",
+    "sequence_number": 2,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "eeac3f72bcfa89732ce50e3e9e93685562237ea52857f9a1611c108fbe07560c",
+    "event_hash": "8d966d7fc2fbea23b5e94bf8621d14e7cdff4cb4dfc8aa59dac3b34b93e09db7"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437820+00:00",
+    "event_type": "BASELINE_FAILED",
+    "component": "sandbox",
+    "status": "failed",
+    "duration_ms": 1453.9,
+    "metadata": {
+      "failure_count": 2,
+      "exit_code": 2
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0003",
+    "sequence_number": 3,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "8d966d7fc2fbea23b5e94bf8621d14e7cdff4cb4dfc8aa59dac3b34b93e09db7",
+    "event_hash": "bb57011477b3df9d6febaedf1d9153e9ced3d469782c0c9a991fcac93b610a9d"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437847+00:00",
+    "event_type": "INTELLIGENCE_STARTED",
+    "component": "repo_analyzer",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {},
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0004",
+    "sequence_number": 4,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "bb57011477b3df9d6febaedf1d9153e9ced3d469782c0c9a991fcac93b610a9d",
+    "event_hash": "b40aa7e13d59275cf6425a4a8491cebfad6ebb7c67e9c91cd8b4db2711463565"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437868+00:00",
+    "event_type": "INTELLIGENCE_COMPLETED",
+    "component": "repo_analyzer",
+    "status": "ok",
+    "duration_ms": 38.0,
+    "metadata": {
+      "graph_nodes": 16,
+      "graph_edges": 17,
+      "repair_ordering": [
+        "models.py",
+        "repository.py"
+      ]
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0005",
+    "sequence_number": 5,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "b40aa7e13d59275cf6425a4a8491cebfad6ebb7c67e9c91cd8b4db2711463565",
+    "event_hash": "87b4c000cbbf5723af888f36985a23d6f7afee086aa675a9d10f5354e78b30dd"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437891+00:00",
+    "event_type": "RESEARCH_STARTED",
+    "component": "evidence",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {
+      "queries": 2
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0006",
+    "sequence_number": 6,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "87b4c000cbbf5723af888f36985a23d6f7afee086aa675a9d10f5354e78b30dd",
+    "event_hash": "d54b78a7d42d1fd3dae299a030c00940d1df2102188f51f0be7c3167edd85cfb"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437911+00:00",
+    "event_type": "RESEARCH_COMPLETED",
+    "component": "evidence",
+    "status": "ok",
+    "duration_ms": 1235.0,
+    "metadata": {
+      "citations_count": 4
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0007",
+    "sequence_number": 7,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "d54b78a7d42d1fd3dae299a030c00940d1df2102188f51f0be7c3167edd85cfb",
+    "event_hash": "2889ce709e653416612a88f1a2e840ab9b3a41bf1656221d8ae8eab637151760"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437932+00:00",
+    "event_type": "PATCH_SYNTHESIS_STARTED",
+    "component": "repair_engine",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {
+      "target": "models.py"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0008",
+    "sequence_number": 8,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "2889ce709e653416612a88f1a2e840ab9b3a41bf1656221d8ae8eab637151760",
+    "event_hash": "0435aae4658a054e4ae8f29cb7c8a46215a375f78560f13eaaf01a843910b6be"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.437963+00:00",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 4.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_5_sqlalchemy_pristine_cand_1"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0009",
+    "sequence_number": 9,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "0435aae4658a054e4ae8f29cb7c8a46215a375f78560f13eaaf01a843910b6be",
+    "event_hash": "8652d4aad645ea913ae01f1bc73d3b7471ad1fd9748dca009b9ad1497a4d5024"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438025+00:00",
+    "event_type": "VERIFICATION_STARTED",
+    "component": "verifier",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_5_sqlalchemy_pristine_cand_1"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0010",
+    "sequence_number": 10,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "8652d4aad645ea913ae01f1bc73d3b7471ad1fd9748dca009b9ad1497a4d5024",
+    "event_hash": "12b954f86f33e797345526c7402e1cf1c70583233e90b156e10bcef7917f7d47"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438045+00:00",
+    "event_type": "VERIFICATION_PASSED",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 1488.0,
+    "metadata": {
+      "tests_passed": 2
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0011",
+    "sequence_number": 11,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "12b954f86f33e797345526c7402e1cf1c70583233e90b156e10bcef7917f7d47",
+    "event_hash": "1d801ac8e2a32064b9bee131d60f7fb22a51b28888a93581ec0a1a09214a5937"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438064+00:00",
+    "event_type": "PATCH_SYNTHESIS_STARTED",
+    "component": "repair_engine",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {
+      "target": "repository.py"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0012",
+    "sequence_number": 12,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "1d801ac8e2a32064b9bee131d60f7fb22a51b28888a93581ec0a1a09214a5937",
+    "event_hash": "7e24189603c1e52206ab6c86c5d55610cfd71918c6208e03419d142c78bc4f90"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438082+00:00",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 5.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_5_sqlalchemy_pristine_cand_2"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0013",
+    "sequence_number": 13,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "7e24189603c1e52206ab6c86c5d55610cfd71918c6208e03419d142c78bc4f90",
+    "event_hash": "148accce14752d00d3c5226e86c457e9b896f1d2849ada2fe5d340fe7a6904f4"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438100+00:00",
+    "event_type": "VERIFICATION_STARTED",
+    "component": "verifier",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_5_sqlalchemy_pristine_cand_2"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0014",
+    "sequence_number": 14,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "148accce14752d00d3c5226e86c457e9b896f1d2849ada2fe5d340fe7a6904f4",
+    "event_hash": "0f0c2548613aec4469d798501a7e987708cb015b2209681b02c40153a2670fd2"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438118+00:00",
+    "event_type": "VERIFICATION_PASSED",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 1186.0,
+    "metadata": {
+      "tests_passed": 3
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0015",
+    "sequence_number": 15,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "0f0c2548613aec4469d798501a7e987708cb015b2209681b02c40153a2670fd2",
+    "event_hash": "2d609896c729f622a2b4c55297f39a0fd4b0c8ff69db4bf09c721a9091c5bb8c"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438136+00:00",
+    "event_type": "FINAL_VERIFICATION_STARTED",
+    "component": "verifier",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {},
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0016",
+    "sequence_number": 16,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "2d609896c729f622a2b4c55297f39a0fd4b0c8ff69db4bf09c721a9091c5bb8c",
+    "event_hash": "a9b29e14f0c833df81876f7506ca7e14e1002d40096ec2ebe9c24cd3ad892ca7"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438153+00:00",
+    "event_type": "FINAL_VERIFICATION_PASSED",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 1620.0,
+    "metadata": {
+      "tests_passed": 3,
+      "typecheck": "ok",
+      "lint": "ok"
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0017",
+    "sequence_number": 17,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "a9b29e14f0c833df81876f7506ca7e14e1002d40096ec2ebe9c24cd3ad892ca7",
+    "event_hash": "1f704a02f1761b5b8e5821c7f5b19c7a1e60404abbc77558aee5ec1956f80272"
+  },
+  {
+    "run_id": "bm_scenario_5_sqlalchemy_pristine",
+    "timestamp": "2026-09-24T12:08:05.438172+00:00",
+    "event_type": "RECOVERY_COMPLETED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "metadata": {
+      "status": "verified_green",
+      "total_runtime_s": 21.92
+    },
+    "event_id": "ev_bm_scenario_5_sqlalchemy_pristine_0018",
+    "sequence_number": 18,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "1f704a02f1761b5b8e5821c7f5b19c7a1e60404abbc77558aee5ec1956f80272",
+    "event_hash": "3ddf3d16e9c39f27f9a457cb2ee9b53363e191b0d81006dc31df9b7d900ebb9d"
+  }
+]

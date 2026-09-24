@@ -1,0 +1,14 @@
+[
+  {
+    "cluster_id": "cluster_pydantic_1_general_migration_incompatibility",
+    "category": "general_migration_incompatibility",
+    "representative_message": "",
+    "affected_files": [
+      "tests/test_foo.py"
+    ],
+    "affected_tests": [],
+    "symbols": [],
+    "failure_count": 0,
+    "evidence_references": []
+  }
+]

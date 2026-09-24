@@ -5,6 +5,7 @@ Guarantees byte-for-byte state restoration without relying on external VCS.
 
 import os
 import hashlib
+import difflib
 from dataclasses import dataclass
 from typing import Dict, List, Tuple, Optional
 
@@ -136,3 +137,26 @@ class SnapshotManager:
             if compute_file_sha256(abs_p) != file_snap.sha256_hash:
                 return False
         return True
+
+    def compute_diff(self, snapshot: RepositorySnapshot) -> str:
+        """Computes a unified diff between snapshotted state and current on-disk state."""
+        diff_chunks = []
+        for rel_path, file_snap in sorted(snapshot.file_snapshots.items()):
+            abs_p = os.path.join(self.repo_dir, rel_path)
+            from_text = file_snap.content_bytes.decode("utf-8", errors="replace").splitlines(keepends=True)
+            if os.path.isfile(abs_p):
+                with open(abs_p, "rb") as f:
+                    to_text = f.read().decode("utf-8", errors="replace").splitlines(keepends=True)
+            else:
+                to_text = []
+
+            delta_lines = list(difflib.unified_diff(
+                from_text,
+                to_text,
+                fromfile=f"a/{rel_path}",
+                tofile=f"b/{rel_path}",
+            ))
+            if delta_lines:
+                diff_chunks.extend(delta_lines)
+
+        return "".join(diff_chunks)

@@ -1,0 +1,35 @@
+[
+  {
+    "cluster_id": "cluster_sqla_decl",
+    "category": "declarative_base_deprecation",
+    "representative_message": "",
+    "affected_files": [
+      "models.py"
+    ],
+    "affected_tests": [],
+    "symbols": [
+      "declarative_base"
+    ],
+    "failure_count": 0,
+    "evidence_references": [
+      "ev_sqla_decl_base"
+    ]
+  },
+  {
+    "cluster_id": "cluster_sqla_query",
+    "category": "legacy_query_execution",
+    "representative_message": "",
+    "affected_files": [
+      "repository.py"
+    ],
+    "affected_tests": [],
+    "symbols": [
+      "Session.query",
+      "Session.execute"
+    ],
+    "failure_count": 0,
+    "evidence_references": [
+      "ev_sqla_select_execute"
+    ]
+  }
+]

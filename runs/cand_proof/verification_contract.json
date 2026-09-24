@@ -1,0 +1,11 @@
+{
+  "required_tests": [
+    "test_models.py"
+  ],
+  "allowed_file_scope": [
+    "models.py"
+  ],
+  "timeout_seconds": 10,
+  "retry_budget": 2,
+  "migration_assertions": {}
+}

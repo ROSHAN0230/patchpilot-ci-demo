@@ -1,0 +1,13 @@
+{
+  "run_id": "bm_scenario_3_adversarial",
+  "target_package": "pydantic",
+  "old_version": "1.10.14",
+  "new_version": "2.6.4",
+  "upgrade_type": "major",
+  "backend_identity": "local_subprocess_isolated",
+  "root_hash": "74c31af1f233f105698b7cc2f35a13bf74c5757312ab4d07ace4d149a9d64ac8",
+  "event_count": 11,
+  "timestamp": "2026-09-24T12:08:05.446303+00:00",
+  "verification_seal": "VERIFIED_GREEN",
+  "final_status": "verified_green"
+}

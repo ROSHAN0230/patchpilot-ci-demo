@@ -2,7 +2,9 @@
 PatchPilot Core Domain Types and Data Models.
 """
 
-from dataclasses import dataclass, field
+import json
+import hashlib
+from dataclasses import dataclass, field, asdict
 from enum import Enum
 from typing import Dict, List, Optional, Any
 
@@ -247,6 +249,38 @@ class TelemetryEvent:
     status: str
     duration_ms: float
     metadata: Dict[str, Any] = field(default_factory=dict)
+    event_id: str = ""
+    sequence_number: int = 0
+    parent_event_id: Optional[str] = None
+    artifact_reference: Optional[str] = None
+    backend_identity: str = "local_subprocess_isolated"
+    previous_hash: str = "0" * 64
+    event_hash: str = ""
+
+    def compute_hash(self, prev_hash: Optional[str] = None) -> str:
+        prev = prev_hash if prev_hash is not None else self.previous_hash
+        backend_id = self.backend_identity
+        if not isinstance(backend_id, str):
+            backend_id = str(backend_id)
+        canonical = json.dumps({
+            "run_id": str(self.run_id),
+            "event_id": str(self.event_id),
+            "sequence_number": int(self.sequence_number),
+            "timestamp": str(self.timestamp),
+            "event_type": str(self.event_type),
+            "component": str(self.component),
+            "status": str(self.status),
+            "duration_ms": round(float(self.duration_ms), 3),
+            "metadata": self.metadata,
+            "parent_event_id": str(self.parent_event_id) if self.parent_event_id is not None else None,
+            "artifact_reference": str(self.artifact_reference) if self.artifact_reference is not None else None,
+            "backend_identity": backend_id,
+            "previous_hash": str(prev),
+        }, sort_keys=True, default=str)
+        return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass
@@ -281,4 +315,7 @@ class BenchmarkMetrics:
     affected_file_precision: Optional[float] = None
     final_diff_text: Optional[str] = None
     sandbox_backend: str = "local_subprocess_isolated"
+    bundle_dir: Optional[str] = None
+    audit_root_hash: Optional[str] = None
+
 

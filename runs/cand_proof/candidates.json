@@ -1,0 +1,40 @@
+[
+  {
+    "candidate_id": "cand_proof_cand_models.py_iter1",
+    "iteration": 1,
+    "hypothesis": "Remediate models.py for pydantic V2",
+    "target_files": [
+      "models.py"
+    ],
+    "passed": false,
+    "status": "FAILED",
+    "exit_code": 1,
+    "tests_passed": 0,
+    "tests_failed": 1,
+    "rollback_performed": true,
+    "duration_ms": 0.0,
+    "typecheck_passed": null,
+    "lint_passed": null,
+    "unified_diff": "--- a/models.py\n+++ b/models.py\n@@ -1,6 +1,7 @@\n-from pydantic import BaseModel, validator\r\n+from pydantic import BaseModel, field_validator\r\n class UserModel(BaseModel):\r\n     id: int\r\n-    @validator('id')\r\n+    @field_validator('non_existent_field')\r\n+    @classmethod\r\n     def check_id(cls, v):\r\n         return v\r\n",
+    "evidence_ids": []
+  },
+  {
+    "candidate_id": "cand_proof_cand_models.py_iter2",
+    "iteration": 2,
+    "hypothesis": "Remediate models.py for pydantic V2",
+    "target_files": [
+      "models.py"
+    ],
+    "passed": true,
+    "status": "PASSED",
+    "exit_code": 0,
+    "tests_passed": 1,
+    "tests_failed": 0,
+    "rollback_performed": false,
+    "duration_ms": 0.0,
+    "typecheck_passed": null,
+    "lint_passed": null,
+    "unified_diff": "--- a/models.py\n+++ b/models.py\n@@ -1,6 +1,7 @@\n-from pydantic import BaseModel, validator\r\n+from pydantic import BaseModel, field_validator\r\n class UserModel(BaseModel):\r\n     id: int\r\n-    @validator('id')\r\n+    @field_validator('id')\r\n+    @classmethod\r\n     def check_id(cls, v):\r\n         return v\r\n",
+    "evidence_ids": []
+  }
+]

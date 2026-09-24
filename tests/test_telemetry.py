@@ -77,3 +77,53 @@ def test_report_generation():
     assert "**Candidate Remediation Attempts**: 2" in report
     assert "**Rollbacks Executed & Verified**: 1" in report
     assert "$0.0034" in report
+
+
+def test_audit_ledger_hash_chain_and_tamper_detection():
+    with tempfile.NamedTemporaryFile(suffix=".jsonl", delete=False) as f:
+        log_path = f.name
+
+    try:
+        logger = JsonlEventLogger(log_path=log_path)
+        e1 = logger.record("run_audit", "UPGRADE_DETECTED", "manifest", "ok", 5.0, {"pkg": "sqlalchemy"})
+        e2 = logger.record("run_audit", "BASELINE_FAILED", "sandbox", "failed", 12.0, {"failures": 2})
+        e3 = logger.record("run_audit", "ROLLBACK_COMPLETED", "state", "ok", 3.0, {"verified": True})
+        e4 = logger.record("run_audit", "VERIFICATION_PASSED", "verifier", "ok", 4.0, {"passed": True})
+
+        # 1. Verify sequence numbers and chaining
+        assert e1.sequence_number == 1
+        assert e2.sequence_number == 2
+        assert e3.sequence_number == 3
+        assert e4.sequence_number == 4
+
+        assert e1.previous_hash == "0" * 64
+        assert e2.previous_hash == e1.event_hash
+        assert e3.previous_hash == e2.event_hash
+        assert e4.previous_hash == e3.event_hash
+
+        # 2. Verify root hash
+        root_hash = logger.get_root_hash()
+        assert root_hash == e4.event_hash
+        assert len(root_hash) == 64
+
+        # 3. Verify untampered ledger
+        valid, err = logger.verify_hash_chain()
+        assert valid is True
+        assert err is None
+
+        # 4. Reload from disk and verify
+        reloaded = JsonlEventLogger.load_from_jsonl(log_path)
+        valid_reloaded, err_reloaded = reloaded.verify_hash_chain()
+        assert valid_reloaded is True
+        assert err_reloaded is None
+        assert reloaded.get_root_hash() == root_hash
+
+        # 5. Tamper detection: mutate an event
+        reloaded.events[1].metadata["failures"] = 999  # Tamper with event 2
+        valid_tampered, err_tampered = reloaded.verify_hash_chain()
+        assert valid_tampered is False
+        assert "Hash mismatch at sequence 2" in err_tampered
+
+    finally:
+        if os.path.exists(log_path):
+            os.remove(log_path)

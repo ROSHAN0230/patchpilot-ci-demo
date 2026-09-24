@@ -1,0 +1,249 @@
+[
+  {
+    "sequence": 1,
+    "event_id": "ev_cand_proof_0001",
+    "event_type": "UPGRADE_DETECTED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.328384+00:00",
+    "metadata": {
+      "package": "pydantic",
+      "from": "1.10.0",
+      "to": "2.0.0"
+    },
+    "event_hash": "8ef14461e7b998b930cd5013dc7bc0180e49abf5acd63e347290cce611b32de2"
+  },
+  {
+    "sequence": 2,
+    "event_id": "ev_cand_proof_0002",
+    "event_type": "BASELINE_STARTED",
+    "component": "sandbox",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.329070+00:00",
+    "metadata": {},
+    "event_hash": "62796f38bfee24639212490f438e0e40f58c21c48c97a8d40d21ef0c22bb3025"
+  },
+  {
+    "sequence": 3,
+    "event_id": "ev_cand_proof_0003",
+    "event_type": "BASELINE_FAILED",
+    "component": "sandbox",
+    "status": "failed",
+    "duration_ms": 0.05,
+    "timestamp": "2026-09-24T12:10:47.329791+00:00",
+    "metadata": {
+      "failure_count": 1,
+      "exit_code": 1
+    },
+    "event_hash": "4f57a94aaa6f583a5c95ca4afb24684a7670fb2e99d13f299f76f4598e2017ff"
+  },
+  {
+    "sequence": 4,
+    "event_id": "ev_cand_proof_0004",
+    "event_type": "INTELLIGENCE_STARTED",
+    "component": "repo_analyzer",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.330241+00:00",
+    "metadata": {},
+    "event_hash": "8d8d5301c93a41e9c23bced4fd41c967ab2935263587902c95ee20a230a5a7fa"
+  },
+  {
+    "sequence": 5,
+    "event_id": "ev_cand_proof_0005",
+    "event_type": "INTELLIGENCE_COMPLETED",
+    "component": "repo_analyzer",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.351787+00:00",
+    "metadata": {
+      "graph_nodes": 7,
+      "graph_edges": 6,
+      "cluster_count": 1,
+      "repair_ordering": [
+        "models.py"
+      ],
+      "order_rationale": "Single file remediation; ordering is trivial.",
+      "uncertainty_score": 0.2
+    },
+    "event_hash": "16d9f8472d86e63f3386c6083ae9a4941b24f471a79a2c7a8108056381b7bd70"
+  },
+  {
+    "sequence": 6,
+    "event_id": "ev_cand_proof_0006",
+    "event_type": "RESEARCH_STARTED",
+    "component": "evidence",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.352469+00:00",
+    "metadata": {},
+    "event_hash": "368c3bcf72f50adbc0ef59f3d44f911756a225d84a922d1d924cfc9687dc0611"
+  },
+  {
+    "sequence": 7,
+    "event_id": "ev_cand_proof_0007",
+    "event_type": "RESEARCH_COMPLETED",
+    "component": "evidence",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.353740+00:00",
+    "metadata": {
+      "citations_count": 0
+    },
+    "event_hash": "5d33bfe03ff5c8f8efa0cac6f7355253c1709b62572515b697880860196d6cb7"
+  },
+  {
+    "sequence": 8,
+    "event_id": "ev_cand_proof_0008",
+    "event_type": "PATCH_SYNTHESIS_STARTED",
+    "component": "repair_engine",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.354502+00:00",
+    "metadata": {
+      "target_file": "models.py",
+      "iteration": 1
+    },
+    "event_hash": "4b14956116503cdad6974d8068f0b6f02f0cd67aea1da790f4c667dcd8806742"
+  },
+  {
+    "sequence": 9,
+    "event_id": "ev_cand_proof_0009",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.355380+00:00",
+    "metadata": {
+      "candidate_id": "cand_proof_cand_models.py_iter1"
+    },
+    "event_hash": "3ba2d520b77e336f1be59dfa811fe685fe7bd6d47e80990b5fc666b87314a21e"
+  },
+  {
+    "sequence": 10,
+    "event_id": "ev_cand_proof_0010",
+    "event_type": "VERIFICATION_STARTED",
+    "component": "verifier",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.355783+00:00",
+    "metadata": {
+      "candidate_id": "cand_proof_cand_models.py_iter1"
+    },
+    "event_hash": "a6a9e6d43c2907a1ce413e56f1b39a1c15c2981a54651dc462fb9520777f51ba"
+  },
+  {
+    "sequence": 11,
+    "event_id": "ev_cand_proof_0011",
+    "event_type": "VERIFICATION_FAILED",
+    "component": "verifier",
+    "status": "failed",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.357512+00:00",
+    "metadata": {
+      "candidate_id": "cand_proof_cand_models.py_iter1",
+      "tests_failed": 1,
+      "regressions": 1,
+      "target_failures": 1
+    },
+    "event_hash": "0b06d1b33d364ea42bdf17c9eafb0f4188034ff908205e705e80ea75e8a4fe39"
+  },
+  {
+    "sequence": 12,
+    "event_id": "ev_cand_proof_0012",
+    "event_type": "ROLLBACK_STARTED",
+    "component": "state_manager",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.357979+00:00",
+    "metadata": {
+      "snapshot_id": "cand_proof_cand_models.py_iter1"
+    },
+    "event_hash": "1ed5d4409e983bf3fc221fdd54f767271642569c4434e976854a8df14ff5752e"
+  },
+  {
+    "sequence": 13,
+    "event_id": "ev_cand_proof_0013",
+    "event_type": "ROLLBACK_COMPLETED",
+    "component": "state_manager",
+    "status": "ok",
+    "duration_ms": 1.47,
+    "timestamp": "2026-09-24T12:10:47.359852+00:00",
+    "metadata": {
+      "verified_hash": "058039e34bcac7b4b3d3b46d4932bfa86e73a4ee4e7af88fe6005a0b24d2688e"
+    },
+    "event_hash": "def7c9352925a564b6ebbb771ff485889b3c9ec7f1f03f6c34b94c9a64fc21a6"
+  },
+  {
+    "sequence": 14,
+    "event_id": "ev_cand_proof_0014",
+    "event_type": "PATCH_SYNTHESIS_STARTED",
+    "component": "repair_engine",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.360548+00:00",
+    "metadata": {
+      "target_file": "models.py",
+      "iteration": 2
+    },
+    "event_hash": "0431fd4bc7fe5700187dd2511f3f1e309e62629bbdae860a66ce55c20c42dc8f"
+  },
+  {
+    "sequence": 15,
+    "event_id": "ev_cand_proof_0015",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.361306+00:00",
+    "metadata": {
+      "candidate_id": "cand_proof_cand_models.py_iter2"
+    },
+    "event_hash": "20ae0f717ef68a39529629b2a15edd4fd04a187e2e667463ad0b8ad5d070c2ce"
+  },
+  {
+    "sequence": 16,
+    "event_id": "ev_cand_proof_0016",
+    "event_type": "VERIFICATION_STARTED",
+    "component": "verifier",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.361690+00:00",
+    "metadata": {
+      "candidate_id": "cand_proof_cand_models.py_iter2"
+    },
+    "event_hash": "8c1e2bffef4f16927c0e8485274049bae1b9b0b5848a9a28ebfa8c4fd3962d85"
+  },
+  {
+    "sequence": 17,
+    "event_id": "ev_cand_proof_0017",
+    "event_type": "VERIFICATION_PASSED",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-24T12:10:47.363083+00:00",
+    "metadata": {
+      "candidate_id": "cand_proof_cand_models.py_iter2",
+      "tests_passed": 1,
+      "target_file_resolved": "models.py"
+    },
+    "event_hash": "7fdd3843c3d16b0f3ebdb96512c18b8dd9db2bc376c7210e74d274e5f0b8ab50"
+  },
+  {
+    "sequence": 18,
+    "event_id": "ev_cand_proof_0018",
+    "event_type": "RUN_COMPLETED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 35.4,
+    "timestamp": "2026-09-24T12:10:47.363551+00:00",
+    "metadata": {
+      "final_status": "verified_green",
+      "attempts": 2,
+      "rollbacks": 1
+    },
+    "event_hash": "f04dd7b0d358c1dc9ab3d32dfb2c999ee9724165c12c7c5be92b686258ac8d48"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "required_tests": [
+    "tests/test_service.py"
+  ],
+  "allowed_file_scope": [
+    "service_model.py",
+    "pyproject.toml"
+  ],
+  "timeout_seconds": 20,
+  "retry_budget": 2,
+  "migration_assertions": {}
+}

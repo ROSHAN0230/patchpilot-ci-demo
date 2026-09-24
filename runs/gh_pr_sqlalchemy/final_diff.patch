@@ -1,0 +1,30 @@
+diff --git a/models.py b/models.py
+--- a/models.py
++++ b/models.py
+@@ -1,7 +1,10 @@
+-from sqlalchemy.ext.declarative import declarative_base
++from sqlalchemy.orm import DeclarativeBase
+ from sqlalchemy import Column, Integer, String
+ 
+-Base = declarative_base()
++class Base(DeclarativeBase):
++    pass
+diff --git a/repository.py b/repository.py
+--- a/repository.py
++++ b/repository.py
+@@ -1,17 +1,21 @@
+ from typing import List, Optional
++from sqlalchemy import select, text
+ from sqlalchemy.orm import Session
+ from models import UserModel
+ 
+ class UserRepository:
+     def get_by_id(self, user_id: int) -> Optional[UserModel]:
+-        return self.session.query(UserModel).filter(UserModel.id == user_id).first()
++        stmt = select(UserModel).where(UserModel.id == user_id)
++        return self.session.execute(stmt).scalars().first()
+ 
+     def count_raw(self) -> int:
+-        result = self.session.execute("SELECT count(*) FROM users").scalar()
++        result = self.session.execute(text("SELECT count(*) FROM users")).scalar()
+         return result or 0

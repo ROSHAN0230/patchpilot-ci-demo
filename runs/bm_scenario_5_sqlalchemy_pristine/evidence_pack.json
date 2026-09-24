@@ -1,0 +1,24 @@
+[
+  {
+    "evidence_id": "ev_sqla_decl_base",
+    "cluster_id": "cluster_sqla_decl",
+    "query": "sqlalchemy 2.0 declarative_base migration DeclarativeBase",
+    "url": "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-orm-declarative",
+    "title": "SQLAlchemy 2.0 Migration: Declarative Base",
+    "domain": "docs.sqlalchemy.org",
+    "retrieved_timestamp": "2026-09-24T11:00:05Z",
+    "relevant_content": "In SQLAlchemy 2.0, declarative_base() is superseded by inheriting from DeclarativeBase class: class Base(DeclarativeBase): pass.",
+    "source_authority": "official_docs"
+  },
+  {
+    "evidence_id": "ev_sqla_select_execute",
+    "cluster_id": "cluster_sqla_query",
+    "query": "sqlalchemy 2.0 Query.all select execute scalars migration",
+    "url": "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html#migration-orm-usage",
+    "title": "SQLAlchemy 2.0 Migration: Query 2.0 Style select()",
+    "domain": "docs.sqlalchemy.org",
+    "retrieved_timestamp": "2026-09-24T11:00:06Z",
+    "relevant_content": "Session.query() is in legacy mode. Replace session.query(UserModel).all() with session.execute(select(UserModel)).scalars().all(). Raw strings must be wrapped in text().",
+    "source_authority": "official_docs"
+  }
+]

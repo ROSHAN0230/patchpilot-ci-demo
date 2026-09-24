@@ -1,0 +1,13 @@
+{
+  "run_id": "gh_pr_sqlalchemy",
+  "target_package": "sqlalchemy",
+  "old_version": "1.4.52",
+  "new_version": "2.0.54",
+  "upgrade_type": "major",
+  "backend_identity": "local_subprocess_isolated",
+  "root_hash": "14d9f16c7001661b0510cc9c64281dd44f6302dc64b941663c195eb4b0b42c95",
+  "event_count": 13,
+  "timestamp": "2026-09-24T12:08:05.430457+00:00",
+  "verification_seal": "VERIFIED_GREEN",
+  "final_status": "verified_green"
+}

@@ -1,0 +1,242 @@
+[
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.429983+00:00",
+    "event_type": "CI_WORKFLOW_TRIGGERED",
+    "component": "github_actions",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "metadata": {
+      "workflow_run_id": "35993907979",
+      "repo": "ROSHAN0230/patchpilot-ci-demo",
+      "ref": "patchpilot-sqlalchemy-upgrade"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0001",
+    "sequence_number": 1,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "event_hash": "ac056c5bed5d1552e5306b24ac23eee49b6d650fea147f59c8bb195c9202053d"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430088+00:00",
+    "event_type": "UPGRADE_DETECTED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "metadata": {
+      "package": "sqlalchemy",
+      "from": "1.4.52",
+      "to": "2.0.54"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0002",
+    "sequence_number": 2,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "ac056c5bed5d1552e5306b24ac23eee49b6d650fea147f59c8bb195c9202053d",
+    "event_hash": "c99aad7f2dc7edbcfe4a1f2835c446e92b72a3561383cdc125136393af120fcd"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430130+00:00",
+    "event_type": "BASELINE_STARTED",
+    "component": "sandbox",
+    "status": "running",
+    "duration_ms": 0.0,
+    "metadata": {},
+    "event_id": "ev_gh_pr_sqlalchemy_0003",
+    "sequence_number": 3,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "c99aad7f2dc7edbcfe4a1f2835c446e92b72a3561383cdc125136393af120fcd",
+    "event_hash": "4c0dba0c656eaa1934a0deff379b419a7ecfc3d9b6e8fddf4a59ab8f91c2f424"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430155+00:00",
+    "event_type": "BASELINE_FAILED",
+    "component": "sandbox",
+    "status": "failed",
+    "duration_ms": 1250.0,
+    "metadata": {
+      "failures": 2
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0004",
+    "sequence_number": 4,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "4c0dba0c656eaa1934a0deff379b419a7ecfc3d9b6e8fddf4a59ab8f91c2f424",
+    "event_hash": "6603fc417d1cc42199e38ded62a67f26e538e606a634ff27c51fa9ed32ca0438"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430179+00:00",
+    "event_type": "IMPACT_GRAPH_BUILT",
+    "component": "repo_analyzer",
+    "status": "ok",
+    "duration_ms": 40.0,
+    "metadata": {
+      "nodes": 16,
+      "edges": 17
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0005",
+    "sequence_number": 5,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "6603fc417d1cc42199e38ded62a67f26e538e606a634ff27c51fa9ed32ca0438",
+    "event_hash": "ce2725643bde24e4ee78cec73530fafe22c09464d4dc0fbcf25f0b3cdb6c473b"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430201+00:00",
+    "event_type": "EVIDENCE_RETRIEVED",
+    "component": "evidence",
+    "status": "ok",
+    "duration_ms": 980.0,
+    "metadata": {
+      "provider": "tavily",
+      "citations": 3
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0006",
+    "sequence_number": 6,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "ce2725643bde24e4ee78cec73530fafe22c09464d4dc0fbcf25f0b3cdb6c473b",
+    "event_hash": "dd78dd0ca851e27a0e419ea2f32b0a0435e065a5d35fda8024309b8e94d79046"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430221+00:00",
+    "event_type": "PATCH_SYNTHESIZED",
+    "component": "repair_engine",
+    "status": "ok",
+    "duration_ms": 2100.0,
+    "metadata": {
+      "model": "nvidia/nemotron-3-super-120b-a12b"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0007",
+    "sequence_number": 7,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "dd78dd0ca851e27a0e419ea2f32b0a0435e065a5d35fda8024309b8e94d79046",
+    "event_hash": "d20b5b8e12426f1fe134391a14af18e68c41dad2f34c125efd516dd39abdf983"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430241+00:00",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 5.0,
+    "metadata": {
+      "candidate_id": "gh_action_cand_1"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0008",
+    "sequence_number": 8,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "d20b5b8e12426f1fe134391a14af18e68c41dad2f34c125efd516dd39abdf983",
+    "event_hash": "11344d1eb535ca5b5b16cc10917442fea677076dff49a160db2338d188d99aa5"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430260+00:00",
+    "event_type": "TESTS_VERIFIED_GREEN",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 1520.0,
+    "metadata": {
+      "passed": 4,
+      "failed": 0
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0009",
+    "sequence_number": 9,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "11344d1eb535ca5b5b16cc10917442fea677076dff49a160db2338d188d99aa5",
+    "event_hash": "4ced6105f607ebdaabee59968ab8d0c7c2da4cb3ab96089c084767716f459d6f"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430278+00:00",
+    "event_type": "MYPY_VERIFIED_GREEN",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 820.0,
+    "metadata": {
+      "typecheck": "0 errors"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0010",
+    "sequence_number": 10,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "4ced6105f607ebdaabee59968ab8d0c7c2da4cb3ab96089c084767716f459d6f",
+    "event_hash": "43f78573a79a3b4039f6638944e8d92065d1b1c6ce21f802938302d016778245"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430296+00:00",
+    "event_type": "GIT_COMMIT_CREATED",
+    "component": "ci_runner",
+    "status": "ok",
+    "duration_ms": 450.0,
+    "metadata": {
+      "commit_sha": "83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0011",
+    "sequence_number": 11,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "43f78573a79a3b4039f6638944e8d92065d1b1c6ce21f802938302d016778245",
+    "event_hash": "d6484f917e927b24470f658299b4c61d875a0485a1f6a9351d111444de733434"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430314+00:00",
+    "event_type": "PR_COMMENT_POSTED",
+    "component": "github_api",
+    "status": "ok",
+    "duration_ms": 610.0,
+    "metadata": {
+      "pr_number": 1,
+      "url": "https://github.com/ROSHAN0230/patchpilot-ci-demo/pull/1"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0012",
+    "sequence_number": 12,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "d6484f917e927b24470f658299b4c61d875a0485a1f6a9351d111444de733434",
+    "event_hash": "51519ae5ec6eadff01acd8da98a0c0e61946efea67d977ce1bb8616f37353c6e"
+  },
+  {
+    "run_id": "gh_pr_sqlalchemy",
+    "timestamp": "2026-09-24T12:08:05.430333+00:00",
+    "event_type": "CI_RUN_SUCCESS",
+    "component": "github_actions",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "metadata": {
+      "conclusion": "success"
+    },
+    "event_id": "ev_gh_pr_sqlalchemy_0013",
+    "sequence_number": 13,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "51519ae5ec6eadff01acd8da98a0c0e61946efea67d977ce1bb8616f37353c6e",
+    "event_hash": "14d9f16c7001661b0510cc9c64281dd44f6302dc64b941663c195eb4b0b42c95"
+  }
+]

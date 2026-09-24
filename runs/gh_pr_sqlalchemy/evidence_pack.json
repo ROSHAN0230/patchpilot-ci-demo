@@ -1,0 +1,13 @@
+[
+  {
+    "evidence_id": "ev_tavily_sqla2",
+    "cluster_id": "c_sqla",
+    "query": "sqlalchemy 2.0 select scalars DeclarativeBase",
+    "url": "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html",
+    "title": "Migrating to SQLAlchemy 2.0 \u2014 Official Documentation",
+    "domain": "docs.sqlalchemy.org",
+    "retrieved_timestamp": "2026-09-24T11:27:00Z",
+    "relevant_content": "1. DeclarativeBase replaces declarative_base(). 2. Session.execute(select(Model)).scalars() replaces query(). 3. text() wraps raw SQL.",
+    "source_authority": "official_docs"
+  }
+]

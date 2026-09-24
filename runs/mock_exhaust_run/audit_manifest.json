@@ -1,0 +1,13 @@
+{
+  "run_id": "mock_exhaust_run",
+  "target_package": "pydantic",
+  "old_version": "1.10.14",
+  "new_version": "2.6.4",
+  "upgrade_type": "major",
+  "backend_identity": "local_subprocess_isolated",
+  "root_hash": "9cd1320c07c4791e7f4783f20f4be957ce2cb67fc64bf3cb2bd46fdf3d14865e",
+  "event_count": 21,
+  "timestamp": "2026-09-24T12:10:47.551303+00:00",
+  "verification_seal": "UNVERIFIED",
+  "final_status": "budget_exhausted"
+}

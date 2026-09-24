@@ -1,0 +1,44 @@
+[
+  {
+    "candidate_id": "bm_scenario_3_adversarial_cand_1_faulty",
+    "iteration": 1,
+    "hypothesis": "Adversarial faulty patch: @field_validator decorated with non-existent field",
+    "target_files": [
+      "service_model.py"
+    ],
+    "passed": false,
+    "status": "rejected_rollback",
+    "exit_code": 1,
+    "tests_passed": 0,
+    "tests_failed": 2,
+    "rollback_performed": true,
+    "duration_ms": 850.0,
+    "typecheck_passed": false,
+    "lint_passed": true,
+    "unified_diff": "--- a/service_model.py\n+++ b/service_model.py\n@@ -5,1 +5,2 @@\n-@validator('user_id')\n+@field_validator('non_existent_id')\n",
+    "evidence_ids": [
+      "ev_pyd_val"
+    ]
+  },
+  {
+    "candidate_id": "bm_scenario_3_adversarial_cand_2_valid",
+    "iteration": 2,
+    "hypothesis": "Remediated patch: @field_validator('user_id') with classmethod",
+    "target_files": [
+      "service_model.py"
+    ],
+    "passed": true,
+    "status": "verified",
+    "exit_code": 0,
+    "tests_passed": 3,
+    "tests_failed": 0,
+    "rollback_performed": false,
+    "duration_ms": 920.0,
+    "typecheck_passed": true,
+    "lint_passed": true,
+    "unified_diff": "--- a/service_model.py\n+++ b/service_model.py\n@@ -5,2 +5,3 @@\n-@validator('user_id')\n+@field_validator('user_id')\n+@classmethod\n",
+    "evidence_ids": [
+      "ev_pyd_val"
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+diff --git a/models.py b/models.py
+--- a/models.py
++++ b/models.py
+@@ -1,7 +1,10 @@
+-from sqlalchemy.ext.declarative import declarative_base
++from sqlalchemy.orm import DeclarativeBase
+ from sqlalchemy import Column, Integer, String
+ 
+-Base = declarative_base()
++class Base(DeclarativeBase):
++    pass
+ 
+ class UserModel(Base):
+     __tablename__ = "users"
+diff --git a/pyproject.toml b/pyproject.toml
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -2,7 +2,7 @@
+ name = "pristine-sqlalchemy-service"
+ dependencies = [
+-    "sqlalchemy==1.4.52",
++    "sqlalchemy>=2.0.0",
+ ]
+diff --git a/repository.py b/repository.py
+--- a/repository.py
++++ b/repository.py
+@@ -1,17 +1,21 @@
+ from typing import List, Optional
++from sqlalchemy import select, text
+ from sqlalchemy.orm import Session
+ from models import UserModel
+ 
+ class UserRepository:
+     def __init__(self, session: Session):
+         self.session = session
+ 
+     def get_by_id(self, user_id: int) -> Optional[UserModel]:
+-        return self.session.query(UserModel).filter(UserModel.id == user_id).first()
++        stmt = select(UserModel).where(UserModel.id == user_id)
++        return self.session.execute(stmt).scalars().first()
+ 
+     def get_all(self) -> List[UserModel]:
+-        return self.session.query(UserModel).all()
++        stmt = select(UserModel)
++        return self.session.execute(stmt).scalars().all()
+ 
+     def count_raw(self) -> int:
+-        result = self.session.execute("SELECT count(*) FROM users").scalar()
++        result = self.session.execute(text("SELECT count(*) FROM users")).scalar()
+         return result or 0

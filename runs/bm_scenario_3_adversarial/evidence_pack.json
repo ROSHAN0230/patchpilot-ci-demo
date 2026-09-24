@@ -1,0 +1,13 @@
+[
+  {
+    "evidence_id": "ev_pyd_val",
+    "cluster_id": "cluster_validator",
+    "query": "pydantic V2 validator migration field_validator",
+    "url": "https://docs.pydantic.dev/latest/migration/#changes-to-validators",
+    "title": "Pydantic V2 Migration Guide: Validators",
+    "domain": "docs.pydantic.dev",
+    "retrieved_timestamp": "2026-09-24T10:00:00Z",
+    "relevant_content": "@validator is replaced with @field_validator in V2. Decorator requires classmethod.",
+    "source_authority": "official_docs"
+  }
+]

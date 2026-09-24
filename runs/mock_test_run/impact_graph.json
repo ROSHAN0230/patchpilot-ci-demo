@@ -1,0 +1,53 @@
+{
+  "nodes": [
+    {
+      "id": "pkg:pydantic",
+      "name": "pydantic",
+      "type": "package",
+      "file_path": null,
+      "metadata": {
+        "old_version": "1.10.14",
+        "new_version": "2.6.4"
+      }
+    },
+    {
+      "id": "mod:model.py",
+      "name": "model",
+      "type": "module",
+      "file_path": "model.py",
+      "metadata": {}
+    },
+    {
+      "id": "sym:model.py:User",
+      "name": "User",
+      "type": "symbol",
+      "file_path": "model.py",
+      "metadata": {
+        "kind": "class",
+        "line": 1,
+        "bases": []
+      }
+    },
+    {
+      "id": "fail:tests/test_foo.py::test_bar::RuntimeFailure",
+      "name": "test_bar",
+      "type": "failure",
+      "file_path": "tests/test_foo.py",
+      "metadata": {
+        "category": "general_migration_incompatibility",
+        "exception": "RuntimeFailure",
+        "message": "Test assertion failed"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "mod:model.py",
+      "target": "sym:model.py:User",
+      "type": "defines_symbol",
+      "explanation": "model.py defines class User",
+      "metadata": {}
+    }
+  ],
+  "causal_paths": {}
+}

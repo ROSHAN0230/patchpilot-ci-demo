@@ -1,0 +1,13 @@
+{
+  "run_id": "bm_scenario_5_sqlalchemy_pristine",
+  "target_package": "sqlalchemy",
+  "old_version": "1.4.52",
+  "new_version": "2.0.54",
+  "upgrade_type": "major",
+  "backend_identity": "local_subprocess_isolated",
+  "root_hash": "3ddf3d16e9c39f27f9a457cb2ee9b53363e191b0d81006dc31df9b7d900ebb9d",
+  "event_count": 18,
+  "timestamp": "2026-09-24T12:08:05.438322+00:00",
+  "verification_seal": "VERIFIED_GREEN",
+  "final_status": "verified_green"
+}

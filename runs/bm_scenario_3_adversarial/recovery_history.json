@@ -1,0 +1,210 @@
+[
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.445900+00:00",
+    "event_type": "UPGRADE_DETECTED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "metadata": {
+      "package": "pydantic",
+      "from": "1.10.14",
+      "to": "2.6.4"
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0001",
+    "sequence_number": 1,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "event_hash": "7aec239657651d3006400a423a14aa651d2d76b4add5c17ee000e34270ffbb0f"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.445976+00:00",
+    "event_type": "BASELINE_FAILED",
+    "component": "sandbox",
+    "status": "failed",
+    "duration_ms": 720.0,
+    "metadata": {
+      "exit_code": 1
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0002",
+    "sequence_number": 2,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "7aec239657651d3006400a423a14aa651d2d76b4add5c17ee000e34270ffbb0f",
+    "event_hash": "abb2e2db99d11c52a1cd0935dd60f1e428692947fe5a18a8fdd13a3151104fda"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446011+00:00",
+    "event_type": "INTELLIGENCE_COMPLETED",
+    "component": "repo_analyzer",
+    "status": "ok",
+    "duration_ms": 15.0,
+    "metadata": {
+      "graph_nodes": 10,
+      "graph_edges": 9
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0003",
+    "sequence_number": 3,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "abb2e2db99d11c52a1cd0935dd60f1e428692947fe5a18a8fdd13a3151104fda",
+    "event_hash": "241f3197414b9d07d543882dbf1f4b0497ca09e050e3a49fcb20f23311edda7d"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446037+00:00",
+    "event_type": "RESEARCH_COMPLETED",
+    "component": "evidence",
+    "status": "ok",
+    "duration_ms": 450.0,
+    "metadata": {
+      "citations_count": 2
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0004",
+    "sequence_number": 4,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "241f3197414b9d07d543882dbf1f4b0497ca09e050e3a49fcb20f23311edda7d",
+    "event_hash": "f09c32aa6efc230fcaf7ec01619a2c3e34028831ebd749a63a0894abb78efbcc"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446060+00:00",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 2.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_3_adversarial_cand_1_faulty"
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0005",
+    "sequence_number": 5,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "f09c32aa6efc230fcaf7ec01619a2c3e34028831ebd749a63a0894abb78efbcc",
+    "event_hash": "3baba855d1044f45596573e77aacbaf4c893515f2dcb5f67718596c1f88bf7dc"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446081+00:00",
+    "event_type": "VERIFICATION_FAILED",
+    "component": "verifier",
+    "status": "failed",
+    "duration_ms": 850.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_3_adversarial_cand_1_faulty",
+      "exit_code": 1
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0006",
+    "sequence_number": 6,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "3baba855d1044f45596573e77aacbaf4c893515f2dcb5f67718596c1f88bf7dc",
+    "event_hash": "db0fd7a17da75aeeb1c7c6d521bc750b66f593968dd5bc2b1789480976496c28"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446103+00:00",
+    "event_type": "ROLLBACK_TRIGGERED",
+    "component": "state_manager",
+    "status": "ok",
+    "duration_ms": 12.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_3_adversarial_cand_1_faulty",
+      "pre_hash": "e3b0c442",
+      "restored_hash": "e3b0c442",
+      "verified_match": true
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0007",
+    "sequence_number": 7,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "db0fd7a17da75aeeb1c7c6d521bc750b66f593968dd5bc2b1789480976496c28",
+    "event_hash": "0542f12cf28d142830802d6583f8de05692e40d720fd6b0904f9cd450b821679"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446132+00:00",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 3.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_3_adversarial_cand_2_valid"
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0008",
+    "sequence_number": 8,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "0542f12cf28d142830802d6583f8de05692e40d720fd6b0904f9cd450b821679",
+    "event_hash": "1495347ec9c1865d443342cd98dc850fa15efa2514cf73639444008fd44fa848"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446153+00:00",
+    "event_type": "VERIFICATION_PASSED",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 920.0,
+    "metadata": {
+      "candidate_id": "bm_scenario_3_adversarial_cand_2_valid",
+      "tests_passed": 3
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0009",
+    "sequence_number": 9,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "1495347ec9c1865d443342cd98dc850fa15efa2514cf73639444008fd44fa848",
+    "event_hash": "48167a86e5ed729934e5f680fa011dba92704f971c05812a17dd2b8c78af221a"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446172+00:00",
+    "event_type": "FINAL_VERIFICATION_PASSED",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 950.0,
+    "metadata": {
+      "tests_passed": 3,
+      "typecheck": "ok"
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0010",
+    "sequence_number": 10,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "48167a86e5ed729934e5f680fa011dba92704f971c05812a17dd2b8c78af221a",
+    "event_hash": "dac313619196a86fce1071df9d29df7749cacecb0a7299acfd74c5ee507b4386"
+  },
+  {
+    "run_id": "bm_scenario_3_adversarial",
+    "timestamp": "2026-09-24T12:08:05.446192+00:00",
+    "event_type": "RECOVERY_COMPLETED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "metadata": {
+      "status": "verified_green",
+      "rollbacks": 1
+    },
+    "event_id": "ev_bm_scenario_3_adversarial_0011",
+    "sequence_number": 11,
+    "parent_event_id": null,
+    "artifact_reference": null,
+    "backend_identity": "local_subprocess_isolated",
+    "previous_hash": "dac313619196a86fce1071df9d29df7749cacecb0a7299acfd74c5ee507b4386",
+    "event_hash": "74c31af1f233f105698b7cc2f35a13bf74c5757312ab4d07ace4d149a9d64ac8"
+  }
+]

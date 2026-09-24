@@ -23,7 +23,7 @@ def test_sandbox_security_credential_scrubbing():
         "PATH": "C:\\Windows\\System32;/usr/bin",
         "PYTHONPATH": "src/",
         "NEBIUS_API_KEY": "secret_nebius_key_12345",
-        "TAVILY_API_KEY": "tvly-secret-token",
+        "TAVILY_API_KEY": "mock_dummy_tavily_secret_key",
         "AWS_SECRET_ACCESS_KEY": "AKIAIOSFODNN7EXAMPLE",
         "GITHUB_TOKEN": "ghp_xxxxxxxxxxxxxxxxxxxx",
         "DATABASE_PASSWORD": "supersecretpassword",

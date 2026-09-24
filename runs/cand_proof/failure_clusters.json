@@ -1,0 +1,16 @@
+[
+  {
+    "cluster_id": "cluster_pydantic_1_validator",
+    "category": "validator",
+    "representative_message": "",
+    "affected_files": [
+      "test_models.py"
+    ],
+    "affected_tests": [],
+    "symbols": [
+      "validator"
+    ],
+    "failure_count": 0,
+    "evidence_references": []
+  }
+]
