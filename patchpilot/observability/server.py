@@ -195,39 +195,39 @@ def get_benchmark_suite() -> Dict[str, Any]:
 
     competitor_matrix = [
         {
-            "dimension": "Remediation Accuracy on Major Upgrades",
-            "patchpilot": "100% Verified Green (5/5 Scenarios)",
-            "general_coding_agents": "Unreliable (Hallucinates deprecated APIs, breaks callers)",
-            "static_codemods": "Fails on runtime semantics and dynamic schemas",
-            "dependabot_renovate": "0% (Only bumps string in manifest, leaves PR broken)",
+            "dimension": "Remediation Accuracy & Context Strategy",
+            "patchpilot": "AST-grounded impact graph slice + targeted upstream migration retrieval (5/5 verified)",
+            "general_coding_agents": "Direct whole-file or full-context prompt without dependency-aware impact graph",
+            "static_codemods": "Rule-based syntax transformations (e.g. LibCST / Bowler)",
+            "dependabot_renovate": "Manifest version string update only",
         },
         {
-            "dimension": "Execution Safety & Rollback",
-            "patchpilot": "Atomic snapshot rollback with SHA-256 pre/post verification",
-            "general_coding_agents": "No rollback mechanism; creates cascade regressions",
-            "static_codemods": "Git rollback only if operator manually intervenes",
-            "dependabot_renovate": "N/A (Does not attempt code remediation)",
+            "dimension": "Failure Handling & Rollback Safety",
+            "patchpilot": "Bounded candidate loop with SHA-256 pre/post atomic snapshot rollback",
+            "general_coding_agents": "In-place file generation; rollback requires external git intervention",
+            "static_codemods": "Transactional file overwrite or operator-managed git revert",
+            "dependabot_renovate": "No application code modification; capability not exercised",
         },
         {
-            "dimension": "Context Strategy & Token Cost",
-            "patchpilot": "AST Impact Graph + Targeted Tavily Docs ($0.001 - $0.0035)",
-            "general_coding_agents": "Dumps entire repository into prompt ($0.05 - $0.25)",
-            "static_codemods": "$0.00 (Pure AST AST-match, no intelligence)",
-            "dependabot_renovate": "$0.00 (Version bump only)",
+            "dimension": "Migration Documentation Grounding",
+            "patchpilot": "Targeted retrieval of upstream migration guides and changelogs via search API",
+            "general_coding_agents": "Parametric model knowledge; external retrieval depends on user prompt or tool integration",
+            "static_codemods": "Codified migration rules authored by human library maintainers",
+            "dependabot_renovate": "Changelog links embedded in PR text; does not perform code remediation",
         },
         {
-            "dimension": "Auditability & Tamper Resistance",
-            "patchpilot": "Cryptographically chained SHA-256 event ledger with root hash",
-            "general_coding_agents": "Ephemeral chat logs; not verifiable",
-            "static_codemods": "Commit messages only",
-            "dependabot_renovate": "Commit messages only",
+            "dimension": "Auditability & Verification Contract",
+            "patchpilot": "Contract-enforced test and typecheck verification with SHA-256 chained event ledger and Merkle root hash",
+            "general_coding_agents": "Conversational logs; verification requires external test runner integration",
+            "static_codemods": "AST syntax validation; test suite execution requires separate CI step",
+            "dependabot_renovate": "Relies on downstream CI pipeline to evaluate opened PR",
         },
         {
-            "dimension": "Autonomous CI/PR Integration",
-            "patchpilot": "Full GitHub Action + bot commit + verified green PR #1",
-            "general_coding_agents": "Manual copy-paste required",
-            "static_codemods": "Requires custom CI scripts",
-            "dependabot_renovate": "Opens broken PR upon upgrade",
+            "dimension": "Automated GitHub CI Workflow",
+            "patchpilot": "Automated bot commit with structured 8-section audit report posted to PR discussion",
+            "general_coding_agents": "Interactive developer environment or CLI; PR creation requires workflow integration",
+            "static_codemods": "Batch CLI tool; requires separate CI workflow to commit",
+            "dependabot_renovate": "Automated PR creation triggered by package registry releases",
         },
     ]
 
@@ -246,13 +246,15 @@ def get_github_proof() -> Dict[str, Any]:
         "repository_url": "https://github.com/ROSHAN0230/patchpilot-ci-demo",
         "pull_request_number": 1,
         "pull_request_url": "https://github.com/ROSHAN0230/patchpilot-ci-demo/pull/1",
-        "pull_request_branch": "patchpilot-sqlalchemy-upgrade",
+        "pull_request_title": "chore(deps): Upgrade SQLAlchemy from 1.4.52 to 2.0.0",
+        "pull_request_branch": "upgrade/sqlalchemy-2.0",
+        "target_branch": "main",
         "bot_commit_sha": "83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78",
         "bot_commit_url": "https://github.com/ROSHAN0230/patchpilot-ci-demo/commit/83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78",
         "workflow_run_id": "35993907979",
         "workflow_run_url": "https://github.com/ROSHAN0230/patchpilot-ci-demo/actions/runs/35993907979",
         "workflow_conclusion": "success",
-        "upgrade_delta": "sqlalchemy 1.4.52 -> 2.0.54",
+        "upgrade_delta": "sqlalchemy 1.4.52 -> >=2.0.0",
         "verified_sections_in_comment": [
             "1. UPGRADE SPECIFICATION",
             "2. IMPACT GRAPH SUMMARY",
@@ -1031,8 +1033,8 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
             <td class="p-3">${(sc.affected_files || []).join(', ')}</td>
             <td class="p-3 ${sc.rollback_count > 0 ? 'text-amber-400 font-bold' : 'text-slate-400'}">${sc.rollback_count}</td>
             <td class="p-3 text-emerald-400 font-bold">${sc.verification_contract_result || sc.final_status}</td>
-            <td class="p-3 text-slate-300">${sc.runtime_seconds}s</td>
-            <td class="p-3 text-amber-400">$${(sc.cost_usd || 0).toFixed(4)}</td>
+            <td class="p-3 text-slate-300">${(sc.runtime_seconds || 0).toFixed(2)}s</td>
+            <td class="p-3 text-amber-400">$${(sc.cost_usd || 0).toFixed(6)}</td>
           `;
           tbody.appendChild(tr);
         });

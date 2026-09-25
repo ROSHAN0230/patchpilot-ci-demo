@@ -5,9 +5,9 @@
   "new_version": "2.6.4",
   "upgrade_type": "major",
   "backend_identity": "local_subprocess_isolated",
-  "root_hash": "93648c2a54dbbe18178f3fe074ee95440c6116e1f0fe3538d560e0681cbf540b",
+  "root_hash": "685a2eb282953d356bab57df8a868c6478aa6c4f14d6627d89fdf8442671c3ac",
   "event_count": 21,
-  "timestamp": "2026-09-24T13:02:37.220519+00:00",
+  "timestamp": "2026-09-25T08:21:23.574080+00:00",
   "verification_seal": "UNVERIFIED",
   "final_status": "budget_exhausted"
 }

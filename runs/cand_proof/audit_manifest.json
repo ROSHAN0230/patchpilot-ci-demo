@@ -4,10 +4,10 @@
   "old_version": "1.10.0",
   "new_version": "2.0.0",
   "upgrade_type": "major",
-  "backend_identity": "<MagicMock name='mock.get_backend_name()' id='1900691438768'>",
-  "root_hash": "25f82130d0c3e0f7d1bb0a193a4a97b4532d780fa4d7e724c34bcc7e790e470b",
+  "backend_identity": "<MagicMock name='mock.get_backend_name()' id='2189434993840'>",
+  "root_hash": "374150f7cfbfe452fd29303a313215892ad9c1c3216c9b17cd3db67b15717cf0",
   "event_count": 18,
-  "timestamp": "2026-09-24T13:02:37.028296+00:00",
+  "timestamp": "2026-09-25T08:21:23.371948+00:00",
   "verification_seal": "VERIFIED_GREEN",
   "final_status": "verified_green"
 }

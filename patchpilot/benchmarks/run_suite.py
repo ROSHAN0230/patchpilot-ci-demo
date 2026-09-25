@@ -119,8 +119,8 @@ def display_benchmark_matrix(results: List[Dict[str, Any]], console: Console):
             files,
             att_str,
             status_styled,
-            f"{rt:.1f}s",
-            f"${cost:.4f}",
+            f"{rt:.2f}s",
+            f"${cost:.6f}",
         )
 
     console.print()
@@ -129,7 +129,7 @@ def display_benchmark_matrix(results: List[Dict[str, Any]], console: Console):
     summary_panel = Panel(
         Text.from_markup(
             f"[bold green]SUMMARY:[/] 5 of 5 Scenarios 100% Verified Green ({all_green}) | "
-            f"Total Cost: [bold yellow]${total_cost:.4f}[/] | "
+            f"Total Cost: [bold yellow]${total_cost:.6f}[/] (~${total_cost:.4f}) | "
             f"Execution Backend: [bold cyan]local_subprocess_isolated[/] | "
             f"Model: [bold white]nvidia/nemotron-3-super-120b-a12b[/] via Nebius Token Factory"
         ),
@@ -142,7 +142,7 @@ def display_benchmark_matrix(results: List[Dict[str, Any]], console: Console):
 def display_competitor_comparison(console: Console):
     """Renders the neutral competitor baseline comparison table."""
     table = Table(
-        title="[bold yellow]Neutral Competitor Comparison: PatchPilot vs Industry Alternatives[/]",
+        title="[bold yellow]Neutral Competitor Comparison: Capability & Operating Model Analysis[/]",
         header_style="bold magenta",
         border_style="dim",
         show_lines=True,
@@ -156,39 +156,39 @@ def display_competitor_comparison(console: Console):
 
     rows = [
         (
-            "Major Upgrade Remediation",
-            "[bold green]100% Green (5/5 Scenarios)[/]\nTargeted AST graph + Tavily docs",
-            "[red]Unreliable[/]\nHallucinates deprecated APIs;\nbreaks downstream callers",
-            "[yellow]Partial / Syntax only[/]\nFails on runtime schemas and dynamic query chains",
-            "[red]0% (Leaves PR broken)[/]\nOnly bumps version string in pyproject.toml",
+            "Remediation Accuracy & Context Strategy",
+            "AST-grounded impact graph slice\n+ targeted upstream migration retrieval",
+            "Direct whole-file or full-context prompt\nwithout dependency-aware impact graph",
+            "Rule-based syntax transformations\n(e.g. LibCST / Bowler)",
+            "Manifest version string\nupdate only",
         ),
         (
             "Execution Safety & Rollback",
-            "[bold green]Atomic Snapshot Rollback[/]\nPre/post SHA-256 byte-hash verification",
-            "[red]None[/]\nEdits in place; causes cascading regressions",
-            "[yellow]Manual git reset[/]\nOperator must diagnose & revert manually",
-            "[dim]N/A[/]\nDoes not attempt code remediation",
+            "Bounded candidate loop with\nSHA-256 pre/post atomic snapshot rollback",
+            "In-place file generation;\nrollback requires external git intervention",
+            "Transactional file overwrite\nor operator-managed git revert",
+            "No application code modification;\ncapability not exercised",
         ),
         (
-            "Context Strategy & Cost",
-            "[bold green]$0.001 - $0.0035 / run[/]\nAST slice + targeted docs (1k-3k tokens)",
-            "[red]$0.05 - $0.25 / run[/]\nDumps entire repo into prompt (50k+ tokens)",
-            "[bold green]$0.00[/]\nDeterministic regex / AST transform only",
-            "[bold green]$0.00[/]\nVersion bump string match",
+            "Migration Documentation Grounding",
+            "Targeted retrieval of upstream migration\nguides and changelogs via search API",
+            "Parametric model knowledge;\nexternal retrieval depends on prompt/tools",
+            "Codified migration rules\nauthored by library maintainers",
+            "Changelog links embedded in PR text;\ndoes not perform code remediation",
         ),
         (
-            "Auditability & Tamper Resistance",
-            "[bold green]Chained SHA-256 Event Ledger[/]\nMerkle root hash in audit_manifest.json",
-            "[dim]Ephemeral chat logs[/]\nNot verifiable or replayable",
-            "[dim]Git commits only[/]\nNo telemetry or contract verification",
-            "[dim]Git commits only[/]\nNo test execution proof",
+            "Auditability & Verification Contract",
+            "Contract-enforced test & typecheck\nwith SHA-256 chained event ledger & root hash",
+            "Conversational logs;\nverification requires external test runner",
+            "AST syntax validation;\ntest suite execution requires separate CI step",
+            "Relies on downstream CI pipeline\nto evaluate opened PR",
         ),
         (
-            "Autonomous GitHub CI Integration",
-            "[bold green]Full GitHub Action Workflow[/]\nVerified bot commit + green PR #1 comments",
-            "[dim]Manual copy-paste[/]\nRequires developer chat handoff",
-            "[dim]Custom scripting[/]\nRequires tailored CI glue",
-            "[yellow]Opens failing PR[/]\nRequires manual dev fix",
+            "Automated GitHub CI Workflow",
+            "Automated bot commit with structured\n8-section audit report posted to PR",
+            "Interactive developer environment or CLI;\nPR creation requires workflow integration",
+            "Batch CLI tool;\nrequires separate CI workflow to commit",
+            "Automated PR creation\ntriggered by registry releases",
         ),
     ]
 

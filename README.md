@@ -13,15 +13,15 @@
 
 ## ⚡ Executive Summary
 
-Modern software development is paralyzed by **dependency drift**. Tools like Dependabot and Renovate merely bump version strings in `pyproject.toml` or `package.json`—opening broken Pull Requests that fail tests and demand hours of manual refactoring. Meanwhile, general-purpose LLM coding agents dump entire repositories into prompt contexts, hallucinate obsolete syntax, edit code in place without rollback safety, and cost dollars per attempt.
+Major dependency upgrades are a significant source of friction in software maintenance. Automated dependency bumpers modify package version strings in `pyproject.toml` or `package.json`, leaving developers to diagnose breaking changes, failing tests, and API deprecations manually. Meanwhile, general-purpose LLM assistants typically operate on full-file prompts without dependency-aware topological ordering or rollback safety mechanisms.
 
-**PatchPilot** transforms dependency management from automated version bumps into **fully autonomous breaking-change recovery**:
-1. **Understands Dependency Topography**: Builds an AST-grounded `ImpactGraph` and `FailureClusters` before touching any source file.
-2. **Consults Authoritative Upstream Docs**: Dynamically queries the **Tavily AI Search API** for official migration guides and deprecation changelogs.
-3. **Synthesizes Surgical Patches**: Leverages **NVIDIA Nemotron-3 Super 120B** via the **Nebius Token Factory** using targeted context slices ($0.001 - $0.0035 per recovery).
-4. **Guarantees Execution Safety**: Validates all candidate patches in an isolated sandbox (`local_subprocess_isolated`) with **byte-level SHA-256 Atomic Snapshot Rollback** if tests or typechecks fail.
-5. **Cryptographically Sealed Audit Ledger**: Emits a chained SHA-256 event ledger and 12-artifact run bundle with a Merkle root hash.
-6. **Production GitHub CI Integration**: Fully proven end-to-end on GitHub Actions with verified bot commits and passing PR comments.
+**PatchPilot** provides an autonomous breaking-change recovery workflow for dependency migrations:
+1. **Dependency-Aware Impact Topography**: Constructs an AST-grounded `ImpactGraph` and `FailureClusters` before modifying application code.
+2. **Authoritative Upstream Evidence**: Dynamically queries the **Tavily AI Search API** for official migration guides and deprecation changelogs.
+3. **Surgical Patch Synthesis**: Leverages **NVIDIA Nemotron-3 Super 120B** via the **Nebius Token Factory** using targeted context slices.
+4. **Enforces Execution Safety**: Validates candidate patches in an isolated sandbox (`local_subprocess_isolated`) with **byte-level SHA-256 Atomic Snapshot Rollback** whenever verification fails.
+5. **Cryptographically Sealed Audit Ledger**: Emits a chained SHA-256 event ledger and 12-artifact run bundle terminating in a Merkle root hash.
+6. **Demonstrated GitHub CI Workflow**: Evaluated end-to-end on GitHub Actions with automated bot commits and structured PR audit comments.
 
 ---
 
@@ -40,14 +40,14 @@ flowchart TD
         TAVILY --> PACK["EvidencePack<br/>(Authoritative migration rules)"]
     end
 
-    subgraph SYNTHESIS ["3. Autonomous Synthesis & Safety"]
+    subgraph SYNTHESIS ["3. Synthesis & Safety Loop"]
         PACK --> NEMOTRON["NVIDIA Nemotron-3 Super 120B<br/>(Nebius Token Factory)"]
         NEMOTRON --> CAND["Candidate Patch<br/>(Surgically scoped diff)"]
         CAND --> SNAPSHOT["Atomic Snapshot Manager<br/>(Pre-patch SHA-256 tree hash)"]
         SNAPSHOT --> SANDBOX["Sandbox Verification<br/>(pytest + mypy strict)"]
     end
 
-    subgraph RESOLUTION ["4. Safety Loop & Delivery"]
+    subgraph RESOLUTION ["4. Verification & Delivery"]
         SANDBOX -- "Fail" --> ROLLBACK["Atomic Rollback<br/>(Restore byte-for-byte state)"]
         ROLLBACK --> NEG_FEEDBACK["Negative Feedback Loop<br/>(Synthesize Candidate n+1)"]
         NEG_FEEDBACK --> NEMOTRON
@@ -82,7 +82,7 @@ pip install -r requirements.txt
 ```
 
 ### 1. Run the Canonical End-to-End Live Demo
-Experience the full **RED ➔ INVESTIGATE ➔ ATTEMPT ➔ FAIL ➔ ROLLBACK ➔ RECOVER ➔ GREEN** lifecycle in real time:
+Execute the full **RED ➔ INVESTIGATE ➔ ATTEMPT 1 ➔ FAIL & ROLLBACK ➔ RECOVER (ATTEMPT 2) ➔ GREEN** lifecycle in real time:
 
 ```bash
 python demo.py
@@ -91,10 +91,10 @@ python demo.py
 *What this demonstrates:*
 - Upgrades `pydantic` from `1.10.14` to `2.6.4`.
 - Captures baseline test failures (`@validator` removed).
-- Builds AST `ImpactGraph` and retrieves official V2 migration evidence.
-- Deliberately injects a faulty adversarial patch (Candidate 1) to test recovery.
+- Builds AST `ImpactGraph` and retrieves official V2 migration evidence via Tavily.
+- Injects a syntax fault on Candidate 1 to exercise failure recovery.
 - Sandbox fails ➔ **Atomic Snapshot Rollback** restores pristine disk state with SHA-256 byte-level verification (`True`).
-- Synthesizes Candidate 2 ➔ Passes `pytest` 2/2 and `mypy` typecheck.
+- Synthesizes Candidate 2 ➔ Passes `pytest` 2/2 and `mypy` strict typecheck.
 - Seals 12 cryptographic artifacts into `runs/canonical_live_demo/` with Merkle root hash.
 
 ### 2. Launch the Developer & Judge Observability Dashboard
@@ -116,43 +116,50 @@ python -m patchpilot.benchmarks.run_suite
 
 ## 📊 Empirical Benchmarks (5 Hard Gates)
 
-All 5 benchmark scenarios were executed against live models (**NVIDIA Nemotron-3 Super 120B** on **Nebius Token Factory**) without mock shortcuts or human intervention:
+All 5 benchmark scenarios were executed against live models (**NVIDIA Nemotron-3 Super 120B** on **Nebius Token Factory**) unassisted within the bounded candidate loop:
 
-| Scenario ID | Dependency Jump | Baseline Failures | Target Files | Attempts / Rollbacks | Status | Runtime | Cost (USD) |
+| Scenario ID | Dependency Jump | Baseline Failures | Target Files | Attempts / Rollbacks | Status | Runtime | Cost (USD, exact) |
 |:---|:---|:---:|:---|:---:|:---:|:---:|:---:|
-| `bm_scenario_1_single` | `pydantic 1.10.14 -> 2.6.4` | 2 fail | `models.py` | 1 att / 0 rb | **VERIFIED_GREEN** | 8.3s | **$0.0010** |
-| `bm_scenario_2_multifile` | `pydantic 1.10.14 -> 2.6.4` | 3 fail | `config.py`, `schemas.py`, `user_service.py` | 3 att / 0 rb | **VERIFIED_GREEN** | 18.7s | **$0.0035** |
-| `bm_scenario_3_adversarial` | `pydantic 1.10.14 -> 2.6.4` | 2 fail | `service_model.py` | 2 att / **1 rollback** | **VERIFIED_GREEN** | 8.8s | **$0.0018** |
-| `bm_scenario_4_sqlalchemy` | `sqlalchemy 1.4.49 -> 2.0.28` | 2 fail | `models.py`, `repository.py` | 2 att / 0 rb | **VERIFIED_GREEN** | 14.2s | **$0.0022** |
-| `bm_scenario_5_sqlalchemy_pristine` | `sqlalchemy 1.4.52 -> 2.0.54` | 2 fail | `models.py`, `repository.py` | 2 att / 0 rb | **VERIFIED_GREEN** | 21.9s | **$0.0024** |
+| `bm_scenario_1_single` | `pydantic 1.10.14 -> 2.6.4` | 2 fail | `models.py` | 1 att / 0 rb | **VERIFIED_GREEN** | 8.30s | **$0.001022** |
+| `bm_scenario_2_multifile` | `pydantic 1.10.14 -> 2.6.4` | 2 fail | `core/config.py`, `core/schemas.py`, `services/user_service.py` | 3 att / 0 rb | **VERIFIED_GREEN** | 19.05s | **$0.003491** |
+| `bm_scenario_3_adversarial` | `pydantic 1.10.14 -> 2.6.4` | 2 fail | `service_model.py` | 2 att / **1 rollback** | **VERIFIED_GREEN** | 8.78s | **$0.002294** |
+| `bm_scenario_4_sqlalchemy` | `sqlalchemy 1.4.49 -> 2.0.28` | 2 fail | `models.py`, `repository.py` | 2 att / 0 rb | **VERIFIED_GREEN** | 17.36s | **$0.002570** |
+| `bm_scenario_5_sqlalchemy_pristine` | `sqlalchemy 1.4.52 -> 2.0.54` | 2 fail | `models.py`, `repository.py` | 2 att / 0 rb | **VERIFIED_GREEN** | 21.92s | **$0.002429** |
 
-**Total Suite Cost:** **$0.0118** (less than 1.2 cents for 5 complete migrations).
+- **Total Suite Cost (Exact)**: **$0.011806** (~**$0.0118**).
+- **Average Cost per Migration**: **$0.00236** (~**$0.0024**).
+- **Execution Backend**: `local_subprocess_isolated`.
 
 ---
 
-## 🥊 Neutral Competitor Comparison
+## 🥊 Neutral Competitor Capability Comparison
 
-| Evaluation Dimension | PatchPilot (Specialized) | General Coding Agents (Devin / SWE-bench style) | Static Codemods (LibCST / Bowler) | Dependabot / Renovate |
+| Evaluation Dimension | PatchPilot (Specialized) | General Coding Agents (SWE-bench / Devin-style) | Static Codemods (LibCST / Bowler) | Dependabot / Renovate |
 |:---|:---|:---|:---|:---|
-| **Major Upgrade Remediation** | **100% Green (5/5 Scenarios)**<br/>Targeted AST graph + Tavily docs | **Unreliable**<br/>Hallucinates deprecated syntax; breaks callers | **Partial**<br/>Fails on runtime schemas & dynamic queries | **0% (Leaves PR broken)**<br/>Only bumps version string in manifest |
-| **Execution Safety & Rollback** | **Atomic Snapshot Rollback**<br/>SHA-256 pre/post byte verification | **None**<br/>Edits code in place; causes cascading regressions | **Manual git reset**<br/>Requires human operator intervention | **N/A**<br/>Does not touch application code |
-| **Context Strategy & Cost** | **$0.001 - $0.0035 / run**<br/>AST slice + targeted docs (1k-3k tokens) | **$0.05 - $0.25 / run**<br/>Dumps entire repository (50k+ tokens) | **$0.00**<br/>Pure AST rule match | **$0.00**<br/>String match only |
-| **Auditability & Integrity** | **Chained SHA-256 Ledger**<br/>Merkle root hash in audit manifest | **Ephemeral chat logs**<br/>Not reproducible or tamper-resistant | **Git commits only**<br/>No execution telemetry or contract | **Git commits only**<br/>No verification proof |
-| **Autonomous GitHub CI** | **Full GitHub Action Workflow**<br/>Verified bot commit + green PR #1 | **Manual copy-paste**<br/>Requires human in the loop | **Custom CI scripting**<br/>Requires manual maintenance | **Opens failing PR**<br/>Creates upgrade fatigue |
+| **Remediation Accuracy & Context Strategy** | AST-grounded impact graph slice + targeted upstream migration retrieval | Direct whole-file or full-context prompt without dependency-aware impact graph | Rule-based syntax transformations (e.g. LibCST / Bowler) | Manifest version string update only |
+| **Execution Safety & Rollback** | Bounded candidate loop with SHA-256 pre/post atomic snapshot rollback | In-place file generation; rollback requires external git intervention | Transactional file overwrite or operator-managed git revert | No application code modification; capability not exercised |
+| **Migration Documentation Grounding** | Targeted retrieval of upstream migration guides and changelogs via search API | Parametric model knowledge; external retrieval depends on prompt/tools | Codified migration rules authored by library maintainers | Changelog links embedded in PR text; does not perform code remediation |
+| **Auditability & Verification Contract** | Contract-enforced test & typecheck with SHA-256 chained event ledger & root hash | Conversational logs; verification requires external test runner | AST syntax validation; test suite execution requires separate CI step | Relies on downstream CI pipeline to evaluate opened PR |
+| **Automated GitHub CI Workflow** | Automated bot commit with structured 8-section audit report posted to PR | Interactive developer environment or CLI; PR creation requires workflow integration | Batch CLI tool; requires separate CI workflow to commit | Automated PR creation triggered by registry releases |
 
 ---
 
-## 🌐 Real-World Production Proof: GitHub Actions & PR #1
+## 🌐 Real-World CI Workflow Proof: GitHub Actions & PR #1
 
-PatchPilot is not a simulated prototype. It has been tested and verified in real-world GitHub CI:
+PatchPilot has been evaluated on a live GitHub repository and CI environment:
 
 - **Repository**: [`ROSHAN0230/patchpilot-ci-demo`](https://github.com/ROSHAN0230/patchpilot-ci-demo)
-- **Verified Pull Request**: [PR #1 — `upgrade(deps): autonomous recovery for sqlalchemy 2.0.54`](https://github.com/ROSHAN0230/patchpilot-ci-demo/pull/1)
+- **Pull Request**: [PR #1 — `chore(deps): Upgrade SQLAlchemy from 1.4.52 to 2.0.0`](https://github.com/ROSHAN0230/patchpilot-ci-demo/pull/1)
+  - **Head Branch**: `upgrade/sqlalchemy-2.0`
+  - **Base Branch**: `main`
+  - **Upgrade Target**: `sqlalchemy 1.4.52 -> >=2.0.0`
 - **Bot Commit SHA**: [`83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78`](https://github.com/ROSHAN0230/patchpilot-ci-demo/commit/83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78)
 - **GitHub Actions Workflow Run**: [`35993907979`](https://github.com/ROSHAN0230/patchpilot-ci-demo/actions/runs/35993907979) (Conclusion: `success`)
 
+> **Note on Workflow Annotations:** The workflow run log contains a teardown warning in `Post Checkout PR Branch` (`The process '/usr/bin/git' failed with exit code 128`). This is a benign post-job cleanup occurrence in `actions/checkout@v4` caused by post-checkout git credential/ref cleanup after bot commits were pushed. The recovery job and overall workflow concluded with status `success`.
+
 ### Automated PR Comment Structure
-Every PatchPilot PR includes an authoritative audit report containing:
+Every PatchPilot PR comment includes a structured 8-section audit report:
 1. **Upgrade Specification** (target package, old/new SemVer, manifest path).
 2. **Impact Graph Summary** (affected symbols, dependent modules, test suites).
 3. **Failure Clusters & Root Causes** (mapped to official deprecation categories).
@@ -171,7 +178,7 @@ We adhere to the highest standards of security engineering and truthful reportin
 - **Zero Secret Exposure**: Zero API keys or tokens in code, repository commits, test runs, telemetry files, or reports.
 - **Compromised Credential Revocation**: Historical test tokens were explicitly revoked via GitHub unauthenticated revocation API (`POST https://api.github.com/credentials/revoke` ➔ HTTP 202).
 - **Git Credential Manager (GCM)**: All Git interactions use native OS credential helpers without hardcoded tokens.
-- **Execution Backend Truthfulness**: Current local sandbox execution is truthfully identified as `local_subprocess_isolated`. The containerized ConTree backend is gated as unavailable on local Windows host.
+- **Execution Backend Truthfulness**: Current local sandbox execution is truthfully identified as `local_subprocess_isolated`. The containerized ConTree backend is gated as unavailable on the local Windows host.
 
 ---
 

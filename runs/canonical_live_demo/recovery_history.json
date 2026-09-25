@@ -1,7 +1,7 @@
 [
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816123+00:00",
+    "timestamp": "2026-09-25T08:22:44.512596+00:00",
     "event_type": "UPGRADE_DETECTED",
     "component": "controller",
     "status": "ok",
@@ -17,11 +17,11 @@
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
     "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-    "event_hash": "8b1a04ed061c493e4eb02f4db39d2649d332bc5faa2e5edbd157f2b266634c3f"
+    "event_hash": "e745cf6b0b94fc116998c235e405d949710270b0b47df127225b0a55827217d4"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816192+00:00",
+    "timestamp": "2026-09-25T08:22:44.512680+00:00",
     "event_type": "BASELINE_STARTED",
     "component": "sandbox",
     "status": "running",
@@ -32,12 +32,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "8b1a04ed061c493e4eb02f4db39d2649d332bc5faa2e5edbd157f2b266634c3f",
-    "event_hash": "edab327c26039b9c5d1003eb622796c3344273431900ef27939c4671cba696e9"
+    "previous_hash": "e745cf6b0b94fc116998c235e405d949710270b0b47df127225b0a55827217d4",
+    "event_hash": "60204cc8f86797c6aed14b7b72f00e0088a7ab5628c84146df27a341e93f2774"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816225+00:00",
+    "timestamp": "2026-09-25T08:22:44.512723+00:00",
     "event_type": "BASELINE_FAILED",
     "component": "sandbox",
     "status": "failed",
@@ -50,12 +50,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "edab327c26039b9c5d1003eb622796c3344273431900ef27939c4671cba696e9",
-    "event_hash": "c53495954cf0dba51c08f9e1335233e6e3d91ce5f790d1d6b0291fd19b307bf4"
+    "previous_hash": "60204cc8f86797c6aed14b7b72f00e0088a7ab5628c84146df27a341e93f2774",
+    "event_hash": "662c2eb15e63cbd8da2e618dc8be653d321675c8f8a00d624a47cc8506b3becb"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816247+00:00",
+    "timestamp": "2026-09-25T08:22:44.512753+00:00",
     "event_type": "IMPACT_GRAPH_BUILT",
     "component": "repo_analyzer",
     "status": "ok",
@@ -69,12 +69,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "c53495954cf0dba51c08f9e1335233e6e3d91ce5f790d1d6b0291fd19b307bf4",
-    "event_hash": "6a50e8a1b477bcbb0548bfff7b0569710d00310d068211d7db9f2bd45b89d6a4"
+    "previous_hash": "662c2eb15e63cbd8da2e618dc8be653d321675c8f8a00d624a47cc8506b3becb",
+    "event_hash": "5118cabd4158f3e01c8393a057c94a2cf6c8bca7baf2e12e5c6d145c5c7a3381"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816266+00:00",
+    "timestamp": "2026-09-25T08:22:44.512780+00:00",
     "event_type": "EVIDENCE_RETRIEVED",
     "component": "evidence",
     "status": "ok",
@@ -87,12 +87,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "6a50e8a1b477bcbb0548bfff7b0569710d00310d068211d7db9f2bd45b89d6a4",
-    "event_hash": "6be77905fb07be88a2c03231827fc4e840990e2e3a9ee63c066ac35afc4a9c2c"
+    "previous_hash": "5118cabd4158f3e01c8393a057c94a2cf6c8bca7baf2e12e5c6d145c5c7a3381",
+    "event_hash": "23d97e5720c5cb6f339fe75ec84af1f74cc43ba7171a157df2dadd668b9a14ff"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816287+00:00",
+    "timestamp": "2026-09-25T08:22:44.512806+00:00",
     "event_type": "PATCH_APPLIED",
     "component": "patch_manager",
     "status": "ok",
@@ -105,12 +105,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "6be77905fb07be88a2c03231827fc4e840990e2e3a9ee63c066ac35afc4a9c2c",
-    "event_hash": "e9b14cdba65321f45b3ae8b28c04b68a48a3c684ad1fb63d4460048b4bd5a607"
+    "previous_hash": "23d97e5720c5cb6f339fe75ec84af1f74cc43ba7171a157df2dadd668b9a14ff",
+    "event_hash": "fe23bce0ef27d564829a05a23c08902e7f5b62b43db954c4b85a4d3d08fe7988"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816304+00:00",
+    "timestamp": "2026-09-25T08:22:44.512831+00:00",
     "event_type": "VERIFICATION_FAILED",
     "component": "verifier",
     "status": "failed",
@@ -124,12 +124,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "e9b14cdba65321f45b3ae8b28c04b68a48a3c684ad1fb63d4460048b4bd5a607",
-    "event_hash": "a053f0a889e248f939d38ddbc616e537b40e18b008fd75b16b4b2de04f5d69bf"
+    "previous_hash": "fe23bce0ef27d564829a05a23c08902e7f5b62b43db954c4b85a4d3d08fe7988",
+    "event_hash": "3f69715be50edd0aaf6e819f5a5737a5714cdc0687404312f961636057568ca9"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816321+00:00",
+    "timestamp": "2026-09-25T08:22:44.512852+00:00",
     "event_type": "ROLLBACK_TRIGGERED",
     "component": "state_manager",
     "status": "ok",
@@ -145,12 +145,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "a053f0a889e248f939d38ddbc616e537b40e18b008fd75b16b4b2de04f5d69bf",
-    "event_hash": "b3b7c5a9ec033f8825baf51605f0e715e44934b2ed56102d0c1814427f003c27"
+    "previous_hash": "3f69715be50edd0aaf6e819f5a5737a5714cdc0687404312f961636057568ca9",
+    "event_hash": "c2dde4f5910e19df37e7c09fa2b0033b95be9aeed8d616dd96707ddc58a97c96"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816343+00:00",
+    "timestamp": "2026-09-25T08:22:44.512881+00:00",
     "event_type": "PATCH_APPLIED",
     "component": "patch_manager",
     "status": "ok",
@@ -163,12 +163,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "b3b7c5a9ec033f8825baf51605f0e715e44934b2ed56102d0c1814427f003c27",
-    "event_hash": "272e029ae329e75dff57e53400fa3c231292a827fc52a78910d831a6053c14ad"
+    "previous_hash": "c2dde4f5910e19df37e7c09fa2b0033b95be9aeed8d616dd96707ddc58a97c96",
+    "event_hash": "871dd6cf77ff54d07a573f4f4f2948fa31c9c1ce9a769b44d2d291b3a7ff687a"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816359+00:00",
+    "timestamp": "2026-09-25T08:22:44.512903+00:00",
     "event_type": "VERIFICATION_PASSED",
     "component": "verifier",
     "status": "ok",
@@ -182,12 +182,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "272e029ae329e75dff57e53400fa3c231292a827fc52a78910d831a6053c14ad",
-    "event_hash": "8eebbb47bd85f786077604e5da080f8b74565ea60f8168fb0947742731c80bab"
+    "previous_hash": "871dd6cf77ff54d07a573f4f4f2948fa31c9c1ce9a769b44d2d291b3a7ff687a",
+    "event_hash": "a2afb8bc89b24f8e2e7a3f3f9fd4928aaf8235d0849108277771aa53c4efdc66"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816376+00:00",
+    "timestamp": "2026-09-25T08:22:44.512924+00:00",
     "event_type": "FINAL_VERIFICATION_PASSED",
     "component": "verifier",
     "status": "ok",
@@ -202,12 +202,12 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "8eebbb47bd85f786077604e5da080f8b74565ea60f8168fb0947742731c80bab",
-    "event_hash": "7778c8f58eb682827e6d74c76f502df20a058a8cea54f73f1f90a9b21d98d9cf"
+    "previous_hash": "a2afb8bc89b24f8e2e7a3f3f9fd4928aaf8235d0849108277771aa53c4efdc66",
+    "event_hash": "c3093fc908750bece092db51253b2541df3e5ea0d2eb4ecc446aed53bdd70fca"
   },
   {
     "run_id": "canonical_live_demo",
-    "timestamp": "2026-09-24T13:02:54.816392+00:00",
+    "timestamp": "2026-09-25T08:22:44.512947+00:00",
     "event_type": "RECOVERY_COMPLETED",
     "component": "controller",
     "status": "ok",
@@ -221,7 +221,7 @@
     "parent_event_id": null,
     "artifact_reference": null,
     "backend_identity": "local_subprocess_isolated",
-    "previous_hash": "7778c8f58eb682827e6d74c76f502df20a058a8cea54f73f1f90a9b21d98d9cf",
-    "event_hash": "ce5680957db95a0f919b026592e28ab81093e6c61b049c7c451c6a56f1d6c439"
+    "previous_hash": "c3093fc908750bece092db51253b2541df3e5ea0d2eb4ecc446aed53bdd70fca",
+    "event_hash": "acf1c5d2e4c13b5f43ede5779dae8d77438c158a480d28ae0ae3a7eb83235644"
   }
 ]
