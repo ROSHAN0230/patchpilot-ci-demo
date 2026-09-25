@@ -156,7 +156,7 @@ PatchPilot has been evaluated on a live GitHub repository and CI environment:
 - **Bot Commit SHA**: [`83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78`](https://github.com/ROSHAN0230/patchpilot-ci-demo/commit/83d9fc4a4805c87a5e88ee7ff96cf5d2cf57ea78)
 - **GitHub Actions Workflow Run**: [`35993907979`](https://github.com/ROSHAN0230/patchpilot-ci-demo/actions/runs/35993907979) (Conclusion: `success`)
 
-> **Note on Workflow Annotations:** The workflow run log contains a teardown warning in `Post Checkout PR Branch` (`The process '/usr/bin/git' failed with exit code 128`). This is a benign post-job cleanup occurrence in `actions/checkout@v4` caused by post-checkout git credential/ref cleanup after bot commits were pushed. The recovery job and overall workflow concluded with status `success`.
+> **Note on Workflow Annotations:** The workflow run log contains a teardown warning in `Post Checkout PR Branch` (`The process '/usr/bin/git' failed with exit code 128`). This is a benign post-job cleanup occurrence in `actions/checkout@v4` during the initial PR #1 run caused by post-checkout git credential/ref cleanup after bot commits were pushed. The recovery job and overall workflow concluded with status `success`. The master repository action definitions have been updated to official Node 24 actions (`actions/checkout@v7`, `actions/setup-python@v7`, and `actions/github-script@v8`).
 
 ### Automated PR Comment Structure
 Every PatchPilot PR comment includes a structured 8-section audit report:
