@@ -330,7 +330,7 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
         <span class="h-3.5 w-3.5 rounded-full bg-emerald-500 animate-pulse"></span>
         <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
           <span>PATCHPILOT</span>
-          <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">v1.0-PROD</span>
+          <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">v1.0-EVAL</span>
         </h1>
       </div>
       <span class="text-slate-600 hidden md:inline">|</span>
@@ -420,7 +420,7 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
         <div class="bg-surface-900 border border-slate-800 rounded-xl p-4">
           <p class="text-slate-400 text-xs font-mono">TIME TO GREEN</p>
           <p id="kpi-runtime" class="text-lg font-bold text-white mt-1 font-mono">-- s</p>
-          <span class="text-[10px] text-slate-500">Zero human intervention</span>
+          <span class="text-[10px] text-slate-500">Bounded autonomous recovery</span>
         </div>
         <div class="bg-surface-900 border border-slate-800 rounded-xl p-4">
           <p class="text-slate-400 text-xs font-mono">CANDIDATES</p>
