@@ -57,3 +57,18 @@ To maintain absolute architectural honesty:
 3. **Hardware Resource Limits**: CPU core pinning and memory limits are constrained by OS process groups rather than cgroups.
 
 *When cloud container spawning via Nebius Token Factory / ConTree is enabled, network and filesystem isolation will be delegated to the remote container sandbox.*
+
+---
+
+## 5. Secret Hygiene, Historical Exposure & Remediation Posture
+
+In strict adherence to reality-based engineering and transparent security disclosure:
+
+1. **Historical Incident Disclosure**: A historical `.env` file containing development credentials was committed to repository history in the initial root commit (`f6d7cfe`) before being removed and untracked in commit `a03cf99`.
+2. **Credential Invalidation & Rotation**: All credentials present in that historical commit (including Nebius Token Factory and Tavily API keys) were revoked upstream and rotated with newly issued credentials outside this chat.
+3. **Current Working Tree Hygiene**: The active repository working tree and all tracked branches (`master`, `main`, `upgrade/sqlalchemy-2.0`) contain zero tracked `.env` files. `.env` is strictly ignored via `.gitignore`, and all CI workflows consume repository secrets exclusively.
+4. **Intentional Preservation of Historical Git Objects**: Historical Git objects have been intentionally preserved rather than rewritten via destructive Git history filtering and force-pushing. This decision was made to maintain the integrity of live hackathon evaluation evidence—specifically GitHub Pull Request #1, the PatchPilot bot repair commit (`83d9fc4`), and GitHub Actions workflow run #35993907979—which would otherwise experience SHA drift, broken references, and detached CI run evidence.
+5. **Preventive Secret Controls**:
+   - **GitHub Secret Scanning & Push Protection**: Recommended to reject pushes containing known API key patterns at the remote gateway.
+   - **Subprocess Environment Sanitization**: `SandboxSecurityPolicy.sanitize_environment` scrubs all credential patterns from subprocess environments before executing candidate repairs or test suites.
+   - **Automated Hygiene Verification**: Automated repository tests enforce that `.env` remains untracked and that no secret literals enter tracked files.
