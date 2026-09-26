@@ -105,6 +105,9 @@ python -m patchpilot.observability.cli --serve --port 8000
 ```
 Open **[http://localhost:8000](http://localhost:8000)** in your browser.
 
+- **Live GitHub CI/CD Pull Request Demo**: [PR #1 — `chore(deps): Upgrade SQLAlchemy from 1.4.52 to 2.0.0`](https://github.com/ROSHAN0230/patchpilot-ci-demo/pull/1) (Autonomous recovery executed via [GitHub Actions Run #35993907979](https://github.com/ROSHAN0230/patchpilot-ci-demo/actions/runs/35993907979)).
+- **Turnkey Public Web Demo (Render)**: Deploy the read-only observability dashboard to Render with 1 click using the included [`render.yaml`](https://render.com/deploy?repo=https://github.com/ROSHAN0230/patchpilot-ci-demo).
+
 ### 3. Run the Empirical Benchmark Suite
 Inspect the 5 hard-gate benchmark scenarios and neutral competitor comparison:
 
