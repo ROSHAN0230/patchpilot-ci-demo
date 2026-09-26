@@ -6,7 +6,7 @@ import os
 import json
 import time
 from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from patchpilot.types import TelemetryEvent, BenchmarkMetrics, UpgradeStatus
 from patchpilot.contracts import EvidenceRecorder
 
