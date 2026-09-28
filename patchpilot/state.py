@@ -1,6 +1,6 @@
 """
 Cryptographic Snapshot Management and Deterministic Rollback Verifier.
-Guarantees byte-for-byte state restoration without relying on external VCS.
+Enforces byte-for-byte state restoration verified by SHA-256 hashes without relying on external VCS.
 """
 
 import os

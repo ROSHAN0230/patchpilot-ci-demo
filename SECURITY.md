@@ -19,9 +19,9 @@ PatchPilot maintains two distinct sandbox drivers via the `SandboxDriver` interf
 
 ---
 
-## 3. Local Isolation Guarantees (`local_subprocess_isolated`)
+## 3. Local Isolation Controls & Bounds (`local_subprocess_isolated`)
 
-When executing under `LocalSubprocessDriver`, the following guarantees are enforced:
+When executing under `LocalSubprocessDriver`, the following controls are enforced:
 
 ### A. Credential Sanitization
 * **Scrubbed Variables**: Subprocess execution environments are scrubbed of all API keys, access tokens, and secrets matching patterns:
