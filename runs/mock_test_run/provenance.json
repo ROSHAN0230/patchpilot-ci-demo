@@ -8,8 +8,8 @@
   "candidate_count": 2,
   "rollback_count": 1,
   "run_timestamps": {
-    "started_at": "2026-09-28T09:08:24.564267+00:00",
-    "completed_at": "2026-09-28T09:08:24.594631+00:00"
+    "started_at": "2026-09-28T09:19:00.975423+00:00",
+    "completed_at": "2026-09-28T09:19:00.985684+00:00"
   },
   "live_api_status": {
     "tavily": "TAVILY_UNAVAILABLE",

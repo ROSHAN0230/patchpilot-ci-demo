@@ -51,6 +51,7 @@ def health() -> Dict[str, Any]:
         "status": "healthy",
         "service": "patchpilot-observability",
         "version": "1.0.0",
+        "commit_sha": os.environ.get("RENDER_GIT_COMMIT", ""),
         "runs_directory": BASE_RUNS_DIR,
     }
 
@@ -377,7 +378,7 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
 
       <div id="run-type-badge" class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 font-bold">
         <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>CANONICAL LIVE RUN</span>
+        <span>LIVE ENGINE RUN</span>
       </div>
 
       <div id="target-delta-badge" class="px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-200">
@@ -793,7 +794,7 @@ DASHBOARD_HTML_CONTENT = """<!DOCTYPE html>
 
       // Top Badges
       const runTypeBadge = document.getElementById('run-type-badge');
-      const rType = data.run_type || (data.run_id === 'canonical_live_demo' ? 'CANONICAL LIVE RUN' : (data.run_id && data.run_id.startsWith('gh_pr_')) ? 'GITHUB ACTION CI/PR' : (data.run_id && data.run_id.startsWith('bm_')) ? 'BENCHMARK SUITE' : 'VERIFIED RUN');
+      const rType = data.run_type || (data.run_id === 'canonical_live_demo' ? 'LIVE ENGINE RUN' : (data.run_id && data.run_id.startsWith('gh_pr_')) ? 'GITHUB ACTION CI/PR' : (data.run_id && data.run_id.startsWith('bm_')) ? 'BENCHMARK SUITE' : 'VERIFIED RUN');
       if (rType.includes('LIVE')) {
         runTypeBadge.className = "px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 font-bold";
         runTypeBadge.innerHTML = `<span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span><span>${rType}</span>`;
