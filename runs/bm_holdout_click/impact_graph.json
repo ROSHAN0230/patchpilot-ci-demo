@@ -1,0 +1,175 @@
+{
+  "nodes": [
+    {
+      "id": "pkg:click",
+      "name": "click",
+      "type": "package",
+      "file_path": null,
+      "metadata": {
+        "old_version": "7.1.2",
+        "new_version": "8.1.7"
+      }
+    },
+    {
+      "id": "mod:cli_formatter.py",
+      "name": "cli_formatter",
+      "type": "module",
+      "file_path": "cli_formatter.py",
+      "metadata": {}
+    },
+    {
+      "id": "sym:cli_formatter.py:format_banner",
+      "name": "format_banner",
+      "type": "symbol",
+      "file_path": "cli_formatter.py",
+      "metadata": {
+        "kind": "function",
+        "line": 4,
+        "bases": []
+      }
+    },
+    {
+      "id": "sym:cli_formatter.py:format_status",
+      "name": "format_status",
+      "type": "symbol",
+      "file_path": "cli_formatter.py",
+      "metadata": {
+        "kind": "function",
+        "line": 11,
+        "bases": []
+      }
+    },
+    {
+      "id": "mod:test_formatter.py",
+      "name": "test_formatter",
+      "type": "test",
+      "file_path": "test_formatter.py",
+      "metadata": {}
+    },
+    {
+      "id": "sym:test_formatter.py:test_format_banner",
+      "name": "test_format_banner",
+      "type": "symbol",
+      "file_path": "test_formatter.py",
+      "metadata": {
+        "kind": "function",
+        "line": 9,
+        "bases": []
+      }
+    },
+    {
+      "id": "sym:test_formatter.py:test_format_status",
+      "name": "test_format_status",
+      "type": "symbol",
+      "file_path": "test_formatter.py",
+      "metadata": {
+        "kind": "function",
+        "line": 15,
+        "bases": []
+      }
+    },
+    {
+      "id": "fail:[::collection_or_module_error::AttributeError",
+      "name": "collection_or_module_error",
+      "type": "failure",
+      "file_path": "[",
+      "metadata": {
+        "category": "general_migration_incompatibility",
+        "exception": "AttributeError",
+        "message": "get_terminal_size"
+      }
+    },
+    {
+      "id": "fail:[100%]::collection_or_module_error::AttributeError",
+      "name": "collection_or_module_error",
+      "type": "failure",
+      "file_path": "[100%]",
+      "metadata": {
+        "category": "general_migration_incompatibility",
+        "exception": "AttributeError",
+        "message": "get_terminal_size"
+      }
+    },
+    {
+      "id": "fail:test_formatter.py::test_format_banner::AttributeError",
+      "name": "test_format_banner",
+      "type": "failure",
+      "file_path": "test_formatter.py",
+      "metadata": {
+        "category": "general_migration_incompatibility",
+        "exception": "AttributeError",
+        "message": "AttributeError: get_terminal_size"
+      }
+    },
+    {
+      "id": "fail:test_formatter.py::test_format_status::AttributeError",
+      "name": "test_format_status",
+      "type": "failure",
+      "file_path": "test_formatter.py",
+      "metadata": {
+        "category": "general_migration_incompatibility",
+        "exception": "AttributeError",
+        "message": "AttributeError: get_terminal_size"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "pkg:click",
+      "target": "mod:cli_formatter.py",
+      "type": "upgrade_target",
+      "explanation": "cli_formatter.py imports click (click)",
+      "metadata": {}
+    },
+    {
+      "source": "mod:cli_formatter.py",
+      "target": "sym:cli_formatter.py:format_banner",
+      "type": "defines_symbol",
+      "explanation": "cli_formatter.py defines function format_banner",
+      "metadata": {}
+    },
+    {
+      "source": "mod:cli_formatter.py",
+      "target": "sym:cli_formatter.py:format_status",
+      "type": "defines_symbol",
+      "explanation": "cli_formatter.py defines function format_status",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_formatter.py",
+      "target": "sym:test_formatter.py:test_format_banner",
+      "type": "defines_symbol",
+      "explanation": "test_formatter.py defines function test_format_banner",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_formatter.py",
+      "target": "sym:test_formatter.py:test_format_status",
+      "type": "defines_symbol",
+      "explanation": "test_formatter.py defines function test_format_status",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_formatter.py",
+      "target": "mod:cli_formatter.py",
+      "type": "tests_module",
+      "explanation": "test_formatter.py imports cli_formatter.py",
+      "metadata": {}
+    },
+    {
+      "source": "fail:test_formatter.py::test_format_banner::AttributeError",
+      "target": "mod:test_formatter.py",
+      "type": "fails_at",
+      "explanation": "Test test_format_banner failed with AttributeError in test_formatter.py",
+      "metadata": {}
+    },
+    {
+      "source": "fail:test_formatter.py::test_format_status::AttributeError",
+      "target": "mod:test_formatter.py",
+      "type": "fails_at",
+      "explanation": "Test test_format_status failed with AttributeError in test_formatter.py",
+      "metadata": {}
+    }
+  ],
+  "causal_paths": {}
+}

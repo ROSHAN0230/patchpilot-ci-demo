@@ -5,36 +5,167 @@
       "name": "pydantic",
       "type": "package",
       "file_path": null,
-      "metadata": {}
+      "metadata": {
+        "old_version": "1.10.14",
+        "new_version": "2.6.4"
+      }
     },
     {
-      "id": "mod:service_model",
-      "name": "service_model.py",
+      "id": "mod:service_model.py",
+      "name": "service_model",
       "type": "module",
       "file_path": "service_model.py",
       "metadata": {}
     },
     {
-      "id": "test:service",
-      "name": "test_service.py",
+      "id": "sym:service_model.py:EventPayload",
+      "name": "EventPayload",
+      "type": "symbol",
+      "file_path": "service_model.py",
+      "metadata": {
+        "kind": "class",
+        "line": 6,
+        "bases": [
+          "BaseModel"
+        ]
+      }
+    },
+    {
+      "id": "sym:service_model.py:parse_metadata_json",
+      "name": "parse_metadata_json",
+      "type": "symbol",
+      "file_path": "service_model.py",
+      "metadata": {
+        "kind": "function",
+        "line": 11,
+        "bases": []
+      }
+    },
+    {
+      "id": "mod:test_service.py",
+      "name": "test_service",
       "type": "test",
       "file_path": "test_service.py",
       "metadata": {}
+    },
+    {
+      "id": "sym:test_service.py:test_1_event_with_dict_metadata",
+      "name": "test_1_event_with_dict_metadata",
+      "type": "symbol",
+      "file_path": "test_service.py",
+      "metadata": {
+        "kind": "function",
+        "line": 10,
+        "bases": []
+      }
+    },
+    {
+      "id": "sym:test_service.py:test_2_event_with_json_string_metadata",
+      "name": "test_2_event_with_json_string_metadata",
+      "type": "symbol",
+      "file_path": "test_service.py",
+      "metadata": {
+        "kind": "function",
+        "line": 19,
+        "bases": []
+      }
+    },
+    {
+      "id": "sym:test_service.py:test_3_invalid_json_fails_validation",
+      "name": "test_3_invalid_json_fails_validation",
+      "type": "symbol",
+      "file_path": "test_service.py",
+      "metadata": {
+        "kind": "function",
+        "line": 38,
+        "bases": []
+      }
+    },
+    {
+      "id": "fail:collecting::collection_or_module_error::RuntimeFailure",
+      "name": "collection_or_module_error",
+      "type": "failure",
+      "file_path": "collecting",
+      "metadata": {
+        "category": "validator_deprecation",
+        "exception": "RuntimeFailure",
+        "message": "Test assertion failed"
+      }
+    },
+    {
+      "id": "fail:test_service.py::collection_or_module_error::RuntimeFailure",
+      "name": "collection_or_module_error",
+      "type": "failure",
+      "file_path": "test_service.py",
+      "metadata": {
+        "category": "validator_deprecation",
+        "exception": "RuntimeFailure",
+        "message": "pydantic.warnings.PydanticDeprecatedSince20: Pydantic..."
+      }
     }
   ],
   "edges": [
     {
       "source": "pkg:pydantic",
-      "target": "mod:service_model",
-      "type": "imports",
-      "explanation": "Imports deprecated validator",
+      "target": "mod:service_model.py",
+      "type": "upgrade_target",
+      "explanation": "service_model.py imports pydantic (pydantic.BaseModel, pydantic.validator)",
       "metadata": {}
     },
     {
-      "source": "mod:service_model",
-      "target": "test:service",
+      "source": "mod:service_model.py",
+      "target": "sym:service_model.py:EventPayload",
+      "type": "defines_symbol",
+      "explanation": "service_model.py defines class EventPayload",
+      "metadata": {}
+    },
+    {
+      "source": "mod:service_model.py",
+      "target": "sym:service_model.py:parse_metadata_json",
+      "type": "defines_symbol",
+      "explanation": "service_model.py defines function parse_metadata_json",
+      "metadata": {}
+    },
+    {
+      "source": "pkg:pydantic",
+      "target": "mod:test_service.py",
+      "type": "upgrade_target",
+      "explanation": "test_service.py imports pydantic (pydantic.ValidationError)",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_service.py",
+      "target": "sym:test_service.py:test_1_event_with_dict_metadata",
+      "type": "defines_symbol",
+      "explanation": "test_service.py defines function test_1_event_with_dict_metadata",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_service.py",
+      "target": "sym:test_service.py:test_2_event_with_json_string_metadata",
+      "type": "defines_symbol",
+      "explanation": "test_service.py defines function test_2_event_with_json_string_metadata",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_service.py",
+      "target": "sym:test_service.py:test_3_invalid_json_fails_validation",
+      "type": "defines_symbol",
+      "explanation": "test_service.py defines function test_3_invalid_json_fails_validation",
+      "metadata": {}
+    },
+    {
+      "source": "mod:test_service.py",
+      "target": "mod:service_model.py",
       "type": "tests_module",
-      "explanation": "Validates UserModel",
+      "explanation": "test_service.py imports service_model.py",
+      "metadata": {}
+    },
+    {
+      "source": "fail:test_service.py::collection_or_module_error::RuntimeFailure",
+      "target": "mod:test_service.py",
+      "type": "fails_at",
+      "explanation": "Test collection_or_module_error failed with RuntimeFailure in test_service.py",
       "metadata": {}
     }
   ],

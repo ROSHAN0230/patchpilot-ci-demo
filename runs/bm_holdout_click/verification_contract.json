@@ -1,0 +1,11 @@
+{
+  "required_tests": [
+    "test_formatter.py"
+  ],
+  "allowed_file_scope": [
+    "cli_formatter.py"
+  ],
+  "timeout_seconds": 30,
+  "retry_budget": 3,
+  "migration_assertions": {}
+}

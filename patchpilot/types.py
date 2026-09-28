@@ -130,6 +130,8 @@ class EvidencePack:
     spec: UpgradeSpec
     items: List[EvidenceItem] = field(default_factory=list)
     cluster_evidence_map: Dict[str, List[EvidenceItem]] = field(default_factory=dict)
+    status: str = "TAVILY_RETRIEVED"
+    error_message: Optional[str] = None
 
 
 @dataclass

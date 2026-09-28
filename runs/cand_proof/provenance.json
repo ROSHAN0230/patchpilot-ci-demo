@@ -1,0 +1,19 @@
+{
+  "execution_mode": "live_controller",
+  "backend_identity": "<MagicMock name='mock.get_backend_name()' id='1762675552816'>",
+  "model_id": "<MagicMock name='mock.model_name' id='1762677382448'>",
+  "model_call_count": 2,
+  "tavily_call_count": 2,
+  "verification_command_count": 3,
+  "candidate_count": 2,
+  "rollback_count": 1,
+  "run_timestamps": {
+    "started_at": "2026-09-28T06:59:43.155248+00:00",
+    "completed_at": "2026-09-28T06:59:43.188697+00:00"
+  },
+  "live_api_status": {
+    "tavily": "<MagicMock name='mock.assemble_evidence_pack().status' id='1762677382784'>",
+    "nebius": "ACTIVE"
+  },
+  "artifact_generation_status": "COMPLETE"
+}

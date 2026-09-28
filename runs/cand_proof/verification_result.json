@@ -6,5 +6,5 @@
   "typecheck_passed": true,
   "lint_passed": true,
   "scope_confinement": true,
-  "duration_seconds": 0.04
+  "duration_seconds": 0.03
 }

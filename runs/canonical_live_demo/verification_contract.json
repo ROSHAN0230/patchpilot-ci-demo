@@ -3,10 +3,9 @@
     "test_service.py"
   ],
   "allowed_file_scope": [
-    "service_model.py",
-    "pyproject.toml"
+    "service_model.py"
   ],
-  "timeout_seconds": 20,
-  "retry_budget": 2,
+  "timeout_seconds": 30,
+  "retry_budget": 3,
   "migration_assertions": {}
 }

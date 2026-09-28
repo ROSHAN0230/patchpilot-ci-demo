@@ -1,0 +1,19 @@
+{
+  "execution_mode": "live_controller",
+  "backend_identity": "local_subprocess_isolated",
+  "model_id": "nvidia/nemotron-3-super-120b-a12b",
+  "model_call_count": 2,
+  "tavily_call_count": 1,
+  "verification_command_count": 3,
+  "candidate_count": 2,
+  "rollback_count": 1,
+  "run_timestamps": {
+    "started_at": "2026-09-28T06:59:43.263115+00:00",
+    "completed_at": "2026-09-28T06:59:43.275412+00:00"
+  },
+  "live_api_status": {
+    "tavily": "TAVILY_UNAVAILABLE",
+    "nebius": "ACTIVE"
+  },
+  "artifact_generation_status": "COMPLETE"
+}

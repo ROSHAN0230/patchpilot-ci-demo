@@ -56,18 +56,19 @@ def load_all_benchmark_results(results_dir: str = BENCHMARKS_RESULTS_DIR) -> Lis
             with open(fpath, "r", encoding="utf-8") as f:
                 results.append(json.load(f))
         else:
-            # Fallback mock if file not found
+            # Explicit missing result without fabricating verified_green
             results.append({
                 "benchmark_id": sc_id,
-                "dependency_delta": {"package_name": "unknown", "old_version": "1.0", "new_version": "2.0"},
-                "baseline_failure_count": 2,
-                "affected_files": ["models.py"],
-                "attempts": 1,
+                "dependency_delta": {"package_name": "unrecorded", "old_version": "", "new_version": ""},
+                "baseline_failure_count": 0,
+                "affected_files": [],
+                "attempts": 0,
                 "rollback_count": 0,
-                "final_status": "verified_green",
-                "runtime_seconds": 12.0,
-                "cost_usd": 0.002,
-                "sandbox_backend": "local_subprocess_isolated",
+                "final_status": "MISSING_RESULT",
+                "runtime_seconds": 0.0,
+                "cost_usd": 0.0,
+                "sandbox_backend": "none",
+                "error": f"Result file {fpath} not found. Run with --run-all to execute live.",
             })
     return results
 
@@ -123,18 +124,30 @@ def display_benchmark_matrix(results: List[Dict[str, Any]], console: Console):
             f"${cost:.6f}",
         )
 
-    console.print()
+    console.print("[dim italic]Mode: RECORDED RESULTS (inspection only). Run with --run-all to execute all 5 scenarios live.[/dim italic]\n")
     console.print(table)
 
-    summary_panel = Panel(
-        Text.from_markup(
+    if all_green:
+        summary_text = (
             f"[bold green]SUMMARY:[/] 5 of 5 Scenarios 100% Verified Green ({all_green}) | "
             f"Total Cost: [bold yellow]${total_cost:.6f}[/] (~${total_cost:.4f}) | "
             f"Execution Backend: [bold cyan]local_subprocess_isolated[/] | "
             f"Model: [bold white]nvidia/nemotron-3-super-120b-a12b[/] via Nebius Token Factory"
-        ),
-        border_style="green" if all_green else "red",
-        title="[bold]Benchmark Verification Seal[/]",
+        )
+        title = "[bold]Benchmark Verification Seal[/]"
+        border_style = "green"
+    else:
+        summary_text = (
+            f"[bold red]SUMMARY:[/] Benchmark suite incomplete or unexecuted. "
+            f"Run live benchmarks against Nebius Token Factory with: [bold cyan]python -m patchpilot.benchmarks.run_suite --run-all[/bold cyan]"
+        )
+        title = "[bold red]Benchmark Verification Incomplete[/]"
+        border_style = "red"
+
+    summary_panel = Panel(
+        Text.from_markup(summary_text),
+        border_style=border_style,
+        title=title,
     )
     console.print(summary_panel)
 

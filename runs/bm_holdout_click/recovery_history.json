@@ -1,0 +1,167 @@
+[
+  {
+    "sequence": 1,
+    "event_id": "ev_bm_holdout_click_0001",
+    "event_type": "UPGRADE_DETECTED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:49.551514+00:00",
+    "metadata": {
+      "package": "click",
+      "from": "7.1.2",
+      "to": "8.1.7"
+    },
+    "event_hash": "076698a893c54faa240ef392da26fe6a1894fe9e418fd5fa371ed798a6a0eb1e"
+  },
+  {
+    "sequence": 2,
+    "event_id": "ev_bm_holdout_click_0002",
+    "event_type": "BASELINE_STARTED",
+    "component": "sandbox",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:49.553801+00:00",
+    "metadata": {},
+    "event_hash": "c3a0af179176025f453c86fd399f230fbdaec0c2319176c697d7b9884f297d06"
+  },
+  {
+    "sequence": 3,
+    "event_id": "ev_bm_holdout_click_0003",
+    "event_type": "BASELINE_FAILED",
+    "component": "sandbox",
+    "status": "failed",
+    "duration_ms": 949.07,
+    "timestamp": "2026-09-28T06:45:50.504961+00:00",
+    "metadata": {
+      "failure_count": 4,
+      "exit_code": 1
+    },
+    "event_hash": "7cfbb54519fb3c43e8bf72c1cdf2348e639ef80d9534f4bba67e4ef980863da9"
+  },
+  {
+    "sequence": 4,
+    "event_id": "ev_bm_holdout_click_0004",
+    "event_type": "INTELLIGENCE_STARTED",
+    "component": "repo_analyzer",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:50.505423+00:00",
+    "metadata": {},
+    "event_hash": "0ee5b15d2965e2f52181dd68d03094993556c662f15e07a2c414c505bfd86d99"
+  },
+  {
+    "sequence": 5,
+    "event_id": "ev_bm_holdout_click_0005",
+    "event_type": "INTELLIGENCE_COMPLETED",
+    "component": "repo_analyzer",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:50.513812+00:00",
+    "metadata": {
+      "graph_nodes": 11,
+      "graph_edges": 8,
+      "cluster_count": 1,
+      "repair_ordering": [
+        "cli_formatter.py"
+      ],
+      "order_rationale": "Single file remediation; ordering is trivial.",
+      "uncertainty_score": 0.2
+    },
+    "event_hash": "93ce9b380b950252b59d32761c980dafa19e4854a62ef3b1afbb57e13b56d5e8"
+  },
+  {
+    "sequence": 6,
+    "event_id": "ev_bm_holdout_click_0006",
+    "event_type": "RESEARCH_STARTED",
+    "component": "evidence",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:50.514514+00:00",
+    "metadata": {},
+    "event_hash": "07a60908189765bec978f0390bb3cce84943d29631f0b6bc240afbaf82447676"
+  },
+  {
+    "sequence": 7,
+    "event_id": "ev_bm_holdout_click_0007",
+    "event_type": "RESEARCH_COMPLETED",
+    "component": "evidence",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:53.409676+00:00",
+    "metadata": {
+      "citations_count": 2
+    },
+    "event_hash": "7a3a20eb747720dfe10e63a5c3f0d9b55ba46614b3b17335122b0629cd482aa8"
+  },
+  {
+    "sequence": 8,
+    "event_id": "ev_bm_holdout_click_0008",
+    "event_type": "PATCH_SYNTHESIS_STARTED",
+    "component": "repair_engine",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:53.410632+00:00",
+    "metadata": {
+      "target_file": "cli_formatter.py",
+      "iteration": 1
+    },
+    "event_hash": "5144044bb31c519c751d5cef00b6530be6f16395b51937ddabbc6e4be9f0f17c"
+  },
+  {
+    "sequence": 9,
+    "event_id": "ev_bm_holdout_click_0009",
+    "event_type": "PATCH_APPLIED",
+    "component": "patch_manager",
+    "status": "ok",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:56.580369+00:00",
+    "metadata": {
+      "candidate_id": "bm_holdout_click_cand_cli_formatter.py_iter1"
+    },
+    "event_hash": "45aa60fba24369bd24791dc477d0a24d776493ebe2ede08249445f7041c76350"
+  },
+  {
+    "sequence": 10,
+    "event_id": "ev_bm_holdout_click_0010",
+    "event_type": "VERIFICATION_STARTED",
+    "component": "verifier",
+    "status": "running",
+    "duration_ms": 0.0,
+    "timestamp": "2026-09-28T06:45:56.580797+00:00",
+    "metadata": {
+      "candidate_id": "bm_holdout_click_cand_cli_formatter.py_iter1"
+    },
+    "event_hash": "2cae24e3f77646539a81c4ded04a2e15b5e2d6f6cf300d6a8fdd2dc650c0e236"
+  },
+  {
+    "sequence": 11,
+    "event_id": "ev_bm_holdout_click_0011",
+    "event_type": "VERIFICATION_PASSED",
+    "component": "verifier",
+    "status": "ok",
+    "duration_ms": 745.23,
+    "timestamp": "2026-09-28T06:45:57.326737+00:00",
+    "metadata": {
+      "candidate_id": "bm_holdout_click_cand_cli_formatter.py_iter1",
+      "tests_passed": 2,
+      "target_file_resolved": "cli_formatter.py"
+    },
+    "event_hash": "d76a3e4fc21b156248176b0c02912f79174e0e8f01ed9dc2a44ea1a0574dc827"
+  },
+  {
+    "sequence": 12,
+    "event_id": "ev_bm_holdout_click_0012",
+    "event_type": "RUN_COMPLETED",
+    "component": "controller",
+    "status": "ok",
+    "duration_ms": 8544.04,
+    "timestamp": "2026-09-28T06:45:58.095451+00:00",
+    "metadata": {
+      "final_status": "verified_green",
+      "attempts": 1,
+      "rollbacks": 0
+    },
+    "event_hash": "fbfcd5240599085d5a49cce6cf28e1c492015e35b5b2e823e31b55596934496c"
+  }
+]

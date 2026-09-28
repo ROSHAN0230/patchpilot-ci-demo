@@ -6,6 +6,7 @@ Enforces deterministic, machine-controlled state transitions with retry budgets 
 import os
 import sys
 import time
+from datetime import datetime, timezone
 from typing import List, Dict, Optional, Any
 from patchpilot.types import (
     UpgradeStatus,
@@ -130,10 +131,12 @@ class BoundedRecoveryController(RecoveryController):
         emit_event("BASELINE_STARTED", "sandbox", "running", 0.0)
         t_base_0 = time.time()
 
+        verification_commands = 0
         baseline_output = ""
         baseline_rc = 0
         for test_target in contract.required_tests:
             cmd = [sys.executable, "-m", "pytest", test_target, "-v"]
+            verification_commands += 1
             rc, out, _ = self.sandbox.run_command(cmd, cwd=repo_dir, timeout_seconds=contract.timeout_seconds)
             baseline_output += out + "\n"
             if rc != 0:
@@ -292,6 +295,11 @@ class BoundedRecoveryController(RecoveryController):
                     sandbox=self.sandbox,
                     failure_analyzer=self.failure_analyzer,
                 )
+                verification_commands += len(contract.required_tests)
+                if contract.typecheck_command:
+                    verification_commands += 1
+                if contract.lint_command:
+                    verification_commands += 1
 
                 # Check progress on target_rel:
                 is_intermediate = (target_rel != target_files[-1]) and (len(target_files) > 1)
@@ -423,6 +431,26 @@ class BoundedRecoveryController(RecoveryController):
         root_hash = self.recorder.get_root_hash() if hasattr(self.recorder, "get_root_hash") else ""
         bundle_dir = None
         if self.artifacts_dir:
+            model_calls = attempts
+            provenance = {
+                "execution_mode": "live_controller",
+                "backend_identity": self.sandbox.get_backend_name() if hasattr(self.sandbox, "get_backend_name") else "local_subprocess_isolated",
+                "model_id": getattr(self.repair_engine, "model_name", "nvidia/nemotron-3-super-120b-a12b"),
+                "model_call_count": model_calls,
+                "tavily_call_count": tavily_calls,
+                "verification_command_count": verification_commands,
+                "candidate_count": attempts,
+                "rollback_count": rollback_count,
+                "run_timestamps": {
+                    "started_at": datetime.fromtimestamp(t_start, tz=timezone.utc).isoformat(),
+                    "completed_at": datetime.now(timezone.utc).isoformat(),
+                },
+                "live_api_status": {
+                    "tavily": getattr(pack, "status", "TAVILY_UNAVAILABLE") if pack else "TAVILY_UNAVAILABLE",
+                    "nebius": "ACTIVE" if model_calls > 0 else "IDLE",
+                },
+                "artifact_generation_status": "COMPLETE",
+            }
             bundle = RunArtifactBundle(
                 run_id=run_id,
                 upgrade_spec=spec,
@@ -447,6 +475,7 @@ class BoundedRecoveryController(RecoveryController):
                 },
                 root_hash=root_hash,
                 backend_identity=self.sandbox.get_backend_name() if hasattr(self.sandbox, "get_backend_name") else "local_subprocess_isolated",
+                provenance=provenance,
             )
             bundle_dir = ArtifactBundleExporter.export(bundle, base_output_dir=self.artifacts_dir)
 

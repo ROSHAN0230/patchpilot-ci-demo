@@ -1,44 +1,46 @@
 [
   {
-    "candidate_id": "canonical_live_demo_cand_1_faulty",
+    "candidate_id": "canonical_live_demo_cand_service_model.py_iter1",
     "iteration": 1,
-    "hypothesis": "Faulty patch decorated with non-existent field",
+    "hypothesis": "Remediate service_model.py for pydantic V2",
     "target_files": [
       "service_model.py"
     ],
     "passed": false,
-    "status": "rejected_rollback",
+    "status": "FAILED",
     "exit_code": 1,
-    "tests_passed": 0,
+    "tests_passed": 2,
     "tests_failed": 2,
     "rollback_performed": true,
-    "duration_ms": 450.0,
-    "typecheck_passed": false,
-    "lint_passed": true,
-    "unified_diff": "--- a/service_model.py\n+++ b/service_model.py\n@@ -6,1 +6,2 @@\n-@validator('user_id')\n+@field_validator('non_existent_field')\n",
+    "duration_ms": 957.629919052124,
+    "typecheck_passed": null,
+    "lint_passed": null,
+    "unified_diff": "--- a/service_model.py\n+++ b/service_model.py\n@@ -1,17 +1,18 @@\n-from typing import Dict, Any\n-from pydantic import BaseModel, validator\n-import json\n-\n-\n-class EventPayload(BaseModel):\n-    event_id: str\n-    metadata: Dict[str, Any]\n-\n-    @validator(\"metadata\", pre=True)\n-    def parse_metadata_json(cls, v):\n-        if isinstance(v, str):\n-            try:\n-                return json.loads(v)\n-            except Exception as e:\n-                raise ValueError(f\"Invalid JSON string: {e}\")\n-        return v\n+from typing import Dict, Any\r\n+from pydantic import BaseModel, field_validator\r\n+import json\r\n+\r\n+\r\n+class EventPayload(BaseModel):\r\n+    event_id: str\r\n+    metadata: Dict[str, Any]\r\n+\r\n+    @field_validator(\"metadata\")\r\n+    @classmethod\r\n+    def parse_metadata_json(cls, v):\r\n+        if isinstance(v, str):\r\n+            try:\r\n+                return json.loads(v)\r\n+            except Exception as e:\r\n+                raise ValueError(f\"Invalid JSON string: {e}\")\r\n+        return v\r\n",
     "evidence_ids": [
-      "ev_pydantic_v2"
+      "ev_pydantic_1",
+      "ev_pydantic_2"
     ]
   },
   {
-    "candidate_id": "canonical_live_demo_cand_2_valid",
+    "candidate_id": "canonical_live_demo_cand_service_model.py_iter2",
     "iteration": 2,
-    "hypothesis": "Remediated patch with @field_validator('user_id') and @classmethod",
+    "hypothesis": "Remediate service_model.py for pydantic V2",
     "target_files": [
       "service_model.py"
     ],
     "passed": true,
-    "status": "verified",
+    "status": "PASSED",
     "exit_code": 0,
-    "tests_passed": 2,
+    "tests_passed": 3,
     "tests_failed": 0,
     "rollback_performed": false,
-    "duration_ms": 520.0,
-    "typecheck_passed": true,
-    "lint_passed": true,
-    "unified_diff": "--- a/service_model.py\n+++ b/service_model.py\n@@ -6,2 +6,3 @@\n-@validator('user_id')\n+@field_validator('user_id')\n+@classmethod\n",
+    "duration_ms": 866.3325309753418,
+    "typecheck_passed": null,
+    "lint_passed": null,
+    "unified_diff": "--- a/service_model.py\n+++ b/service_model.py\n@@ -1,17 +1,18 @@\n-from typing import Dict, Any\n-from pydantic import BaseModel, validator\n-import json\n-\n-\n-class EventPayload(BaseModel):\n-    event_id: str\n-    metadata: Dict[str, Any]\n-\n-    @validator(\"metadata\", pre=True)\n-    def parse_metadata_json(cls, v):\n-        if isinstance(v, str):\n-            try:\n-                return json.loads(v)\n-            except Exception as e:\n-                raise ValueError(f\"Invalid JSON string: {e}\")\n-        return v\n+from typing import Dict, Any\r\n+from pydantic import BaseModel, field_validator\r\n+import json\r\n+\r\n+\r\n+class EventPayload(BaseModel):\r\n+    event_id: str\r\n+    metadata: Dict[str, Any]\r\n+\r\n+    @field_validator(\"metadata\", mode=\"before\")\r\n+    @classmethod\r\n+    def parse_metadata_json(cls, v):\r\n+        if isinstance(v, str):\r\n+            try:\r\n+                return json.loads(v)\r\n+            except Exception as e:\r\n+                raise ValueError(f\"Invalid JSON string: {e}\")\r\n+        return v\r\n",
     "evidence_ids": [
-      "ev_pydantic_v2"
+      "ev_pydantic_1",
+      "ev_pydantic_2"
     ]
   }
 ]

@@ -1,0 +1,6 @@
+[project]
+name = "holdout-cli-service"
+version = "0.1.0"
+dependencies = [
+    "click>=8.0.0",
+]

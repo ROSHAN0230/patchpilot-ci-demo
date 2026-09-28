@@ -39,13 +39,22 @@ class TavilyEvidenceEngine(EvidenceEngine):
         """
         pack = EvidencePack(spec=spec)
         if not self.api_key:
+            pack.status = "TAVILY_UNAVAILABLE"
+            pack.error_message = "No Tavily API key provided"
             return pack
 
         from tavily import TavilyClient
-        client = TavilyClient(api_key=self.api_key)
+        try:
+            client = TavilyClient(api_key=self.api_key)
+        except Exception as e:
+            pack.status = "TAVILY_UNAVAILABLE"
+            pack.error_message = f"Failed to initialize Tavily client: {str(e)}"
+            return pack
 
         domains = self.AUTHORITATIVE_DOMAINS.get(spec.package_name.lower(), [])
         item_counter = 1
+        any_success = False
+        had_error = False
 
         for cluster in clusters:
             pack.cluster_evidence_map[cluster.cluster_id] = []
@@ -93,23 +102,19 @@ class TavilyEvidenceEngine(EvidenceEngine):
                     pack.items.append(item)
                     pack.cluster_evidence_map[cluster.cluster_id].append(item)
                     cluster.evidence_references.append(evidence_id)
+                    any_success = True
 
             except Exception as e:
-                # Graceful fallback without hard-crashing on rate-limits/network drops
-                fallback_item = EvidenceItem(
-                    evidence_id=f"ev_err_{item_counter}",
-                    cluster_id=cluster.cluster_id,
-                    query=query,
-                    url="https://docs.pydantic.dev/latest/migration/" if spec.package_name.lower() == "pydantic" else "https://docs.sqlalchemy.org/en/20/changelog/migration_20.html",
-                    title="Baseline Migration Documentation",
-                    retrieved_timestamp=datetime.now(timezone.utc).isoformat(),
-                    relevant_content=f"Official guide for {spec.package_name} upgrade: {str(e)}",
-                    source_authority="official_docs",
-                )
-                pack.items.append(fallback_item)
-                pack.cluster_evidence_map[cluster.cluster_id].append(fallback_item)
-                cluster.evidence_references.append(fallback_item.evidence_id)
-                item_counter += 1
+                # FAIL CLOSED: Do NOT fabricate official documentation on failure
+                had_error = True
+                pack.error_message = f"Tavily search failed: {str(e)}"
+
+        if pack.items:
+            pack.status = "TAVILY_RETRIEVED"
+        elif had_error:
+            pack.status = "TAVILY_UNAVAILABLE"
+        else:
+            pack.status = "TAVILY_EMPTY"
 
         return pack
 
@@ -118,7 +123,7 @@ class TavilyEvidenceEngine(EvidenceEngine):
     ) -> Tuple[str, List[Dict[str, str]]]:
         """Backwards-compatible interface for simple text context + citations."""
         if not self.api_key:
-            return "No Tavily API key provided. Relying on baseline knowledge.", []
+            return "", []
 
         categories = list({f.category for f in failures})
         cat_str = " ".join(categories[:2]).replace("_", " ")
@@ -128,8 +133,8 @@ class TavilyEvidenceEngine(EvidenceEngine):
         query = f"{delta.package_name} V2 migration guide {cat_str} {sym_str}".strip()
 
         from tavily import TavilyClient
-        client = TavilyClient(api_key=self.api_key)
         try:
+            client = TavilyClient(api_key=self.api_key)
             res = client.search(query=query, search_depth="basic", max_results=2)
             results = res.get("results", [])
 
@@ -144,5 +149,5 @@ class TavilyEvidenceEngine(EvidenceEngine):
 
             combined_docs = "\n\n".join(snippets)
             return combined_docs, citations
-        except Exception as e:
-            return f"Evidence retrieval notice: {str(e)}", []
+        except Exception:
+            return "", []

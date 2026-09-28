@@ -61,6 +61,7 @@ class RunArtifactBundle:
     root_hash: str = ""
     backend_identity: str = "local_subprocess_isolated"
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    provenance: Optional[Dict[str, Any]] = None
 
 
 class ArtifactBundleExporter:
@@ -197,7 +198,12 @@ class ArtifactBundleExporter:
         with open(os.path.join(run_dir, "verification_result.json"), "w", encoding="utf-8") as f:
             json.dump(bundle.verification_result, f, indent=2, default=str)
 
-        # 12. audit_manifest.json (root seal with cryptographic hash)
+        # 12. provenance.json (safe runtime execution provenance)
+        if bundle.provenance:
+            with open(os.path.join(run_dir, "provenance.json"), "w", encoding="utf-8") as f:
+                json.dump(bundle.provenance, f, indent=2, default=str)
+
+        # 13. audit_manifest.json (root seal with cryptographic hash)
         root_hash = bundle.root_hash
         if not root_hash and bundle.telemetry_events:
             root_hash = bundle.telemetry_events[-1].event_hash
@@ -234,6 +240,7 @@ class ArtifactBundleExporter:
             "candidates.json",
             "recovery_history.json",
             "verification_result.json",
+            "provenance.json",
             "audit_manifest.json",
         ]:
             p = os.path.join(run_dir, name)

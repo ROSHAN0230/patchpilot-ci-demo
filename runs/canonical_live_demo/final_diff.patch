@@ -1,18 +1,38 @@
-diff --git a/service_model.py b/service_model.py
 --- a/service_model.py
 +++ b/service_model.py
-@@ -1,7 +1,8 @@
+@@ -1,17 +1,18 @@
+-from typing import Dict, Any
 -from pydantic import BaseModel, validator
-+from pydantic import BaseModel, field_validator
- 
- class UserModel(BaseModel):
-     user_id: int
-     username: str
- 
--    @validator('user_id')
-+    @field_validator('user_id')
-+    @classmethod
-     def validate_user_id(cls, v):
-         if v <= 0:
-             raise ValueError('user_id must be positive')
-         return v
+-import json
+-
+-
+-class EventPayload(BaseModel):
+-    event_id: str
+-    metadata: Dict[str, Any]
+-
+-    @validator("metadata", pre=True)
+-    def parse_metadata_json(cls, v):
+-        if isinstance(v, str):
+-            try:
+-                return json.loads(v)
+-            except Exception as e:
+-                raise ValueError(f"Invalid JSON string: {e}")
+-        return v
++from typing import Dict, Any
++from pydantic import BaseModel, field_validator
++import json
++
++
++class EventPayload(BaseModel):
++    event_id: str
++    metadata: Dict[str, Any]
++
++    @field_validator("metadata", mode="before")
++    @classmethod
++    def parse_metadata_json(cls, v):
++        if isinstance(v, str):
++            try:
++                return json.loads(v)
++            except Exception as e:
++                raise ValueError(f"Invalid JSON string: {e}")
++        return v

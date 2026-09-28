@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "cluster_id": "cluster_pydantic_1_validator_deprecation",
+    "category": "validator_deprecation",
+    "representative_message": "",
+    "affected_files": [
+      "collecting",
+      "test_service.py"
+    ],
+    "affected_tests": [],
+    "symbols": [],
+    "failure_count": 0,
+    "evidence_references": [
+      "ev_pydantic_1",
+      "ev_pydantic_2"
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "candidate_id": "bm_holdout_click_cand_cli_formatter.py_iter1",
+    "iteration": 1,
+    "hypothesis": "Remediate cli_formatter.py for click V2",
+    "target_files": [
+      "cli_formatter.py"
+    ],
+    "passed": true,
+    "status": "PASSED",
+    "exit_code": 0,
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "rollback_performed": false,
+    "duration_ms": 745.2259063720703,
+    "typecheck_passed": null,
+    "lint_passed": null,
+    "unified_diff": "--- a/cli_formatter.py\n+++ b/cli_formatter.py\n@@ -1,14 +1,14 @@\n-import click\n-\n-\n-def format_banner(text: str) -> str:\n-    \"\"\"Formats a header banner centered according to terminal width.\"\"\"\n-    columns, _ = click.get_terminal_size()\n-    padding = max(0, (columns - len(text)) // 2)\n-    return \" \" * padding + text\n-\n-\n-def format_status(status: str) -> str:\n-    columns, _ = click.get_terminal_size()\n-    divider = \"=\" * min(columns, 60)\n-    return f\"{divider}\\nSTATUS: {status}\\n{divider}\"\n+import shutil\r\n+\r\n+\r\n+def format_banner(text: str) -> str:\r\n+    \"\"\"Formats a header banner centered according to terminal width.\"\"\"\r\n+    columns, _ = shutil.get_terminal_size()\r\n+    padding = max(0, (columns - len(text)) // 2)\r\n+    return \" \" * padding + text\r\n+\r\n+\r\n+def format_status(status: str) -> str:\r\n+    columns, _ = shutil.get_terminal_size()\r\n+    divider = \"=\" * min(columns, 60)\r\n+    return f\"{divider}\\nSTATUS: {status}\\n{divider}\"\r\n",
+    "evidence_ids": [
+      "ev_click_1",
+      "ev_click_2"
+    ]
+  }
+]

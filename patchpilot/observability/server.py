@@ -55,15 +55,35 @@ def health() -> Dict[str, Any]:
     }
 
 
-def determine_run_type(run_id: str) -> str:
-    """Classifies run bundle into clear developer/judge categories."""
-    if run_id == "canonical_live_demo" or run_id.startswith("live_"):
-        return "CANONICAL LIVE RUN"
+def determine_run_type(run_id: str, provenance: Optional[Dict[str, Any]] = None) -> str:
+    """
+    Classifies run bundle truthfully based on actual execution mode and origin:
+    - LIVE ENGINE RUN: Authentically executed through the live BoundedRecoveryController
+    - GITHUB CI RUN: Originating from GitHub Action Pull Request CI
+    - BENCHMARK RESULT: Originating from the empirical benchmark suite
+    - REPLAY / SEEDED: Seeded or recorded replay walkthrough / mock tests
+    """
+    if run_id.startswith("mock_") or run_id.startswith("test_") or run_id.startswith("cand_"):
+        return "REPLAY / SEEDED"
+
     if run_id.startswith("gh_pr_"):
-        return "GITHUB ACTION CI/PR"
+        return "GITHUB CI RUN"
+
     if run_id.startswith("bm_"):
-        return "BENCHMARK SUITE"
-    return "VERIFIED RUN"
+        return "BENCHMARK RESULT"
+
+    if provenance:
+        mode = provenance.get("execution_mode", "")
+        if mode == "live_controller":
+            return "LIVE ENGINE RUN"
+        if mode in ("seeded_replay", "replay", "mock_test"):
+            return "REPLAY / SEEDED"
+
+    if run_id.startswith("replay_"):
+        return "REPLAY / SEEDED"
+    if run_id == "canonical_live_demo" or run_id.startswith("live_"):
+        return "LIVE ENGINE RUN"
+    return "REPLAY / SEEDED"
 
 
 @app.get("/api/runs")
@@ -91,10 +111,19 @@ def list_runs() -> List[Dict[str, Any]]:
                         with open(cands_file, "r", encoding="utf-8") as cf:
                             cand_count = len(json.load(cf))
 
+                    prov_file = os.path.join(run_dir, "provenance.json")
+                    provenance_data = None
+                    if os.path.isfile(prov_file):
+                        try:
+                            with open(prov_file, "r", encoding="utf-8") as pf:
+                                provenance_data = json.load(pf)
+                        except Exception:
+                            pass
+
                     run_id = manifest.get("run_id", entry.name)
                     summaries.append({
                         "run_id": run_id,
-                        "run_type": determine_run_type(run_id),
+                        "run_type": determine_run_type(run_id, provenance_data),
                         "target_package": manifest.get("target_package", "unknown"),
                         "old_version": manifest.get("old_version", ""),
                         "new_version": manifest.get("new_version", ""),
@@ -132,7 +161,7 @@ def get_run_bundle(run_id: str) -> Dict[str, Any]:
     try:
         bundle_data = ArtifactBundleExporter.load(run_dir)
         bundle_data["run_id"] = run_id
-        bundle_data["run_type"] = determine_run_type(run_id)
+        bundle_data["run_type"] = determine_run_type(run_id, bundle_data.get("provenance"))
         audit_res = AuditLedgerVerifier.verify_run_bundle(run_dir)
         bundle_data["audit_verification"] = audit_res
         return bundle_data
