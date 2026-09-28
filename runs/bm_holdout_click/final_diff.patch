@@ -1,6 +1,6 @@
 --- a/cli_formatter.py
 +++ b/cli_formatter.py
-@@ -1,14 +1,14 @@
+@@ -1,14 +1,26 @@
 -import click
 -
 -
@@ -16,16 +16,28 @@
 -    divider = "=" * min(columns, 60)
 -    return f"{divider}\nSTATUS: {status}\n{divider}"
 +import shutil
++from typing import Tuple
++
++def _get_terminal_size() -> Tuple[int, int]:
++    """
++    Returns the terminal size as (columns, rows).
++    Falls back to a default size of 80x24 if the size cannot be determined.
++    """
++    try:
++        size = shutil.get_terminal_size(fallback=(80, 24))
++        return size.columns, size.lines
++    except Exception:  # pragma: no cover
++        return 80, 24
 +
 +
 +def format_banner(text: str) -> str:
 +    """Formats a header banner centered according to terminal width."""
-+    columns, _ = shutil.get_terminal_size()
++    columns, _ = _get_terminal_size()
 +    padding = max(0, (columns - len(text)) // 2)
 +    return " " * padding + text
 +
 +
 +def format_status(status: str) -> str:
-+    columns, _ = shutil.get_terminal_size()
++    columns, _ = _get_terminal_size()
 +    divider = "=" * min(columns, 60)
 +    return f"{divider}\nSTATUS: {status}\n{divider}"

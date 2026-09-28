@@ -48,9 +48,26 @@ def cmd_demo(args: argparse.Namespace) -> int:
 
 def cmd_benchmark(args: argparse.Namespace) -> int:
     """Executes benchmark scenarios."""
-    from patchpilot.benchmarks.run_suite import run_all_benchmarks
-    success = run_all_benchmarks(run_all=args.run_all)
-    return 0 if success else 1
+    from patchpilot.benchmarks.run_suite import (
+        run_all_live_benchmarks,
+        load_all_benchmark_results,
+        display_benchmark_matrix,
+        display_competitor_comparison,
+    )
+    from rich.console import Console
+    console = Console()
+
+    if args.run_all:
+        success = run_all_live_benchmarks()
+        results = load_all_benchmark_results()
+        display_benchmark_matrix(results, console)
+        display_competitor_comparison(console)
+        return 0 if success else 1
+    else:
+        results = load_all_benchmark_results()
+        display_benchmark_matrix(results, console)
+        display_competitor_comparison(console)
+        return 0
 
 
 def build_parser() -> argparse.ArgumentParser:

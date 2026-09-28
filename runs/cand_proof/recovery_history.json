@@ -6,13 +6,13 @@
     "component": "controller",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.155673+00:00",
+    "timestamp": "2026-09-28T09:08:24.362784+00:00",
     "metadata": {
       "package": "pydantic",
       "from": "1.10.0",
       "to": "2.0.0"
     },
-    "event_hash": "8d0401fa759319cf197f3f2fa07ac7ff4f86b7806eb679c77ba980db0382e59b"
+    "event_hash": "6f467383f1cdc6b892347be6edcaafa239f06783663c52f6e66d443191c98b26"
   },
   {
     "sequence": 2,
@@ -21,9 +21,9 @@
     "component": "sandbox",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.156676+00:00",
+    "timestamp": "2026-09-28T09:08:24.363745+00:00",
     "metadata": {},
-    "event_hash": "0dd1abd03a7e63da536b1d12ad9c31616d773b61e95b0705b99a2d7420abe5a9"
+    "event_hash": "bf12d04359a75d9d9a732cf31feb85579f522173431d8220c7f4f8a4f4535f63"
   },
   {
     "sequence": 3,
@@ -31,13 +31,13 @@
     "event_type": "BASELINE_FAILED",
     "component": "sandbox",
     "status": "failed",
-    "duration_ms": 0.06,
-    "timestamp": "2026-09-28T06:59:43.157635+00:00",
+    "duration_ms": 0.08,
+    "timestamp": "2026-09-28T09:08:24.364673+00:00",
     "metadata": {
       "failure_count": 1,
       "exit_code": 1
     },
-    "event_hash": "a43b963ebf13e9f2ee668e4c6e78037ce60ecf7e23c544217f2db9dd8b8c1e70"
+    "event_hash": "fab5267ce3e0c79e523ab8c6e80a88c8313e83e7a2196c455335d68dbd2546d9"
   },
   {
     "sequence": 4,
@@ -46,9 +46,9 @@
     "component": "repo_analyzer",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.158166+00:00",
+    "timestamp": "2026-09-28T09:08:24.365291+00:00",
     "metadata": {},
-    "event_hash": "fb636688124c69a24d708cdee9bea7191315403006e4f9450564c8fdd0e78a98"
+    "event_hash": "448bb5f2545a4e40a4724b79e4938ad805a0494dd563725763d7c63e476473f0"
   },
   {
     "sequence": 5,
@@ -57,7 +57,7 @@
     "component": "repo_analyzer",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.175314+00:00",
+    "timestamp": "2026-09-28T09:08:24.413085+00:00",
     "metadata": {
       "graph_nodes": 7,
       "graph_edges": 6,
@@ -68,7 +68,7 @@
       "order_rationale": "Single file remediation; ordering is trivial.",
       "uncertainty_score": 0.2
     },
-    "event_hash": "555075d193671f24e4576bb75141f2af67ba3cd2ab3f89703a4ca7d50418f8ce"
+    "event_hash": "18da04d27c04ccba350f8b364283b2d1ce28b86ab0b372c03db11f763627a95b"
   },
   {
     "sequence": 6,
@@ -77,9 +77,9 @@
     "component": "evidence",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.175946+00:00",
+    "timestamp": "2026-09-28T09:08:24.413919+00:00",
     "metadata": {},
-    "event_hash": "fe3751dfcef6de8a7194d205a33683d3c94a930d27818cbf52c45a00d5187f0e"
+    "event_hash": "c7c66472157c91ffa52e3eceaf6f0f0939db5cd58ed74e8fd77d0a7c15f84201"
   },
   {
     "sequence": 7,
@@ -88,11 +88,11 @@
     "component": "evidence",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.177107+00:00",
+    "timestamp": "2026-09-28T09:08:24.415430+00:00",
     "metadata": {
       "citations_count": 0
     },
-    "event_hash": "e8894af57496e24b9053ff849ec5a9c40fdc9f3d92a9fa401770c442cd52d4ef"
+    "event_hash": "5a7267c31a1ca8d95b40cad79925f48994c98712008b91bde267a4c5b852cd6d"
   },
   {
     "sequence": 8,
@@ -101,12 +101,12 @@
     "component": "repair_engine",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.177852+00:00",
+    "timestamp": "2026-09-28T09:08:24.416289+00:00",
     "metadata": {
       "target_file": "models.py",
       "iteration": 1
     },
-    "event_hash": "5a99a95a257a4300a4b7f476242909dd500afdae19b0ffcb278c08b6df5ed30e"
+    "event_hash": "dc5a251f7cc1904bfece1cc3ac57ae8f2f8f22644143b86f0605f23b2e78e0e6"
   },
   {
     "sequence": 9,
@@ -115,11 +115,11 @@
     "component": "patch_manager",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.178634+00:00",
+    "timestamp": "2026-09-28T09:08:24.417286+00:00",
     "metadata": {
       "candidate_id": "cand_proof_cand_models.py_iter1"
     },
-    "event_hash": "c9cb6630b9fecdac3df82b3a4e242213451be5f49d27f2bb7742cd2652dfcaed"
+    "event_hash": "317ea1260625280da7b989ba06144c0ba71ba77fff26f4594e9c1215e7ef691b"
   },
   {
     "sequence": 10,
@@ -128,11 +128,11 @@
     "component": "verifier",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.179014+00:00",
+    "timestamp": "2026-09-28T09:08:24.417800+00:00",
     "metadata": {
       "candidate_id": "cand_proof_cand_models.py_iter1"
     },
-    "event_hash": "fec2877a7a204290e2af72c15f5f86df76f948bcb248c0331f72f5fb598bffa9"
+    "event_hash": "bbac12be9dd064cfa7395cf6517eedac8d7679dbb6ce697e3f21b859c78a4341"
   },
   {
     "sequence": 11,
@@ -141,14 +141,14 @@
     "component": "verifier",
     "status": "failed",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.180616+00:00",
+    "timestamp": "2026-09-28T09:08:24.428093+00:00",
     "metadata": {
       "candidate_id": "cand_proof_cand_models.py_iter1",
       "tests_failed": 1,
       "regressions": 1,
       "target_failures": 1
     },
-    "event_hash": "422133932d95e1d60c11db8fcfa84891c7cb9a4835e1225f1ed597b76f0bf27f"
+    "event_hash": "ae3ba947c14ed5767118dbc317c023b5bfabed4b5096135d2fe41094d6ac6264"
   },
   {
     "sequence": 12,
@@ -157,11 +157,11 @@
     "component": "state_manager",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.181052+00:00",
+    "timestamp": "2026-09-28T09:08:24.428766+00:00",
     "metadata": {
       "snapshot_id": "cand_proof_cand_models.py_iter1"
     },
-    "event_hash": "0fbf05529fa6847645f3c20f5a7ed6c14edc6ebc800a2158acfa0b27ed7983b5"
+    "event_hash": "2132270aaa3f71ccefc75fac15333a4a71864d9413735298649c9976b73660e2"
   },
   {
     "sequence": 13,
@@ -169,12 +169,12 @@
     "event_type": "ROLLBACK_COMPLETED",
     "component": "state_manager",
     "status": "ok",
-    "duration_ms": 1.53,
-    "timestamp": "2026-09-28T06:59:43.182987+00:00",
+    "duration_ms": 1.84,
+    "timestamp": "2026-09-28T09:08:24.431315+00:00",
     "metadata": {
       "verified_hash": "058039e34bcac7b4b3d3b46d4932bfa86e73a4ee4e7af88fe6005a0b24d2688e"
     },
-    "event_hash": "501bdf8ba1c211b9d0d7f42ca5ceff3e0c3fd5bc13d9d79dc7a73d3f92014df9"
+    "event_hash": "440c4583d9e4b9f726fd45db7d976c4145c17faee4d11b04720062b7fecfaf2a"
   },
   {
     "sequence": 14,
@@ -183,12 +183,12 @@
     "component": "repair_engine",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.183640+00:00",
+    "timestamp": "2026-09-28T09:08:24.432147+00:00",
     "metadata": {
       "target_file": "models.py",
       "iteration": 2
     },
-    "event_hash": "cc4adbe2dedd88614dfe7db823eaf413473a3c32cbff461ebcd7b2fb85853a24"
+    "event_hash": "9216e2371e75bffe445f8946893f031f8c0e23dcf58bfd387137d1cbf06b7b00"
   },
   {
     "sequence": 15,
@@ -197,11 +197,11 @@
     "component": "patch_manager",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.184449+00:00",
+    "timestamp": "2026-09-28T09:08:24.433041+00:00",
     "metadata": {
       "candidate_id": "cand_proof_cand_models.py_iter2"
     },
-    "event_hash": "ef58db6e109fc0d0151544dac696ca88d7a3adb6054010aca2b8d9fffec09b00"
+    "event_hash": "e2202df6ec3d01c68170ee67891ee887617f58d00e39b9ed8958f73b8ef0dcb5"
   },
   {
     "sequence": 16,
@@ -210,11 +210,11 @@
     "component": "verifier",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.184925+00:00",
+    "timestamp": "2026-09-28T09:08:24.433511+00:00",
     "metadata": {
       "candidate_id": "cand_proof_cand_models.py_iter2"
     },
-    "event_hash": "cee6b78b527bc9fc809ae704164a551aa929d64faf6c72bcf4309b321f9dcaab"
+    "event_hash": "1eab57172bb1ad4600f7d404df6ca079bd8fb42ba0df542f82089d44a3e6d399"
   },
   {
     "sequence": 17,
@@ -223,13 +223,13 @@
     "component": "verifier",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:59:43.186691+00:00",
+    "timestamp": "2026-09-28T09:08:24.440258+00:00",
     "metadata": {
       "candidate_id": "cand_proof_cand_models.py_iter2",
       "tests_passed": 1,
       "target_file_resolved": "models.py"
     },
-    "event_hash": "43e3e126a313ae76cec62ac47fc145494aefd6ebdd459d5934147253654a1632"
+    "event_hash": "91bbdac9514fb9748dff2fc2e0a5d8cb3890ca8bcd35cb8d32b92b4c3790bbbe"
   },
   {
     "sequence": 18,
@@ -237,13 +237,13 @@
     "event_type": "RUN_COMPLETED",
     "component": "controller",
     "status": "ok",
-    "duration_ms": 32.15,
-    "timestamp": "2026-09-28T06:59:43.187459+00:00",
+    "duration_ms": 78.36,
+    "timestamp": "2026-09-28T09:08:24.440843+00:00",
     "metadata": {
       "final_status": "verified_green",
       "attempts": 2,
       "rollbacks": 1
     },
-    "event_hash": "2ca3c68487ef08a795518750c829e2ee197105f645f774cecea6e62594a1301f"
+    "event_hash": "aec48bf63860ed4b2b64fc9f26d727d5413914506410ca060491cf59eba00443"
   }
 ]

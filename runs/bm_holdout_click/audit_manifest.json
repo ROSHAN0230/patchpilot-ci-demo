@@ -5,9 +5,9 @@
   "new_version": "8.1.7",
   "upgrade_type": "major",
   "backend_identity": "local_subprocess_isolated",
-  "root_hash": "fbfcd5240599085d5a49cce6cf28e1c492015e35b5b2e823e31b55596934496c",
+  "root_hash": "77ece40da840adc84de2b26060eaa2568a68bf171ecafdafe56d8c072e773663",
   "event_count": 12,
-  "timestamp": "2026-09-28T06:45:58.096237+00:00",
+  "timestamp": "2026-09-28T09:10:07.052606+00:00",
   "verification_seal": "VERIFIED_GREEN",
   "final_status": "verified_green"
 }

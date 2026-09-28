@@ -3,22 +3,22 @@
     "evidence_id": "ev_pydantic_1",
     "cluster_id": "cluster_pydantic_1_validator_deprecation",
     "query": "pydantic 2.6.4 migration guide validator deprecation",
-    "url": "https://docs.pydantic.dev/latest/migration",
+    "url": "https://docs.pydantic.dev/latest/migration#basesettings-has-moved-to-pydantic-settings",
     "title": "Migration Guide | Pydantic Docs",
     "domain": "docs.pydantic.dev",
-    "retrieved_timestamp": "2026-09-28T06:55:01.663459+00:00",
-    "relevant_content": "`@validator` has been deprecated, and should be replaced with `@field_validator`, which provides various new features and improvements.\n  + The new `@field_validator` decorator does not have the `each_item` keyword argument; validators you want to apply to items within a generic container should be added by annotating the type argument. See validators in Annotated metadata for details. This looks like `list[Annotated[int, Field(ge=0)]]` [...] See the `ConfigDict` API reference for more details.\n\n### Changes to validators\n\n#### `@validator` and `@root_validator` are deprecated [...] `@root_validator` has been deprecated, and should be replaced with `@model_validator`, which also provides new features and improvements. Be aware that the allowed signatures have changed (see the relevant documentation).\n  + Under some circumstances (such as assignment when `model_config['validate_assignment'] is True`), the `@model_validator` decorator will receive an instance of the model, not a dict of v",
+    "retrieved_timestamp": "2026-09-28T09:08:49.386208+00:00",
+    "relevant_content": "`@validator` has been deprecated, and should be replaced with `@field_validator`, which provides various new features and improvements.\n  + The new `@field_validator` decorator does not have the `each_item` keyword argument; validators you want to apply to items within a generic container should be added by annotating the type argument. See validators in Annotated metadata for details. This looks like `list[Annotated[int, Field(ge=0)]]` [...] See the `ConfigDict` API reference for more details.\n\n### Changes to validators\n\n#### `@validator` and `@root_validator` are deprecated [...] + Even if you keep using the deprecated `@validator` decorator, you can no longer add the `field` or `config` arguments to the signature of validator functions. If you need access to these, you\u2019ll need to migrate to `@field_validator` \u2014 see the next section for more details.",
     "source_authority": "migration_guide"
   },
   {
     "evidence_id": "ev_pydantic_2",
     "cluster_id": "cluster_pydantic_1_validator_deprecation",
     "query": "pydantic 2.6.4 migration guide validator deprecation",
-    "url": "https://pydantic.dev/docs/validation/2.0/get-started/migration",
-    "title": "Migration | Pydantic Docs",
-    "domain": "pydantic.dev",
-    "retrieved_timestamp": "2026-09-28T06:55:01.663484+00:00",
-    "relevant_content": "`@validator` has been deprecated, and should be replaced with `@field_validator`, which provides various new features and improvements.\n  + The new `@field_validator` decorator does not have the `each_item` keyword argument; validators you want to apply to items within a generic container should be added by annotating the type argument. See validators in Annotated metadata for details. This looks like `List[Annotated[int, Field(ge=0)]]` [...] + Even if you keep using the deprecated `@validator` decorator, you can no longer add the `field` or `config` arguments to the signature of validator functions. If you need access to these, you\u2019ll need to migrate to `@field_validator` \u2014 see the next section for more details. [...] `@root_validator` has been deprecated, and should be replaced with `@model_validator`, which also provides new features and improvements.\n  + Under some circumstances (such as assignment when `model_config['validate_assignment'] is True`), the `@model_validator` decorato",
+    "url": "https://docs.pydantic.dev/latest/migration#changes-to-handling-of-standard-types",
+    "title": "Migration Guide | Pydantic Docs",
+    "domain": "docs.pydantic.dev",
+    "retrieved_timestamp": "2026-09-28T09:08:49.386229+00:00",
+    "relevant_content": "`@validator` has been deprecated, and should be replaced with `@field_validator`, which provides various new features and improvements.\n  + The new `@field_validator` decorator does not have the `each_item` keyword argument; validators you want to apply to items within a generic container should be added by annotating the type argument. See validators in Annotated metadata for details. This looks like `list[Annotated[int, Field(ge=0)]]` [...] See the `ConfigDict` API reference for more details.\n\n### Changes to validators\n\n#### `@validator` and `@root_validator` are deprecated [...] + Even if you keep using the deprecated `@validator` decorator, you can no longer add the `field` or `config` arguments to the signature of validator functions. If you need access to these, you\u2019ll need to migrate to `@field_validator` \u2014 see the next section for more details.",
     "source_authority": "migration_guide"
   }
 ]

@@ -6,13 +6,13 @@
     "component": "controller",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:49.551514+00:00",
+    "timestamp": "2026-09-28T09:09:56.926609+00:00",
     "metadata": {
       "package": "click",
       "from": "7.1.2",
       "to": "8.1.7"
     },
-    "event_hash": "076698a893c54faa240ef392da26fe6a1894fe9e418fd5fa371ed798a6a0eb1e"
+    "event_hash": "141ab89eb562d3a813c78ab7a9f2f78ce413c08c0218f4fde7efebe825ff9060"
   },
   {
     "sequence": 2,
@@ -21,9 +21,9 @@
     "component": "sandbox",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:49.553801+00:00",
+    "timestamp": "2026-09-28T09:09:56.927311+00:00",
     "metadata": {},
-    "event_hash": "c3a0af179176025f453c86fd399f230fbdaec0c2319176c697d7b9884f297d06"
+    "event_hash": "b6216ad07e1e1dd8cc3076a21299ff638e3934caeca49e37d7fd5b1e60b66b71"
   },
   {
     "sequence": 3,
@@ -31,13 +31,13 @@
     "event_type": "BASELINE_FAILED",
     "component": "sandbox",
     "status": "failed",
-    "duration_ms": 949.07,
-    "timestamp": "2026-09-28T06:45:50.504961+00:00",
+    "duration_ms": 914.32,
+    "timestamp": "2026-09-28T09:09:57.842917+00:00",
     "metadata": {
       "failure_count": 4,
       "exit_code": 1
     },
-    "event_hash": "7cfbb54519fb3c43e8bf72c1cdf2348e639ef80d9534f4bba67e4ef980863da9"
+    "event_hash": "0dcaec986e02cbaaed8c9747deef74bac21755cce3d079162e6dccec58872fe6"
   },
   {
     "sequence": 4,
@@ -46,9 +46,9 @@
     "component": "repo_analyzer",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:50.505423+00:00",
+    "timestamp": "2026-09-28T09:09:57.843464+00:00",
     "metadata": {},
-    "event_hash": "0ee5b15d2965e2f52181dd68d03094993556c662f15e07a2c414c505bfd86d99"
+    "event_hash": "83432d9984f5e9b26519e31a2d65f0dda78c39f6afd584c6aa8a0d38b156985c"
   },
   {
     "sequence": 5,
@@ -57,7 +57,7 @@
     "component": "repo_analyzer",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:50.513812+00:00",
+    "timestamp": "2026-09-28T09:09:57.845868+00:00",
     "metadata": {
       "graph_nodes": 11,
       "graph_edges": 8,
@@ -68,7 +68,7 @@
       "order_rationale": "Single file remediation; ordering is trivial.",
       "uncertainty_score": 0.2
     },
-    "event_hash": "93ce9b380b950252b59d32761c980dafa19e4854a62ef3b1afbb57e13b56d5e8"
+    "event_hash": "db2b90dcc98f75adad3a2e261305d4f7f90041b856fade4ab3becb3d5a01b0d8"
   },
   {
     "sequence": 6,
@@ -77,9 +77,9 @@
     "component": "evidence",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:50.514514+00:00",
+    "timestamp": "2026-09-28T09:09:57.846506+00:00",
     "metadata": {},
-    "event_hash": "07a60908189765bec978f0390bb3cce84943d29631f0b6bc240afbaf82447676"
+    "event_hash": "5fe90c07611c1d09428cf7d4162c10c62a287eedeb746b31fcbd7bc3c5bff090"
   },
   {
     "sequence": 7,
@@ -88,11 +88,11 @@
     "component": "evidence",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:53.409676+00:00",
+    "timestamp": "2026-09-28T09:10:02.553146+00:00",
     "metadata": {
       "citations_count": 2
     },
-    "event_hash": "7a3a20eb747720dfe10e63a5c3f0d9b55ba46614b3b17335122b0629cd482aa8"
+    "event_hash": "c4f30660b1318f5f2b0562a49f0abf8babdcb04372695bbd4bb13001a375d8a6"
   },
   {
     "sequence": 8,
@@ -101,12 +101,12 @@
     "component": "repair_engine",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:53.410632+00:00",
+    "timestamp": "2026-09-28T09:10:02.555314+00:00",
     "metadata": {
       "target_file": "cli_formatter.py",
       "iteration": 1
     },
-    "event_hash": "5144044bb31c519c751d5cef00b6530be6f16395b51937ddabbc6e4be9f0f17c"
+    "event_hash": "7affce1d0ffb40db91e0ad509ade8420f68a751079c7150530df7fa2c6d9a764"
   },
   {
     "sequence": 9,
@@ -115,11 +115,11 @@
     "component": "patch_manager",
     "status": "ok",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:56.580369+00:00",
+    "timestamp": "2026-09-28T09:10:05.218804+00:00",
     "metadata": {
       "candidate_id": "bm_holdout_click_cand_cli_formatter.py_iter1"
     },
-    "event_hash": "45aa60fba24369bd24791dc477d0a24d776493ebe2ede08249445f7041c76350"
+    "event_hash": "aff4ff05a1fd6a3cbf42359784979d5241d3ce1553ba010ff5ff8b33d52af004"
   },
   {
     "sequence": 10,
@@ -128,11 +128,11 @@
     "component": "verifier",
     "status": "running",
     "duration_ms": 0.0,
-    "timestamp": "2026-09-28T06:45:56.580797+00:00",
+    "timestamp": "2026-09-28T09:10:05.219862+00:00",
     "metadata": {
       "candidate_id": "bm_holdout_click_cand_cli_formatter.py_iter1"
     },
-    "event_hash": "2cae24e3f77646539a81c4ded04a2e15b5e2d6f6cf300d6a8fdd2dc650c0e236"
+    "event_hash": "e5d9ff8cbe73c82dd146b91a3c17ec118185402d0f1730c5f33d39af0bab7c9c"
   },
   {
     "sequence": 11,
@@ -140,14 +140,14 @@
     "event_type": "VERIFICATION_PASSED",
     "component": "verifier",
     "status": "ok",
-    "duration_ms": 745.23,
-    "timestamp": "2026-09-28T06:45:57.326737+00:00",
+    "duration_ms": 775.95,
+    "timestamp": "2026-09-28T09:10:05.997143+00:00",
     "metadata": {
       "candidate_id": "bm_holdout_click_cand_cli_formatter.py_iter1",
       "tests_passed": 2,
       "target_file_resolved": "cli_formatter.py"
     },
-    "event_hash": "d76a3e4fc21b156248176b0c02912f79174e0e8f01ed9dc2a44ea1a0574dc827"
+    "event_hash": "561a7bb8c559179568984858ff469b7f679599a36989eb71757e5aa6e34677cc"
   },
   {
     "sequence": 12,
@@ -155,13 +155,13 @@
     "event_type": "RUN_COMPLETED",
     "component": "controller",
     "status": "ok",
-    "duration_ms": 8544.04,
-    "timestamp": "2026-09-28T06:45:58.095451+00:00",
+    "duration_ms": 10124.97,
+    "timestamp": "2026-09-28T09:10:07.051579+00:00",
     "metadata": {
       "final_status": "verified_green",
       "attempts": 1,
       "rollbacks": 0
     },
-    "event_hash": "fbfcd5240599085d5a49cce6cf28e1c492015e35b5b2e823e31b55596934496c"
+    "event_hash": "77ece40da840adc84de2b26060eaa2568a68bf171ecafdafe56d8c072e773663"
   }
 ]
